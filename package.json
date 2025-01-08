@@ -1,0 +1,16 @@
+{
+  "name": "php2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "php -S localhost:8080",
+    "css": "sass --watch Public/Assets/Client/sass/main.scss Public/Assets/Client/css/main.css"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bootstrap": "^5.3.3"
+  }
+}
