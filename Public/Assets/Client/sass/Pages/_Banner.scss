@@ -1,0 +1,76 @@
+.banner {
+    height: 75vh;
+    position: relative;
+    background: $bg-color2;
+    .slider-item {
+        height: 100%;
+    }
+    .banner-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(50%) contrast(100%);
+    }
+
+    .banner-text {
+
+        .special-bg {
+            margin: auto;
+            width: 40%;
+            height: 40%;
+            object-fit: cover;
+        }
+        .banner-heading {
+            text-align: center;
+            font-weight: $fw-bold;
+        }
+        p {
+            text-align: center;
+        }
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        .button-holder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .banner-btn {
+            border: 1px solid white;
+            padding: 1rem;
+            border-radius: 2rem;
+            text-decoration: none;
+            font-weight: $fw-bold;
+            color: $text-color-light;
+            &:hover {
+                background: $text-color-light;
+                color: $text-color-dark;
+                transition: 0.5s ease-in-out;
+            }
+        }
+    }
+
+    .banner-dot {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        bottom: 2rem;
+        right: 3rem;
+        .dot {
+            border: 1px solid white;
+            border-radius: 50%;
+            color: white;
+            min-width: 1.2rem;
+            min-height: 1.2rem;
+            cursor: pointer;
+        }
+        .dot-active {
+            background: white;
+            transition: 0.5s ease-in-out;
+        }
+        z-index: 1;
+    }
+}
