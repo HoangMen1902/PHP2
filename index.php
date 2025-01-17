@@ -35,6 +35,7 @@ Ignition::make()->register()->theme('dark');
 
 
 $dispatcher = FastRoute\simpleDispatcher(function(RouteCollector $r) {
+    $r->get('/', [HomeController::class, 'loadHome']);
     $r->get('/home', [HomeController::class, 'loadHome']);
 });
 
