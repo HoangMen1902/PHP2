@@ -1,6 +1,7 @@
 <?php
 use FastRoute\RouteCollector;
 use Spatie\Ignition\Ignition;
+use Src\Controllers\Client\AuthController;
 use Src\Controllers\Client\HomeController;
 use Src\Models\Database;
 
@@ -39,6 +40,9 @@ $dispatcher = FastRoute\simpleDispatcher(function(RouteCollector $r) {
     $r->get('/home', [HomeController::class, 'loadHome']);
     $r->get('/gioi-thieu', [HomeController::class, 'loadAbout']);
     $r->get('/lien-he', [HomeController::class, 'loadContact']);
+    $r->get('/dang-nhap', [AuthController::class, 'loadLogin']);
+    $r->get('/dang-ky', [AuthController::class, 'loadRegister']);
+
 });
 
 
