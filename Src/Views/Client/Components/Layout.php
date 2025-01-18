@@ -22,10 +22,10 @@
                 <a href="/gioi-thieu">
                     <li class="menu-item">Giới thiệu</li>
                 </a>
-                <a href="#">
+                <a href="/san-pham">
                     <li class="menu-item">Sản phẩm</li>
                 </a>
-                <a href="#">
+                <a href="/lien-he">
                     <li class="menu-item">Liên hệ</li>
                 </a>
             </ul>

@@ -38,6 +38,7 @@ $dispatcher = FastRoute\simpleDispatcher(function(RouteCollector $r) {
     $r->get('/', [HomeController::class, 'loadHome']);
     $r->get('/home', [HomeController::class, 'loadHome']);
     $r->get('/gioi-thieu', [HomeController::class, 'loadAbout']);
+    $r->get('/lien-he', [HomeController::class, 'loadContact']);
 });
 
 
