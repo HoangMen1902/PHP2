@@ -57,7 +57,7 @@
         <div class="category-item">
             <div class="category-text">
                 <p class="category-name"> Touhou Fumo</p>
-                <p>Những dòng Fumo cao cấp của những nhân vật đến từ tựa game Touhou Project.</p>
+                <p class="category-content">Những dòng Fumo cao cấp của những nhân vật đến từ tựa game Touhou Project.</p>
                 <a href="" class="category-btn">Xem chi tiết</a>
             </div>
             <img src="<?= client_img ?>/Categories/Reimu.png" alt="Reimu Fumo" class="category-img">
@@ -65,7 +65,7 @@
         <div class="category-item">
             <div class="category-text">
                 <p class="category-name"> Blue Archive Plush</p>
-                <p>Plush chính hãng đến từ tựa game Gacha Blue Archive của nhà Nexon.</p>
+                <p class="category-content">Plush chính hãng đến từ tựa game Gacha Blue Archive của nhà Nexon.</p>
                 <a href="" class="category-btn">Xem chi tiết</a>
 
             </div>
@@ -74,7 +74,7 @@
         <div class="category-item">
             <div class="category-text">
                 <p class="category-name">Honkai: Star Rail</p>
-                <p>Plush chính hãng đến từ tựa game Honkai: Star Rail của nhà Hoyoverse.</p>
+                <p class="category-content">Plush chính hãng đến từ tựa game Honkai: Star Rail của nhà Hoyoverse.</p>
                 <a href="" class="category-btn">Xem chi tiết</a>
 
             </div>
@@ -83,7 +83,7 @@
         <div class="category-item">
             <div class="category-text">
                 <p class="category-name">Anime</p>
-                <p>Plush cao cấp được thiết kế theo hình tượng các nhân vật Anime nổi tiếng.</p>
+                <p class="category-content">Plush cao cấp được thiết kế theo hình tượng các nhân vật Anime nổi tiếng.</p>
                 <a href="" class="category-btn">Xem chi tiết</a>
             </div>
             <img src="<?= client_img ?>/Categories/Anime.png" alt="Anime" class="category-img">
@@ -102,7 +102,7 @@
                         <p class="product-card__description">Experience ultimate comfort and style with these iconic Nike Air Max sneakers. lorem</p>
                         <div class="product-card__price-row">
                             <span class="product-card__price">2.000.000đ</span>
-                            <button class="product-card__btn">Thêm vào giỏ hàng</button>
+                            <button class="product-card__btn">Xem Thêm</button>
                         </div>
                     </div>
                 </div>
@@ -117,7 +117,7 @@
                         <p class="product-card__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos aut quaerat voluptatum nisi repellat nemo assumenda eveniet hic velit in earum veniam minima, dicta nihil cupiditate illo commodi mollitia facilis?</p>
                         <div class="product-card__price-row">
                             <span class="product-card__price">2.000.000đ</span>
-                            <button class="product-card__btn">Thêm vào giỏ hàng</button>
+                            <button class="product-card__btn">Xem Thêm</button>
                         </div>
                     </div>
                 </div>
@@ -132,7 +132,7 @@
                         <p class="product-card__description">Experience ultimate comfort and style with these iconic Nike Air Max sneakers. lorem</p>
                         <div class="product-card__price-row">
                             <span class="product-card__price">2.000.000đ</span>
-                            <button class="product-card__btn">Thêm vào giỏ hàng</button>
+                            <button class="product-card__btn">Xem Thêm</button>
                         </div>
                     </div>
                 </div>
@@ -147,7 +147,7 @@
                         <p class="product-card__description">Experience ultimate comfort and style with these iconic Nike Air Max sneakers. lorem</p>
                         <div class="product-card__price-row">
                             <span class="product-card__price">2.000.000đ</span>
-                            <button class="product-card__btn">Thêm vào giỏ hàng</button>
+                            <button class="product-card__btn">Xem Thêm</button>
                         </div>
                     </div>
                 </div>
@@ -168,7 +168,7 @@
                         <p class="product-card__description">Experience ultimate comfort and style with these iconic Nike Air Max sneakers. lorem</p>
                         <div class="product-card__price-row">
                             <span class="product-card__price">2.000.000đ</span>
-                            <button class="product-card__btn">Thêm vào giỏ hàng</button>
+                            <button class="product-card__btn">Xem Thêm</button>
                         </div>
                     </div>
                 </div>
@@ -183,7 +183,7 @@
                         <p class="product-card__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos aut quaerat voluptatum nisi repellat nemo assumenda eveniet hic velit in earum veniam minima, dicta nihil cupiditate illo commodi mollitia facilis?</p>
                         <div class="product-card__price-row">
                             <span class="product-card__price">2.000.000đ</span>
-                            <button class="product-card__btn">Thêm vào giỏ hàng</button>
+                            <button class="product-card__btn">Xem Thêm</button>
                         </div>
                     </div>
                 </div>
@@ -198,7 +198,7 @@
                         <p class="product-card__description">Experience ultimate comfort and style with these iconic Nike Air Max sneakers. lorem</p>
                         <div class="product-card__price-row">
                             <span class="product-card__price">2.000.000đ</span>
-                            <button class="product-card__btn">Thêm vào giỏ hàng</button>
+                            <button class="product-card__btn">Xem Thêm</button>
                         </div>
                     </div>
                 </div>
@@ -213,7 +213,7 @@
                         <p class="product-card__description">Experience ultimate comfort and style with these iconic Nike Air Max sneakers. lorem</p>
                         <div class="product-card__price-row">
                             <span class="product-card__price">2.000.000đ</span>
-                            <button class="product-card__btn">Thêm vào giỏ hàng</button>
+                            <button class="product-card__btn">Xem Thêm</button>
                         </div>
                     </div>
                 </div>
@@ -249,7 +249,7 @@
                         <p class="product-card__description">Experience ultimate comfort and style with these iconic Nike Air Max sneakers. lorem</p>
                         <div class="product-card__price-row">
                             <span class="product-card__price">2.000.000đ</span>
-                            <button class="product-card__btn">Thêm vào giỏ hàng</button>
+                            <button class="product-card__btn">Xem Thêm</button>
                         </div>
                     </div>
                 </div>
@@ -264,7 +264,7 @@
                         <p class="product-card__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos aut quaerat voluptatum nisi repellat nemo assumenda eveniet hic velit in earum veniam minima, dicta nihil cupiditate illo commodi mollitia facilis?</p>
                         <div class="product-card__price-row">
                             <span class="product-card__price">2.000.000đ</span>
-                            <button class="product-card__btn">Thêm vào giỏ hàng</button>
+                            <button class="product-card__btn">Xem Thêm</button>
                         </div>
                     </div>
                 </div>
@@ -279,7 +279,7 @@
                         <p class="product-card__description">Experience ultimate comfort and style with these iconic Nike Air Max sneakers. lorem</p>
                         <div class="product-card__price-row">
                             <span class="product-card__price">2.000.000đ</span>
-                            <button class="product-card__btn">Thêm vào giỏ hàng</button>
+                            <button class="product-card__btn">Xem Thêm</button>
                         </div>
                     </div>
                 </div>
@@ -294,7 +294,7 @@
                         <p class="product-card__description">Experience ultimate comfort and style with these iconic Nike Air Max sneakers. lorem</p>
                         <div class="product-card__price-row">
                             <span class="product-card__price">2.000.000đ</span>
-                            <button class="product-card__btn">Thêm vào giỏ hàng</button>
+                            <button class="product-card__btn">Xem Thêm</button>
                         </div>
                     </div>
                 </div>
