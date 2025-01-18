@@ -36,7 +36,7 @@
             <img src="" alt="">
             <h2 class="banner-heading text-light">Arknights</h2>
             <p class="text-light">Sẵn sàng xây dựng chiến thuật, phát triển đội hình, và chinh phục mọi khó khăn chưa?</p>
-            <p class="text-light">Gia nhập ngay Arknights và để hành trình của bạn bắt đầu!</p>
+            <p class="text-light">Pre-order Arknights Plush ngay!</p>
             <div class="button-holder">
                 <a href="" class="banner-btn">Tìm hiểu thêm</a>
             </div>
@@ -231,7 +231,7 @@
             <p class="text-light">Hãy vui vẻ, tận hưởng những phút giây tuyệt vời khi khám phá lượng sản phẩm tuyệt vời của trang web nhé!</p>
             <p class="text-light">Thông tin thêm về <em>SUWAFUMO</em></p>
             <div class="button-holder">
-                <a href="" class="banner-btn">Giới Thiệu</a>
+                <a href="/gioi-thieu" class="banner-btn">Giới Thiệu</a>
             </div>
         </div>
 </div>

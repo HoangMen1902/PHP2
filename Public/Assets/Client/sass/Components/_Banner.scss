@@ -74,3 +74,66 @@
         z-index: 1;
     }
 }
+
+.about-banner {
+    position: relative;
+    height: 70vh;
+    .abt-banner-img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        filter: brightness(30%) contrast(100%);
+    }
+    .banner-text {
+        .logo-banner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        display: flex;
+        position: absolute;
+        justify-content: space-between;
+        width: 60%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        .banner-heading {
+            font-weight: $fw-bold;
+            text-align: end;
+        }
+        .text-content {
+            width: 50%;
+            text-align: justify;
+            color: $text-color-light;
+            p {
+                text-align: justify;
+                text-align-last: end;
+            }
+            .invite-btn {
+                display: flex;
+                align-items: center;
+                justify-content: end;
+                .discord-invite {
+                
+                    text-decoration: none;
+                    color: $text-color-dark;
+                    font-weight: $fw-semi;
+                    padding: 1rem;
+                    border-radius: 3rem;
+                    background: $text-color-light;
+                    &:hover {
+                        background: $secondary-color;
+                        color: $text-color-light;
+                        transition: 0.25s ease-in-out;
+                    }
+                }
+            }
+            
+        }
+    }
+}
+
+.banner-spacing {
+    margin-top: 1rem;
+}
