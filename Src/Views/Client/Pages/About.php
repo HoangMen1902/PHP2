@@ -24,17 +24,17 @@
         <div class="service-box-group">
             <div class="service-box">
                 <img src="<?= client_img ?>/Icons/Package.png" alt="">
-                <h3 class="service-title">Hỗ trợ</h3>
+                <h3 class="service-title">Chất lượng</h3>
                 <p> Với chất lượng vượt trội và thiết kế độc đáo, SUWAFUMO tự hào là lựa chọn hàng đầu cho những ai yêu thích các món đồ chơi dễ thương và ngọt ngào. Chúng tôi cam kết cung cấp những sản phẩm tinh tế và mang lại sự hài lòng tuyệt đối cho khách hàng, từ những món quà đặc biệt cho đến bộ sưu tập ấn tượng.</p>
             </div>
             <div class="service-box">
                 <img src="<?= client_img ?>/Icons/Support.png" alt="">
-                <h3 class="service-title">Hoàn trả</h3>
-                <p> Với chất lượng vượt trội và thiết kế độc đáo, SUWAFUMO tự hào là lựa chọn hàng đầu cho những ai yêu thích các món đồ chơi dễ thương và ngọt ngào. Chúng tôi cam kết cung cấp những sản phẩm tinh tế và mang lại sự hài lòng tuyệt đối cho khách hàng, từ những món quà đặc biệt cho đến bộ sưu tập ấn tượng.</p>
+                <h3 class="service-title">Hỗ trợ</h3>
+                <p> Đội ngũ hỗ trợ luôn sẵn sàng lắng nghe, tư vấn và cung cấp thông tin chính xác để đáp ứng nhu cầu của khách hàng một cách tận tâm và chuyên nghiệp. Với mục tiêu xây dựng sự tin tưởng và hài lòng.</p>
             </div>
             <div class="service-box">
                 <img src="<?= client_img ?>/Icons/Exchange.png" alt="">
-                <h3 class="service-title">Hàng hóa</h3>
+                <h3 class="service-title">Trả hàng</h3>
                 <p> Với chất lượng vượt trội và thiết kế độc đáo, SUWAFUMO tự hào là lựa chọn hàng đầu cho những ai yêu thích các món đồ chơi dễ thương và ngọt ngào. Chúng tôi cam kết cung cấp những sản phẩm tinh tế và mang lại sự hài lòng tuyệt đối cho khách hàng, từ những món quà đặc biệt cho đến bộ sưu tập ấn tượng.</p>
             </div>
         </div>

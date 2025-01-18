@@ -3,6 +3,7 @@ use FastRoute\RouteCollector;
 use Spatie\Ignition\Ignition;
 use Src\Controllers\Client\AuthController;
 use Src\Controllers\Client\HomeController;
+use Src\Controllers\Client\ProductController;
 use Src\Models\Database;
 
 ini_set('display_errors', '1');
@@ -42,6 +43,8 @@ $dispatcher = FastRoute\simpleDispatcher(function(RouteCollector $r) {
     $r->get('/lien-he', [HomeController::class, 'loadContact']);
     $r->get('/dang-nhap', [AuthController::class, 'loadLogin']);
     $r->get('/dang-ky', [AuthController::class, 'loadRegister']);
+    $r->get('/san-pham', [ProductController::class, 'loadProducts']);
+    $r->get('/chi-tiet', [ProductController::class, 'loadDetail']);
 
 });
 
