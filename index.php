@@ -1,12 +1,17 @@
 <?php
 use FastRoute\RouteCollector;
 use Spatie\Ignition\Ignition;
+use Src\Controllers\Admin\BrandController;
+use Src\Controllers\Admin\CategoryController;
+use Src\Controllers\Admin\HomeController as AdminHomeController;
+use Src\Controllers\Admin\OrderController;
+use Src\Controllers\Admin\ProductController as AdminProductController;
+use Src\Controllers\Admin\UserController;
 use Src\Controllers\Client\AuthController;
 use Src\Controllers\Client\CartController;
 use Src\Controllers\Client\CheckoutController;
 use Src\Controllers\Client\HomeController;
 use Src\Controllers\Client\ProductController;
-use Src\Models\Database;
 
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
@@ -50,6 +55,33 @@ $dispatcher = FastRoute\simpleDispatcher(function(RouteCollector $r) {
     $r->get('/gio-hang', [CartController::class, 'loadCart']);
     $r->get('/thanh-toan', [CheckoutController::class, 'checkoutPage']);
 
+
+
+    $r->addGroup('/admin', function (RouteCollector $r) {
+
+        $r->get('/', [AdminHomeController::class, 'index']);
+        $r->get('', [AdminHomeController::class, 'index']);
+        $r->get('/dashboard', [AdminHomeController::class, 'index']);
+
+        $r->get('/users', [UserController::class, 'index']);
+        $r->get('/create-user', [UserController::class, 'addPage']);
+
+        $r->get('/products', [AdminProductController::class, 'index']);
+        $r->get('/product/add', [AdminProductController::class, 'addPage']);
+
+        $r->get('/allAttribute', [AdminProductController::class, 'attributeList']);
+        $r->get('/attribute', [AdminProductController::class, 'attributeAdd']);
+
+        $r->get('/categories', [CategoryController::class, 'index']);
+        $r->get('/category/add', [CategoryController::class, 'categoryAdd']);
+
+        $r->get('/brands', [BrandController::class, 'index']);
+        $r->get('/brand/add', [BrandController::class, 'addPage']);
+
+
+        $r->get('/orders', [OrderController::class, 'index']);
+
+    });
 });
 
 
