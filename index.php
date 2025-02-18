@@ -104,10 +104,13 @@ switch ($routeInfo[0]) {
         break;
     case FastRoute\Dispatcher::FOUND:
         $handler = $routeInfo[1];
-        $vars = $routeInfo[2];
-        $method = $handler[1];
-        
-        $controller = new $handler[0];
-        $controller->$method($vars);
+        $vars = $routeInfo[2];        
+        if (is_array($handler) && count($handler) === 2) {
+            list($class, $method) = $handler;
+        } else {
+            die("Error: Invalid route handler!"); 
+        }
+    
+        call_user_func_array([new $class, $method], $vars);
         break;
 }
