@@ -54,6 +54,8 @@ $dispatcher = FastRoute\simpleDispatcher(function(RouteCollector $r) {
     $r->get('/chi-tiet', [ProductController::class, 'loadDetail']);
     $r->get('/gio-hang', [CartController::class, 'loadCart']);
     $r->get('/thanh-toan', [CheckoutController::class, 'checkoutPage']);
+    $r->get('/tai-khoan', [AuthController::class, 'loadProfile']);
+
 
 
 

@@ -10,4 +10,8 @@ class AuthController extends BaseController {
     public function loadRegister() {
         echo $this->view->render('/Client/Pages/Register');
     }
+
+    public function loadProfile() {
+        echo $this->view->render('/Client/Pages/User');
+    }
 }
