@@ -4,52 +4,12 @@
 <?php 
 $this->start('main_content');
 ?>
-
-<?php
-if(isset($_GET['status']) && $_GET['status'] === 'success') :
-
-
-?>
-
-<div class="alert alert-success" role="alert">
-  Đã cập nhật thương hiệu thành công
-</div>
-<?php
-elseif (isset($_GET['status']) && $_GET['status'] === 'failed'):;
-
-?>
-
-<div class="alert alert-danger" role="alert">
-    <?php switch ($_GET['code']) {
-        case '1':
-            echo 'Lỗi! Dữ liệu không hợp lệ';
-            break;
-        case '2':
-            echo 'Lỗi! khi thêm dữ liệu';
-            break;
-        case '3':
-            echo 'Lỗi! không thể upload file hình ảnh';
-            break;
-        case '4':
-            echo 'Lỗi! File không phải là hình ảnh';
-            break;
-        case '5':
-            echo 'Lỗi! không thể xóa được thương hiệu';
-            break;
-        default:
-            break;
-    }?>
-</div>
-<?php
-
-endif;
-?>
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">Danh sách thương hiệu</h4>
             <div class="table-responsive pt-3">
-                <table class="table table-bordered">
+                <table class="table table-bordered" id="myTable">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -94,9 +54,7 @@ endif;
                     </tbody>
                 </table>
             </div>
-            <?php if(!isset($data) || empty($data)):?>
-            <h4 class="text-center text-danger">Không có dữ liệu</h4>
-            <?php endif;?>
+
         </div>
     </div>
 </div>
@@ -116,3 +74,43 @@ $this->push('scripts')
 <?php
 $this->end();
 ?>
+
+<?=$this->push('styles')?>
+    <link rel="stylesheet" href="<?= $_ENV['APP_URL'] ?>/node_modules\datatables.net-dt\css\dataTables.dataTables.min.css">
+<?=$this->end()?>
+
+
+
+
+<?=$this->push('scripts')?>
+<script src="<?= $_ENV['APP_URL'] ?>/node_modules/datatables.net/js/datatables.js"></script>
+
+<script>
+    let table = new DataTable('#myTable', {
+        responsive: true,
+        language: {
+            decimal: ",",
+            thousands: ".",
+            search: "Tìm kiếm:",
+            lengthMenu: "Hiển thị _MENU_ dòng mỗi trang",
+            info: "Hiển thị _START_ đến _END_ trong tổng số _TOTAL_ dòng",
+            infoEmpty: "Không có dữ liệu",
+            infoFiltered: "(lọc từ _MAX_ dòng)",
+            loadingRecords: "Đang tải...",
+            zeroRecords: "Không tìm thấy kết quả phù hợp",
+            emptyTable: "Không có dữ liệu trong bảng",
+            paginate: {
+                first: "Đầu",
+                last: "Cuối",
+                next: "Tiếp",
+                previous: "Trước"
+            },
+            aria: {
+                sortAscending: ": kích hoạt để sắp xếp cột tăng dần",
+                sortDescending: ": kích hoạt để sắp xếp cột giảm dần"
+            }
+        }
+
+    });
+</script>
+<?=$this->end()?>

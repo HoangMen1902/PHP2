@@ -10,7 +10,7 @@ $this->start('main_content');
             <h4 class="card-title">Danh sách Sản phẩm</h4>
 
             <div class="table-responsive pt-3">
-                <table class="table table-bordered">
+                <table class="table table-bordered" id="myTable">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -65,13 +65,48 @@ $this->start('main_content');
     </div>
 </div>
 
-<script>
-    function closeAlert() {
-        // Đóng thông báo khi người dùng nhấn nút đóng
-        document.getElementById('alert-box').style.display = 'none';
-    }
-</script>
 
 <?php
 $this->stop();
 ?>
+
+<?=$this->push('styles')?>
+<link rel="stylesheet" href="<?= $_ENV['APP_URL'] ?>/node_modules\datatables.net-dt\css\dataTables.dataTables.min.css">
+<?=$this->end()?>
+
+<?=$this->push('scripts')?>
+<script src="<?= $_ENV['APP_URL'] ?>/node_modules/datatables.net/js/datatables.js"></script>
+<script>
+    function closeAlert() {
+        document.getElementById('alert-box').style.display = 'none';
+    }
+
+
+    let table = new DataTable('#myTable', {
+        responsive: true,
+        language: {
+            decimal: ",",
+            thousands: ".",
+            search: "Tìm kiếm:",
+            lengthMenu: "Hiển thị _MENU_ dòng mỗi trang",
+            info: "Hiển thị _START_ đến _END_ trong tổng số _TOTAL_ dòng",
+            infoEmpty: "Không có dữ liệu",
+            infoFiltered: "(lọc từ _MAX_ dòng)",
+            loadingRecords: "Đang tải...",
+            zeroRecords: "Không tìm thấy kết quả phù hợp",
+            emptyTable: "Không có dữ liệu trong bảng",
+            paginate: {
+                first: "Đầu",
+                last: "Cuối",
+                next: "Tiếp",
+                previous: "Trước"
+            },
+            aria: {
+                sortAscending: ": kích hoạt để sắp xếp cột tăng dần",
+                sortDescending: ": kích hoạt để sắp xếp cột giảm dần"
+            }
+        }
+
+    });
+</script>
+<?=$this->end()?>

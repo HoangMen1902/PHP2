@@ -1,7 +1,7 @@
 <?= $this->layout('Client/Components/Layout') ?>
 
 <?= $this->start('main_content') ?>
-<section class="account">
+<section class="account px-5">
     <div class="container-fluid">
         <div class="row g-0">
             <?php $this->Insert('Client/Components/sidebar'); ?>

@@ -117,8 +117,8 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/admin/dashboard">
                             <i class="typcn typcn-device-desktop menu-icon"></i>
-                            <span class="menu-title">Dashboard</span>
-                            <div class="badge badge-danger">new</div>
+                            <span class="menu-title">Thống kê</span>
+                            <div class="badge badge-danger">Mới</div>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -172,26 +172,6 @@
                         <div id="brandsSubmenu" class="collapse submenu">
                             <a class="nav-link" href="/admin/brands">Danh sách thương hiệu</a>
                             <a class="nav-link" href="/admin/brand/add">Thêm thương hiệu</a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#commentsSubmenu">
-                            <i class="typcn typcn-message menu-icon"></i>
-                            <span class="menu-title">Bình luận</span>
-                        </a>
-                        <div id="commentsSubmenu" class="collapse submenu">
-                            <a class="nav-link" href="/admin/comments">Danh sách Bình luận</a>
-
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#ratingsSubmenu">
-                            <i class="typcn typcn-star  menu-icon"></i>
-                            <span class="menu-title">Đánh giá</span>
-                        </a>
-                        <div id="ratingsSubmenu" class="collapse submenu">
-                            <a class="nav-link" href="/admin/ratings">Danh sách đánh giá</a>
-
                         </div>
                     </li>
                     <li class="nav-item">

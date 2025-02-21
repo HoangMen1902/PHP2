@@ -6,7 +6,7 @@
 $this->push('styles');
 
 ?>
-<link rel="stylesheet" href="<?= $_ENV['APP_URL'] ?>/node_modules\datatables.net-dt\css\dataTables.dataTables.min.css">
+<script rel="stylesheet" href="<?= $_ENV['APP_URL'] ?>/node_modules\datatables.net-dt\css\dataTables.dataTables.min.css"></script>
 <?php
 $this->end();
 ?>

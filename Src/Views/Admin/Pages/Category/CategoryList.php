@@ -9,13 +9,13 @@ $this->start('main_content');
         <div class="card-body">
             <h4 class="card-title">Danh sách Loại sản phẩm</h4>
             <div class="table-responsive pt-3">
-                <table class="table table-bordered">
+                <table class="table table-bordered" id="myTable">
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>Tên Loại sản phẩm</th>
                             <th>Trạng thái</th>
-                            <th></th>
+                            <th>Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -23,26 +23,8 @@ $this->start('main_content');
                                 <td>1</td>
                                 <td>Phân loại 1</td>
                                 <td>Hoạt động</td>
-                                <td>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <i class="bi bi-three-dots"></i>
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item d-flex" href="/admin/category/edit/">
-                                                <p>Sửa</p>
-                                                <i class="typcn typcn-edit btn-icon-append"></i>
-                                            </a>
-                                            <a class="dropdown-item d-flex" href="/admin/category/delete/" onclick="return confirm('Bạn chắc chứ?')">
-                                                <p>Xóa</p>
-                                                <i class="typcn typcn-delete-outline btn-icon-append"></i>
-                                            </a>            
-
-                                        </div>
-                                    </div>
-                                </td>
+                                <td></td>
                             </tr>
-                            <tr>
                     </tbody>
                 </table>
                 <?php
@@ -62,3 +44,43 @@ $this->start('main_content');
 
 $this->stop();
 ?>
+
+<?=$this->push('styles')?>
+    <link rel="stylesheet" href="<?= $_ENV['APP_URL'] ?>/node_modules\datatables.net-dt\css\dataTables.dataTables.min.css">
+<?=$this->end()?>
+
+
+
+
+<?=$this->push('scripts')?>
+<script src="<?= $_ENV['APP_URL'] ?>/node_modules/datatables.net/js/datatables.js"></script>
+
+<script>
+    let table = new DataTable('#myTable', {
+        responsive: true,
+        language: {
+            decimal: ",",
+            thousands: ".",
+            search: "Tìm kiếm:",
+            lengthMenu: "Hiển thị _MENU_ dòng mỗi trang",
+            info: "Hiển thị _START_ đến _END_ trong tổng số _TOTAL_ dòng",
+            infoEmpty: "Không có dữ liệu",
+            infoFiltered: "(lọc từ _MAX_ dòng)",
+            loadingRecords: "Đang tải...",
+            zeroRecords: "Không tìm thấy kết quả phù hợp",
+            emptyTable: "Không có dữ liệu trong bảng",
+            paginate: {
+                first: "Đầu",
+                last: "Cuối",
+                next: "Tiếp",
+                previous: "Trước"
+            },
+            aria: {
+                sortAscending: ": kích hoạt để sắp xếp cột tăng dần",
+                sortDescending: ": kích hoạt để sắp xếp cột giảm dần"
+            }
+        }
+
+    });
+</script>
+<?=$this->end()?>
