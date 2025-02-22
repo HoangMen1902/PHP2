@@ -71,6 +71,7 @@ $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) {
         $r->get('/users', [UserController::class, 'index']);
         $r->get('/create-user', [UserController::class, 'addPage']);
         $r->get('/edit-user/{id}', [UserController::class, 'editPage']);
+        $r->get('/delete-user/{id}', [UserController::class, 'delete']);
 
         $r->get('/products', [AdminProductController::class, 'index']);
         $r->get('/product/add', [AdminProductController::class, 'addPage']);
@@ -78,15 +79,19 @@ $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) {
         $r->get('/allAttribute', [AttributeController::class, 'attributeList']);
         $r->get('/attribute', [AttributeController::class, 'attributeAdd']);
         $r->get('/attribute-edit/{id}', [AttributeController::class, 'attributeEdit']);
+        $r->get('/delete-attribute/{id}', [AttributeController::class, 'delete']);
 
 
         $r->get('/categories', [CategoryController::class, 'index']);
         $r->get('/category/add', [CategoryController::class, 'categoryAdd']);
         $r->get('/category-edit/{id}', [CategoryController::class, 'categoryEdit']);
+        $r->get('/delete-category/{id}', [CategoryController::class, 'delete']);
 
 
         $r->get('/brands', [BrandController::class, 'index']);
         $r->get('/brand/add', [BrandController::class, 'addPage']);
+        $r->get('/delete-brand/{id}', [BrandController::class, 'delete']);
+
         $r->get('/edit-brand/{id}', [BrandController::class, 'editPage']);
 
         $r->get('/orders', [OrderController::class, 'index']);

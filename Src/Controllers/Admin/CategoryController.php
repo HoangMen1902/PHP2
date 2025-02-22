@@ -81,4 +81,19 @@ class CategoryController extends BaseController {
             exit();
         }
     }
+
+
+    public function delete($id) {
+        $CategoryModel = new CategoryModel();
+        $result = $CategoryModel->deleteCategory($id);
+        if($result) {
+            Notification::success('Thành công', 'Đã xóa thành công');
+            header('location: /admin/categories');
+            exit();
+        } else {
+            Notification::error('Thất bại', 'Xảy ra lỗi khi xóa');
+            header('location: /admin/categories');
+            exit();
+        }
+    }
 }

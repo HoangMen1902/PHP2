@@ -84,4 +84,17 @@ class   BrandController extends BaseController {
             exit();
         }
     }
+    public function delete($id) {
+        $BrandModel = new BrandModel();
+        $result = $BrandModel->deleteBrand($id);
+        if($result) {
+            Notification::success('Thành công', 'Đã xóa thành công');
+            header('location: /admin/brands');
+            exit();
+        } else {
+            Notification::error('Thất bại', 'Xảy ra lỗi khi xóa');
+            header('location: /admin/brands');
+            exit();
+        }
+    }
 }

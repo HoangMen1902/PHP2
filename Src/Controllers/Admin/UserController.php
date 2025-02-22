@@ -86,4 +86,19 @@ class UserController extends BaseController {
             exit();
         }
     }
+
+    public function delete($id) {
+        var_dump($id);
+        $UserModel = new UserModel();
+        $result = $UserModel->deleteUser($id);
+        if($result) {
+            Notification::success('Thành công', 'Đã xóa thành công');
+            header('location: /admin/users');
+            exit();
+        } else {
+            Notification::error('Thất bại', 'Xảy ra lỗi khi xóa');
+            header('location: /admin/users');
+            exit();
+        }
+    }
 }

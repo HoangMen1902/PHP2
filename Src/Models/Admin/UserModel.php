@@ -28,4 +28,8 @@ class UserModel extends Model {
     public function updateUser(int $id, array $data): bool {
         return $this->update($id, $data);
     }
+
+    public function deleteUser(int $id): bool{
+        return $this->delete($id);
+    }
 }

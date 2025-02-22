@@ -25,4 +25,8 @@ class CategoryModel extends Model {
     public function updateCategory(int $id, array $data): bool {
         return $this->update($id, $data);
     }
+
+    public function deleteCategory(int $id) {
+        return $this->delete($id);
+    }
 }

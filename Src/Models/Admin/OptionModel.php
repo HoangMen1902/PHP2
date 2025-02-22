@@ -23,7 +23,11 @@ class OptionModel extends Model {
         return $this->find($id);
     }
 
-    public function updateOption(int $id, $data): bool {
+    public function updateOption(int $id, array $data): bool {
         return $this->update($id, $data);
+    }
+
+    public function deleteOption(int $id):bool {
+        return $this->delete($id);
     }
 }

@@ -88,4 +88,18 @@ class AttributeController extends BaseController
             exit();
         }
     }
+
+    public function delete($id) {
+        $OptionModel = new OptionModel();
+        $result = $OptionModel->deleteOption($id);
+        if($result) {
+            Notification::success('Thành công', 'Đã xóa thành công');
+            header('location: /admin/allAttribute');
+            exit();
+        } else {
+            Notification::error('Thất bại', 'Xảy ra lỗi khi xóa');
+            header('location: /admin/allAttribute');
+            exit();
+        }
+    }
 }

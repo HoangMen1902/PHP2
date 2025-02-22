@@ -33,51 +33,49 @@ $this->start('main_content');
     <div class="col-md-12">
         <div class="card">
             <div class="table-responsive pt-3">
-                <table class="table table-striped project-orders-table">
+            <table class="table table-bordered" id="myTable">
                     <thead>
                         <tr>
-                            <th class="ml-5">ID </th>
-                            <th>Họ Tên</th>
+                            <th>ID</th>
+                            <th>Họ tên</th>
                             <th>Email</th>
                             <th>Số điện thoại</th>
                             <th>Trạng thái</th>
                             <th>Vai trò</th>
-                            <th></th>
+                            <th>Hành động</th>
                         </tr>
                     </thead>
-                    <tbody id="userTable">
-                        
+                    <tbody>
                         <?php
-                        if (isset($data) && !empty($data) && $data != null) :
-                            foreach ($data as $user):
+                            if(isset($data)):
+                                foreach($data as $user):
                         ?>
-                                <tr>
-                                    <td><?= $user['id'] ?></td>
-                                    <td><?= $user['firstname'] . ' '  . $user['lastname'] ?></td>
-                                    <td><?= $user['email'] ?></td>
-                                    <td><?= isset($user['phone']) ? $user['phone'] : 'Trống' ?></td>
-                                    <td><?= $user['status'] == 1 ? 'Hoạt động' : 'Khóa' ?></td>
-                                    <td><?= $user['status'] == 1 ? 'Khách hàng' : 'Quản trị' ?></td>
-                                    <td>
-
-                                        <div class="d-flex align-items-center">
-                                            <button class="btn btn-primary btn-sm btn-icon-text mr-3" onclick="showOrders(<?= $user['id'] ?>)" data-id="<?= $user['id'] ?>">Lịch sử mua hàng</button>
-                                            <a href="/admin/edit-user/<?= $user['id'] ?>">
-                                                <button type="button" class="btn btn-success btn-sm btn-icon-text mr-3">
-                                                    Sửa
-                                                    <i class="typcn typcn-edit btn-icon-append"></i>
-                                                </button>
-                                            </a>
-                                            <form action="/admin/lock-user/<?= $user['id'] ?>" data-user="<?= $user['id'] ?>" method="post" id="lockForm">
-                                                <button type="submit" class="btn btn-danger btn-sm btn-icon-text">Khóa tạm thời</button>
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
+                        <tr>
+                            <td><?=$user['id']?></td>
+                            <td><?=$user['firstname'] . ' ' . $user['lastname']?></td>
+                            
+                            <td><?=$user['email']?></td>
+                            <td><?=$user['phone']?></td>
+                            <td><?=$user['status'] === 1 ? 'Hoạt động' : 'Khóa'?></td>
+                            <td><?=$user['role'] === 1 ? 'Khách hàng' : 'Quản trị'?></td>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <a href="/admin/edit-user/1" class="btn btn-success btn-sm btn-icon-text mr-3">
+                                        Sửa
+                                        <i class="typcn typcn-edit btn-icon-append"></i>
+                                    </a>
+                                    <button  onclick="deleteUser(<?=$user['id']?>)"  class="btn btn-danger btn-sm btn-icon-text">
+                                        Xóa
+                                        <i class="typcn typcn-delete-outline btn-icon-append"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
                         <?php
-                            endforeach;
-                        endif;
-                        ?>
+                        endforeach;
+                    endif;
+                    ?>
+                        <!-- Thêm các hàng khác nếu cần -->
                     </tbody>
                 </table>
             </div>
@@ -111,6 +109,11 @@ $this->push('scripts');
 <script src="<?= $_ENV['APP_URL'] ?>/node_modules/datatables.net/js/datatables.js"></script>
 
 <script>
+    function deleteUser(id) {
+        if(confirm('Bạn chắc chứ?')) {
+            window.location.href = `/admin/delete-user/${id}`;
+        }
+    }
     async function showOrders(id) {
 
         await $.ajax({
@@ -221,6 +224,32 @@ $this->push('scripts');
             }
         });
     }
+    let table = new DataTable('#myTable', {
+        responsive: true,
+        language: {
+            decimal: ",",
+            thousands: ".",
+            search: "Tìm kiếm:",
+            lengthMenu: "Hiển thị _MENU_ dòng mỗi trang",
+            info: "Hiển thị _START_ đến _END_ trong tổng số _TOTAL_ dòng",
+            infoEmpty: "Không có dữ liệu",
+            infoFiltered: "(lọc từ _MAX_ dòng)",
+            loadingRecords: "Đang tải...",
+            zeroRecords: "Không tìm thấy kết quả phù hợp",
+            emptyTable: "Không có dữ liệu trong bảng",
+            paginate: {
+                first: "Đầu",
+                last: "Cuối",
+                next: "Tiếp",
+                previous: "Trước"
+            },
+            aria: {
+                sortAscending: ": kích hoạt để sắp xếp cột tăng dần",
+                sortDescending: ": kích hoạt để sắp xếp cột giảm dần"
+            }
+        }
+
+    });
 </script>
 <script src="<?= $_ENV['APP_URL'] ?>/public\Assets\Admin\js\Pages\UserScript.js"></script>
 <?php

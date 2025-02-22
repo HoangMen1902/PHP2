@@ -26,4 +26,8 @@ class BrandModel extends Model {
     public function updateBrand(int $id, array $data): int {
         return $this->update($id, $data);
     }
+
+    public function deleteBrand(int $id):bool {
+        return $this->delete($id);
+    }
 }

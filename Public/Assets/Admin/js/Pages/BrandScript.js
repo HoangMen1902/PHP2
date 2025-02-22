@@ -42,17 +42,6 @@ $(() => {
 
 function deleteBrand(id) {
     if(confirm('Bạn chắc chứ?')) {
-        $.ajax({
-            type: "DELETE",
-            url: `/admin/delete-brand/${id}`,
-            success: function (response) {
-                if(response.status === 200 || 201) {
-                    location.reload();
-                }
-            }, error: function(xhr,status,error) {
-                console.log(error);
-            }
-        });
+        window.location.href = `/admin/delete-brand/${id}`;
     }
-    return false;
 }
