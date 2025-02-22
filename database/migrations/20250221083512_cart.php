@@ -20,13 +20,16 @@ final class Cart extends AbstractMigration
      */
     public function change(): void
     {
-        $table = $this->table('orders');
-        $table->addColumn('total_price', 'double')
-        ->addColumn('user_id', 'integer')
-        ->addColumn('address', 'text')
-        ->addColumn('status', 'integer', ['limit'=> MysqlAdapter::INT_TINY])
+
+        $table = $this->table('carts');
+        $table->addColumn('quantity', 'integer')
+        ->addColumn('sku_id', 'integer', ['signed' => false])
+        ->addColumn('user_id', 'integer', ['signed' => false])
         ->addColumn('created_at', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
         ->addColumn('updated_at', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
+        ->addForeignKey('user_id', 'users', 'id',  ['delete'  => 'CASCADE', 'update' => 'NO_ACTION'])
+        ->addForeignKey('sku_id', 'product_skus', 'id',  ['delete'  => 'CASCADE', 'update' => 'NO_ACTION'])
+
         ->create();
     }
 }

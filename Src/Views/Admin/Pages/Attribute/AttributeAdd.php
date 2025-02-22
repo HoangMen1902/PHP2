@@ -19,7 +19,6 @@ $this->start('main_content');
             <?php endif; ?>
 
             <form action="<?= isset($isOption) && $isOption ? '/admin/option-add' : '/admin/attribute-add' ?>" method="post">
-                <input type="hidden" name="method" value="POST">
 
                 <?php if (isset($isOption) && $isOption): ?>
                     <div class="form-group">
@@ -65,7 +64,7 @@ $this->start('main_content');
                     </div>
                 </div>
 
-                <button type="submit" name="submit" class="btn btn-primary" style="justify-self: flex-end;">
+                <button type="submit"  class="btn btn-primary" style="justify-self: flex-end;">
                     <?= isset($isOption) && $isOption ? 'Thêm Option' : 'Thêm Thuộc Tính' ?>
                 </button>
             </form>

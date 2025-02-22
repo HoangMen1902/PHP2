@@ -12,13 +12,7 @@ class ProductController extends BaseController {
         echo $this->view->render('/Admin/Pages/Products/ProductAdd');
     }
 
-    public function attributeList() {
-        echo $this->view->render('/Admin/Pages/Attribute/AttributeList');
 
-    }
 
-    public function attributeAdd() {
-        echo $this->view->render('/Admin/Pages/Attribute/AttributeAdd');
 
-    }
 }

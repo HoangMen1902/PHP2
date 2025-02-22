@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Phinx\Db\Adapter\MysqlAdapter;
 use Phinx\Migration\AbstractMigration;
 
 final class Orders extends AbstractMigration
@@ -20,11 +21,15 @@ final class Orders extends AbstractMigration
     public function change(): void
     {
         $table = $this->table('orders');
-        $table->addColumn('quantity', 'integer')
-        ->addColumn('sku_id', 'integer')
-        ->addColumn('user_id', 'integer')
+        $table->addColumn('total_price', 'double')
+        ->addColumn('user_id', 'integer', ['signed' => false])
+        ->addColumn('address', 'text')
+        ->addColumn('status', 'integer', ['limit'=> MysqlAdapter::INT_TINY])
         ->addColumn('created_at', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
         ->addColumn('updated_at', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
+        ->addForeignKey('user_id', 'users', 'id',  ['delete'  => 'CASCADE', 'update' => 'NO_ACTION'])
+        
         ->create();
+
     }
 }

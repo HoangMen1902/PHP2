@@ -26,11 +26,14 @@ final class ProductTable extends AbstractMigration
         ->addColumn('total_quantity', 'integer')
         ->addColumn('thumbnail', 'text')
         ->addColumn('status', 'integer', ['limit'=> MysqlAdapter::INT_TINY])
-        ->addColumn('brand_id', 'integer')
-        ->addColumn('category_id', 'integer')
+        ->addColumn('brand_id', 'integer', ['signed' => false])
+        ->addColumn('category_id', 'integer', ['signed' => false])
         ->addColumn('images', 'text')
         ->addColumn('created_at', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
         ->addColumn('updated_at', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
+        ->addForeignKey('brand_id', 'brands', 'id',  ['delete'  => 'CASCADE', 'update' => 'NO_ACTION'])
+        ->addForeignKey('category_id', 'categories', 'id',  ['delete'  => 'CASCADE', 'update' => 'NO_ACTION'])
+
         ->create();
     }
 }

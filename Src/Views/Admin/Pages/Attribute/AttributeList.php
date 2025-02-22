@@ -46,19 +46,11 @@ $this->start('main_content');
                                         </div>
                                     </td>
                                 </tr>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                            <tr>
-                                <td colspan="4" class="text-center">Không có dữ liệu</td>
-                            </tr>
-                        <?php endif; ?>
+                            <?php endforeach; endif;?>
+
                     </tbody>
                 </table>
             </div>
-
-            <?php if (empty($data)): ?>
-                <h4 class="text-center text-danger" id="no-data-message" style="display: block;">Không có dữ liệu</h4>
-            <?php endif; ?>
         </div>
     </div>
 </div>

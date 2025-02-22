@@ -1,6 +1,8 @@
 <?php
+
 use FastRoute\RouteCollector;
 use Spatie\Ignition\Ignition;
+use Src\Controllers\Admin\AttributeController;
 use Src\Controllers\Admin\BrandController;
 use Src\Controllers\Admin\CategoryController;
 use Src\Controllers\Admin\HomeController as AdminHomeController;
@@ -20,7 +22,8 @@ ini_set('log_errors', TRUE);
 ini_set('error_log', './logs/php.log');
 
 require_once './vendor/autoload.php';
-
+ob_start();
+session_start();
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
@@ -43,7 +46,7 @@ Ignition::make()->register()->theme('dark');
 
 
 
-$dispatcher = FastRoute\simpleDispatcher(function(RouteCollector $r) {
+$dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) {
     $r->get('/', [HomeController::class, 'loadHome']);
     $r->get('/home', [HomeController::class, 'loadHome']);
     $r->get('/gioi-thieu', [HomeController::class, 'loadAbout']);
@@ -67,22 +70,28 @@ $dispatcher = FastRoute\simpleDispatcher(function(RouteCollector $r) {
 
         $r->get('/users', [UserController::class, 'index']);
         $r->get('/create-user', [UserController::class, 'addPage']);
+        $r->get('/edit-user/{id}', [UserController::class, 'editPage']);
 
         $r->get('/products', [AdminProductController::class, 'index']);
         $r->get('/product/add', [AdminProductController::class, 'addPage']);
 
-        $r->get('/allAttribute', [AdminProductController::class, 'attributeList']);
-        $r->get('/attribute', [AdminProductController::class, 'attributeAdd']);
+        $r->get('/allAttribute', [AttributeController::class, 'attributeList']);
+        $r->get('/attribute', [AttributeController::class, 'attributeAdd']);
+        $r->get('/attribute-edit/{id}', [AttributeController::class, 'attributeEdit']);
+
 
         $r->get('/categories', [CategoryController::class, 'index']);
         $r->get('/category/add', [CategoryController::class, 'categoryAdd']);
 
         $r->get('/brands', [BrandController::class, 'index']);
         $r->get('/brand/add', [BrandController::class, 'addPage']);
-
-
         $r->get('/orders', [OrderController::class, 'index']);
 
+        $r->post('/add-user', [UserController::class, 'insertUser']);
+        $r->post('/edit-user/{id}', [UserController::class, 'updateUser']);
+
+        $r->post('/attribute-add', [AttributeController::class, 'insertAttribute']);
+        $r->post('/attribute-update/{id}', [AttributeController::class, 'updateAttribute']);
     });
 });
 
@@ -106,14 +115,13 @@ switch ($routeInfo[0]) {
         break;
     case FastRoute\Dispatcher::FOUND:
         $handler = $routeInfo[1];
-        $vars = $routeInfo[2];        
+        $vars = $routeInfo[2];
         if (is_array($handler) && count($handler) === 2) {
             list($class, $method) = $handler;
         } else {
-            die("Error: Invalid route handler!"); 
+            die("Error: Invalid route handler!");
         }
-    
+
         call_user_func_array([new $class, $method], $vars);
         break;
 }
-

@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-use Phinx\Db\Adapter\MysqlAdapter;
 use Phinx\Migration\AbstractMigration;
 
-final class OptionValueTable extends AbstractMigration
+final class SkuValuesTable extends AbstractMigration
 {
     /**
      * Change Method.
@@ -20,16 +19,16 @@ final class OptionValueTable extends AbstractMigration
      */
     public function change(): void
     {
-        $table = $this->table('option_values');
-        $table->addColumn('product_id', 'integer', ['signed' => false])
+        $table = $this->table('sku_values');
+        $table->addColumn('sku_id', 'integer', ['signed' => false])
         ->addColumn('option_id', 'integer', ['signed' => false])
-        ->addColumn('value_name', 'string', ['limit' => 255])
-        ->addColumn('status', 'integer', ['limit'=> MysqlAdapter::INT_TINY])
+        ->addColumn('value_id', 'integer', ['signed' => false])
         ->addColumn('created_at', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
         ->addColumn('updated_at', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
+        ->addForeignKey('sku_id', 'product_skus', 'id',  ['delete'  => 'CASCADE', 'update' => 'NO_ACTION'])
         ->addForeignKey('option_id', 'options', 'id',  ['delete'  => 'CASCADE', 'update' => 'NO_ACTION'])
-        ->addForeignKey('product_id', 'products', 'id',  ['delete'  => 'CASCADE', 'update' => 'NO_ACTION'])
-
+        ->addForeignKey('value_id', 'sku_values', 'id',  ['delete'  => 'CASCADE', 'update' => 'NO_ACTION'])
+        
         ->create();
     }
 }

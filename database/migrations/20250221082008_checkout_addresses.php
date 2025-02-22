@@ -20,7 +20,7 @@ final class CheckoutAddresses extends AbstractMigration
     public function change(): void
     {
         $table = $this->table('checkout_addresses');
-        $table->addColumn('user_id', 'integer', ['null' => false])
+        $table->addColumn('user_id', 'integer', ['null' => false, 'signed' => false])
               ->addColumn('address', 'text', ['limit' => 101])
               ->addColumn('province_name', 'string', ['limit' => 255])
               ->addColumn('district_name', 'string', ['limit' => 255])
@@ -28,6 +28,7 @@ final class CheckoutAddresses extends AbstractMigration
               ->addColumn('phone', 'string', ['limit' => 10])
               ->addColumn('created_at', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
               ->addColumn('updated_at', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
+              ->addForeignKey('user_id', 'users', 'id',  ['delete'  => 'CASCADE', 'update' => 'NO_ACTION'])
               ->create();
     }
 }

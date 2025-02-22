@@ -1,6 +1,6 @@
 <?php $this->layout('Admin/Layouts/Layout') ?>
 
-<?php 
+<?php
 $this->start('main_content');
 ?>
 
@@ -9,21 +9,12 @@ $this->start('main_content');
         <div class="card-body">
             <h4 class="card-title">Sửa Thuộc Tính</h4>
 
-            <!-- Hiển thị thông báo thành công nếu có -->
-            <?php if (isset($_SESSION['status_message'])): ?>
-                <div class="alert alert-success">
-                    <?= htmlspecialchars($_SESSION['status_message']) ?>
-                </div>
-                <?php unset($_SESSION['status_message']); // Xóa thông báo sau khi hiển thị ?>
-            <?php endif; ?>
-
             <form action="/admin/attribute-update/<?= $data['id'] ?>" method="post">
-                <input type="hidden" name="method" value="POST">
 
                 <div class="form-group">
                     <label>Tên Thuộc Tính</label>
                     <input type="text" class="form-control form-control-lg" placeholder="Tên thuộc tính"
-                           name="name" value="<?= isset($data['name']) ? htmlspecialchars($data['name']) : '' ?>">
+                        name="name" value="<?= isset($data['name']) ? htmlspecialchars($data['name']) : '' ?>">
                     <?php if (isset($errors['name'])): ?>
                         <div class="text-danger"><?= htmlspecialchars($errors['name']) ?></div>
                     <?php endif; ?>
@@ -39,7 +30,7 @@ $this->start('main_content');
                     </div>
                 </div>
 
-                <button type="submit" name="submit" class="btn btn-primary" style="justify-self: flex-end;">
+                <button type="submit" class="btn btn-primary" style="justify-self: flex-end;">
                     Cập nhật Thuộc Tính
                 </button>
             </form>

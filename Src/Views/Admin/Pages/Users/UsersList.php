@@ -14,21 +14,6 @@ $this->end();
 $this->start('main_content');
 ?>
 
-<?php
-if (isset($_GET['status']) && $_GET['status'] === 'success') {
-?>
-    <div class="alert alert-success mt-5">
-        <p class="m-0">Thao tác thành công</p>
-    </div>
-<?php
-} else if (isset($_GET['status']) && $_GET['status'] === 'failed' && $_GET['error'] == 3) {
-?>
-    <div class="alert alert-danger mt-5">
-        <p class="m-0">Dữ liệu đã bị trùng, lỗi: <?= $_GET['name'] ?></p>
-    </div>
-<?php
-}
-?>
 <form action="/admin/user-search" class="mb-3" method="post" id="user-search">
     <div class="row">
         <div class="col-lg-12">
@@ -61,6 +46,7 @@ if (isset($_GET['status']) && $_GET['status'] === 'success') {
                         </tr>
                     </thead>
                     <tbody id="userTable">
+                        
                         <?php
                         if (isset($data) && !empty($data) && $data != null) :
                             foreach ($data as $user):

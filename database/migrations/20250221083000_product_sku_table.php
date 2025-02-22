@@ -19,14 +19,15 @@ final class ProductSkuTable extends AbstractMigration
      */
     public function change(): void
     {
-        $table = $this->table('product_sku');
+        $table = $this->table('product_skus');
         $table->addColumn('sku', 'string', ['limit' => 255])
         ->addColumn('images', 'text')
         ->addColumn('price', 'double')
         ->addColumn('quantity', 'integer')
-        ->addColumn('product_id', 'integer')
+        ->addColumn('product_id', 'integer', ['signed' => false])
         ->addColumn('created_at', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
         ->addColumn('updated_at', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
+        ->addForeignKey('product_id', 'products', 'id',  ['delete'  => 'CASCADE', 'update' => 'NO_ACTION'])
         ->create(); 
     }
 }

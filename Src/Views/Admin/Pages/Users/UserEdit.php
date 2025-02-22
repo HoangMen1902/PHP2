@@ -60,8 +60,8 @@ $this->start('main_content');
                                 <label class="col-sm-3 col-form-label">Vai trò</label>
                                 <div class="col-sm-9">
                                     <select class="form-control" name="role" id="role">
-                                        <option value="1" <?=$data['role'] = 1 ? 'selected' : ''?>>Client</option>
-                                        <option value="2" <?=$data['role'] = 2 ? 'selected' : ''?>>Admin</option>
+                                        <option value="1" <?=$data['role'] === 1 ? 'selected' : ''?>>Client</option>
+                                        <option value="2" <?=$data['role'] === 2 ? 'selected' : ''?>>Admin</option>
                                     </select>
                                     <small class="text-danger" style="display: none;" id="role-validate">* Vai trò không được trống</small>
                                 </div>
@@ -89,27 +89,6 @@ $this->start('main_content');
                 </form>
 
             </div>
-            <?php
-            if (isset($_GET['status']) && $_GET['status'] === 'failed' && isset($_GET['error'])) {
-                switch ($_GET['error']) {
-                    case 1:
-            ?>
-                        <div class="alert alert-danger mt-5">
-                            <strong>Lỗi!</strong> Vui lòng nhập đầy đủ thông tin cần thiết!
-                        </div>
-                    <?php
-                        break;
-                    case 2:
-                    ?>
-                        <div class="alert alert-danger mt-5">
-                            <strong>Lỗi!</strong> Độ dài dữ liệu không hợp lệ!
-                        </div>
-            <?php
-                        break;
-                }
-            } 
-
-            ?>
         </div>
     </div>
 </div>

@@ -20,12 +20,14 @@ final class OrderDetailTable extends AbstractMigration
     public function change(): void
     {
         $table = $this->table('order_details');
-        $table->addColumn('order_id', 'integer')
-        ->addColumn('sku_id', 'integer')
+        $table->addColumn('order_id', 'integer', ['signed' => false])
+        ->addColumn('sku_id', 'integer', ['signed' => false])
         ->addColumn('price', 'double')
         ->addColumn('quantity', 'integer')
         ->addColumn('created_at', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
         ->addColumn('updated_at', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
+        ->addForeignKey('order_id', 'orders', 'id',  ['delete'  => 'CASCADE', 'update' => 'NO_ACTION'])
+        ->addForeignKey('sku_id', 'product_skus', 'id',  ['delete'  => 'CASCADE', 'update' => 'NO_ACTION'])
         ->create();
     }
 }
