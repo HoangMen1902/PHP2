@@ -9,7 +9,6 @@ $this->start('main_content');
         <div class="card-body">
             <h4 class="card-title">Thêm phân loại</h4>
             <form action="/admin/category/store" method="post">
-                <input type="hidden" name="method" value="POST">
                 <div class="form-group">
                     <label>Tên phân loại</label>
                     <input type="text" class="form-control form-control-lg" placeholder="Bàn phím.." aria-label="Category Name" name="name" value="<?= htmlspecialchars($data['name'] ?? '') ?>">
@@ -23,16 +22,8 @@ $this->start('main_content');
                     </select>
                 </div>
                 
-                <button type="submit" name="submit" class="btn btn-primary" style="justify-self: flex-end;">Thêm</button>
+                <button type="submit" class="btn btn-primary" style="justify-self: flex-end;">Thêm</button>
             </form>
-
-            <?php if (!empty($errors)): ?>
-                <div class="mt-5 alert alert-danger" role="alert">
-                    <?php foreach ($errors as $error): ?>
-                        <p><?= htmlspecialchars($error) ?></p>
-                    <?php endforeach; ?>
-                </div>
-            <?php endif; ?>
         </div>
     </div>
 </div>

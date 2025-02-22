@@ -19,21 +19,28 @@ $this->start('main_content');
                         </tr>
                     </thead>
                     <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Phân loại 1</td>
-                                <td>Hoạt động</td>
-                                <td></td>
-                            </tr>
+                    <?php if (!empty($data)): ?>
+                            <?php foreach ($data as $category): ?>
+                                <tr>
+                                    <td><?= htmlspecialchars($category['id']) ?></td>
+                                    <td><?= htmlspecialchars($category['name']) ?></td>
+                                    <td><?= $category['status'] == 1 ? 'Hoạt động' : 'Không hoạt động' ?></td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <a href="/admin/category-edit/<?= htmlspecialchars($category['id']) ?>" class="btn btn-success btn-sm btn-icon-text mr-3">
+                                                Sửa
+                                                <i class="typcn typcn-edit btn-icon-append"></i>
+                                            </a>
+                                            <a href="/admin/delete-category/<?= htmlspecialchars($category['id']) ?>" onclick="return confirm('Bạn chắc chứ?')" class="btn btn-danger btn-sm btn-icon-text">
+                                                Xóa
+                                                <i class="typcn typcn-delete-outline btn-icon-append"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php endforeach; endif;?>
                     </tbody>
                 </table>
-                <?php
-                if(!isset($category) || empty($category)):
-                ?>
-                <h4 class="text-center text-danger">Không có dữ liệu</h4>
-                <?php
-                endif;
-                ?>
             </div>
         </div>
     </div>

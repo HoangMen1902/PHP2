@@ -22,18 +22,6 @@ $this->start('main_content');
                         </div>
 
                         <div class="form-group">
-                            <label>Hình Ảnh Thương Hiệu</label>
-                            <div class="mb-2">
-                                <img src="<?=$_ENV['APP_URL']?>/public/Uploads/Brands/<?=$data['image']?>" alt="Current Image"
-                                    style="max-width: 150px;">
-                            </div>
-                            <input type="file" class="form-control form-control-lg" name="image"
-                                aria-label="Category Image">
-                    <small class="text-danger" style="display: none;" id="image-validate">* Vui lòng tải hình thương hiệu</small>
-
-                        </div>
-
-                        <div class="form-group">
                             <label>Mô tả Thương hiệu</label>
                             <textarea class="form-control form-control-lg" name="description"
                                 placeholder="Mô tả"><?=$data['description']?></textarea>

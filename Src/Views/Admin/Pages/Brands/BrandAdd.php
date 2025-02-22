@@ -5,43 +5,6 @@
 $this->start('main_content');
 ?>
 
-
-<?php
-if(isset($_GET['status']) && $_GET['status'] === 'success') :
-
-
-?>
-
-<div class="alert alert-success" role="alert">
-  Đã thêm thương hiệu thành công
-</div>
-<?php
-elseif (isset($_GET['status']) && $_GET['status'] === 'failed'):;
-
-?>
-
-<div class="alert alert-danger" role="alert">
-    <?php switch ($_GET['code']) {
-        case '1':
-            echo 'Lỗi! Dữ liệu không hợp lệ';
-            break;
-        case '2':
-            echo 'Lỗi! khi thêm dữ liệu';
-            break;
-        case '3':
-            echo 'Lỗi! không thể upload file hình ảnh';
-            break;
-        case '4':
-            echo 'Lỗi! File không phải là hình ảnh';
-        default:
-            break;
-    }?>
-</div>
-<?php
-
-endif;
-?>
-    
 <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
         <div class="card-body">
@@ -55,11 +18,7 @@ endif;
                         <small class="text-danger" style="display: none;" id="name-validate">* Vui lòng nhập tên thương hiệu</small>
                 </div>
                 
-                <div class="form-group">
-                    <label>Hình Ảnh Thương Hiệu</label>
-                    <input type="file" class="form-control form-control-lg brand-input" name="image" aria-label="Category Name">
-                    <small class="text-danger" style="display: none;" id="image-validate">* Vui lòng tải hình thương hiệu</small>
-                </div>
+
                 
                 <div class="form-group">
                     <label>Mô tả</label>
@@ -77,15 +36,8 @@ endif;
                     </div>
                 </div>
                 
-                <button type="submit"  class="btn btn-primary" name="submit" style="justify-self: flex-end;">Thêm</button>
+                <button type="submit"  class="btn btn-primary"  style="justify-self: flex-end;">Thêm</button>
 
-                <!-- Success and Error Alerts - Toggle display based on conditions -->
-                <div id="alert-success" class="alert alert-success mt-5" style="display: none;">
-                    Thêm thương hiệu thành công!
-                </div>
-                <div id="alert-error" class="alert alert-danger mt-5" style="display: none;">
-                    Có lỗi xảy ra khi thêm thương hiệu.
-                </div>
             </form>
         </div>
     </div>

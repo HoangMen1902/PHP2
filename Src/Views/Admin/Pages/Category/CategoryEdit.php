@@ -21,11 +21,6 @@ $this->start('main_content');
 
                     <form action="/admin/category/update/<?= $category['id'] ?>" method="post" enctype="multipart/form-data">
 
-                        <input type="hidden" name="method" value="POST">
-                        <div class="form-group">
-                            <label for="name">ID</label>
-                            <input type="text" class="form-control" id="id" placeholder="id" name="id" value="<?= htmlspecialchars($category['id']) ?>" readonly>
-                        </div>
                         <div class="form-group">
                             <label>Tên Loại sản phẩm</label>
                             <input type="text" class="form-control form-control-lg" name="name" placeholder="Bàn phím.." value="<?= $category['name'] ?>" aria-label="Category Name">
@@ -39,7 +34,7 @@ $this->start('main_content');
                                 </select>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary" name="submit" style="justify-self: flex-end;">Sửa</button>
+                        <button type="submit" class="btn btn-primary" style="justify-self: flex-end;">Sửa</button>
                     </form>
                 </div>
             </div>

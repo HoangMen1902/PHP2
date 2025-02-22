@@ -82,9 +82,13 @@ $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) {
 
         $r->get('/categories', [CategoryController::class, 'index']);
         $r->get('/category/add', [CategoryController::class, 'categoryAdd']);
+        $r->get('/category-edit/{id}', [CategoryController::class, 'categoryEdit']);
+
 
         $r->get('/brands', [BrandController::class, 'index']);
         $r->get('/brand/add', [BrandController::class, 'addPage']);
+        $r->get('/edit-brand/{id}', [BrandController::class, 'editPage']);
+
         $r->get('/orders', [OrderController::class, 'index']);
 
         $r->post('/add-user', [UserController::class, 'insertUser']);
@@ -92,6 +96,14 @@ $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) {
 
         $r->post('/attribute-add', [AttributeController::class, 'insertAttribute']);
         $r->post('/attribute-update/{id}', [AttributeController::class, 'updateAttribute']);
+
+        $r->post('/category/store', [CategoryController::class, 'insertCategory']);
+        $r->post('/category/update/{id}', [CategoryController::class, 'updateCategory']);
+
+        $r->post('/add-brand', [BrandController::class, 'insertBrand']);
+        $r->post('/update-brand/{id}', [BrandController::class, 'updateBrand']);
+
+
     });
 });
 

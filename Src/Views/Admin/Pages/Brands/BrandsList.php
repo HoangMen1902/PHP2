@@ -14,7 +14,6 @@ $this->start('main_content');
                         <tr>
                             <th>ID</th>
                             <th>Tên thương hiệu</th>
-                            <th>Hình ảnh</th>
                             <th>Trạng thái</th>
                             <th>Hành động</th>
                         </tr>
@@ -27,11 +26,7 @@ $this->start('main_content');
                         <tr>
                             <td><?=$brand['id']?></td>
                             <td><?=$brand['name']?></td>
-                            <td>
-                                <img src="<?=$_ENV['APP_URL']?>/public/Uploads/Brands/<?=$brand['image']?>" 
-                                     alt="Brand Image" 
-                                     style="object-fit: contain; width: 100px; height: auto;">
-                            </td>
+                            
                             <td><?=$brand['status'] == 1 ? 'Hoạt động' : 'Khóa'?></td>
                             <td>
                                 <div class="d-flex align-items-center">

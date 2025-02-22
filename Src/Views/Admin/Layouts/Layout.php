@@ -6,18 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Bee Technova Admin</title>
     <?= $this->section('styles') ?>
+    <style>
+        .select2-container .select2-selection--single {
+            padding: 6px 0 !important;
+            height: auto !important;
+        }
+    </style>
 
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-    <link rel="stylesheet" href="<?= getenv('APP_URL') ?>\node_modules\typicons.font\src\font/typicons.css">
-    <link rel="stylesheet" href="<?= getenv('APP_URL') ?>/public/Assets/Admin/Styles/style.css">
+    <link rel="stylesheet" href="<?= $_ENV['APP_URL'] ?>\node_modules\typicons.font\src\font/typicons.css">
+    <link rel="stylesheet" href="<?= $_ENV['APP_URL'] ?>/public/Assets/Admin/Styles/style.css">
+
+    <link rel="stylesheet" href="<?= $_ENV['APP_URL'] ?>\node_modules\select2\dist/css\select2.min.css">
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script
         src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
         crossorigin="anonymous"></script>
-    <script src="<?= getenv('APP_URL') ?>/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="<?= $_ENV['APP_URL'] ?>/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
@@ -28,9 +36,9 @@
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="navbar-brand-wrapper d-flex justify-content-center">
                 <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">
-                    <!-- <a class="navbar-brand brand-logo" href="/admin/dashboard"><img src="<?= getenv('APP_URL') ?>public/assets/admin/images/beelogo.png" -->
+                    <!-- <a class="navbar-brand brand-logo" href="/admin/dashboard"><img src="<?= $_ENV['APP_URL'] ?>public/assets/admin/images/beelogo.png" -->
                     <a class="navbar-brand brand-logo" href="/admin/dashboard"><img
-                            src="<?= getenv('APP_URL') ?>/public\Assets\Admin\Images\WebLogo.png" alt="logo" /></a>
+                            src="<?= $_ENV['APP_URL'] ?>/public\Assets\Admin\Images\WebLogo.png" alt="logo" /></a>
                     <a class="navbar-brand brand-logo-mini" href="/admin/dashboard"
                         style="color: #fff; text-decoration: none;">Bee</a>
                     <button class="navbar-toggler navbar-toggler align-self-center" type="button"
@@ -183,7 +191,7 @@
                             <a class="nav-link" href="/admin/orders">Danh sách đơn hàng</a>
                         </div>
                     </li>
-                   
+
 
                 </ul>
             </nav>
@@ -220,16 +228,20 @@
     </div>
 
     <?= $this->section('scripts') ?>
-    <!-- <script src="<?= getenv('APP_URL') ?>/public/assets/admin/vendors/js/vendor.bundle.base.js"></script> -->
+    <!-- <script src="<?= $_ENV['APP_URL'] ?>/public/assets/admin/vendors/js/vendor.bundle.base.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="<?= getenv('APP_URL') ?>/node_modules/chart.js/dist/Chart.min.js"></script>
-    <script src="<?= getenv('APP_URL') ?>/public/Assets/Admin/js/off-canvas.js"></script>
-    <script src="<?= getenv('APP_URL') ?>/public/Assets/Admin/js/hoverable-collapse.js"></script>
-    <script src="<?= getenv('APP_URL') ?>/public/Assets/Admin/js/template.js"></script>
-    <script src="<?= getenv('APP_URL') ?>/public/Assets/Admin/js/settings.js"></script>
-    <script src="<?= getenv('APP_URL') ?>/public/Assets/Admin/js/todolist.js"></script>
-    <script src="<?= getenv('APP_URL') ?>/public/Assets/Admin/js/dashboard.js"></script>
-    <script src="<?= getenv('APP_URL') ?>/public/Assets/Admin/js/variations.js"></script>
+    <script src="<?= $_ENV['APP_URL'] ?>/node_modules/select2/dist/js/select2.min.js"></script>
+
+
+    <script src="<?= $_ENV['APP_URL'] ?>/node_modules/chart.js/dist/Chart.min.js"></script>
+    <script src="<?= $_ENV['APP_URL'] ?>/public/Assets/Admin/js/off-canvas.js"></script>
+    <script src="<?= $_ENV['APP_URL'] ?>/public/Assets/Admin/js/hoverable-collapse.js"></script>
+    <script src="<?= $_ENV['APP_URL'] ?>/public/Assets/Admin/js/template.js"></script>
+    <script src="<?= $_ENV['APP_URL'] ?>/public/Assets/Admin/js/settings.js"></script>
+    <script src="<?= $_ENV['APP_URL'] ?>/public/Assets/Admin/js/todolist.js"></script>
+    <script src="<?= $_ENV['APP_URL'] ?>/public/Assets/Admin/js/dashboard.js"></script>
+    <script src="<?= $_ENV['APP_URL'] ?>/public/Assets/Admin/js/variations.js"></script>
+
 
 </body>
 

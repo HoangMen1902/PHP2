@@ -54,7 +54,6 @@ class AttributeController extends BaseController
             }
         } else {
             Notification::error('Thất bại', 'Vui lòng nhập thông tin thuộc tính');
-            var_dump($validation);
             header('location: /admin/allAttribute');
             exit();
         }
@@ -85,7 +84,6 @@ class AttributeController extends BaseController
             }
         } else {
             Notification::error('Thất bại', 'Vui lòng nhập thông tin thuộc tính');
-            var_dump($validation);
             header('location: /admin/attribute');
             exit();
         }

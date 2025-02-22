@@ -1,40 +1,3 @@
-function getProductInput() {
-    return {
-        name: $('input[name="name"]').val().trim(),
-        brand: $('select[name="brand"]').val().trim(),
-        discount: $('input[name="discount"]').val().trim(),
-        status: $('select[name="status"]').val(),
-        categories: $('select[name="categories"]').val(),
-        child_category: $('select[name="child_category"]').val(),
-        specifications_file: $('input[name="specifications_file"]').val().trim()
-    };
-}
-
-
-function validationAddForm() {
-    let input = getProductInput();
-    let is_valid = true;
-    Object.entries(input).forEach(([key, value]) => {
-        if (!value) {
-            $(`#${key}-required`).show()
-            $(`input[name="${key}"]`).addClass('border-danger');
-            $(`textarea[name="${key}"]`).addClass('border-danger');
-            $(`select[name="${key}"]`).addClass('border-danger');
-            is_valid = false;
-        } else {
-            $(`#${key}-required`).hide()
-            $(`input[name="${key}"]`).removeClass('border-danger');
-            $(`textarea[name="${key}"]`).removeClass('border-danger');
-            $(`select[name="${key}"]`).removeClass('border-danger');
-        }
-    })
-
-    if (is_valid === false) {
-        return false;
-    }
-    return true;
-}
-
 
 function skuValidate() {
     let isValid = true;
@@ -127,35 +90,4 @@ $('#productAddForm').on('submit', (e) => {
 
 
 
-
-$(function () {
-    $('#categories').on('change', function () {
-        var parentId = $(this).val();
-        if (parentId) {
-            $.ajax({
-                type: 'POST',
-                url: '/admin/get-child-categories',
-                data: { category_id: parentId },
-                success: function (response) {
-                    if (response.length > 0) {
-                        $('#child_category').show();
-                        $('#child_category select').empty();
-                        $('#child_category select').append('<option value="">Chọn danh mục con</option>');
-
-                        response.forEach(function (childCategory) {
-                            $('#child_category select').append('<option value="' + childCategory.id + '">' + childCategory.name + '</option>');
-                        });
-                    } else {
-                        $('#child_category').hide();
-                    }
-                },
-                error: function () {
-                    console.log('Có lỗi xảy ra khi lấy danh mục con.');
-                }
-            });
-        } else {
-            $('#child_category').hide();
-        }
-    });
-});
 

@@ -6,8 +6,8 @@ $this->push('styles');
 ?>
 <style>
     .cke_notification {
-    display: none !important;
-}
+        display: none !important;
+    }
 </style>
 <?php
 $this->end();
@@ -19,73 +19,62 @@ $this->start('main_content');
 
 <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
+
         <div class="card-body">
+
             <h4 class="card-title">Thêm sản phẩm</h4>
             <form action="/admin/product/store" id="productAddForm" method="post" enctype="multipart/form-data">
 
                 <p class="card-description">Thông tin sản phẩm</p>
                 <div class="form-group">
+                    <label for="name">Mã SKU</label>
+                    <input type="text" class="form-control" name="sku" placeholder="SKU">
+                    <small id="name-required" class="text-danger" style="display:none">Vui lòng nhập tên sản phẩm</small>
+                </div>
+
+                <div class="form-group">
                     <label for="name">Tên sản phẩm</label>
-                    <input type="text" class="form-control" name="name" placeholder="Tên sản phẩm" value="<?= htmlspecialchars($data['name'] ?? '') ?>">
+                    <input type="text" class="form-control" name="name" placeholder="Tên sản phẩm">
                     <small id="name-required" class="text-danger" style="display:none">Vui lòng nhập tên sản phẩm</small>
                 </div>
 
                 <div class="form-group">
                     <label for="description">Mô tả ngắn</label>
-                    <textarea class="form-control" name="short_description" id="short_description" rows="2" placeholder="Mô tả sản phẩm"><?= htmlspecialchars($data['description'] ?? '') ?></textarea>
+                    <textarea class="form-control" name="short_description" id="short_description" rows="2" placeholder="Mô tả sản phẩm"></textarea>
                     <small id="description-required" class="text-danger" style="display:none">Vui lòng nhập mô tả sản phẩm</small>
                 </div>
 
                 <div class="form-group">
                     <label for="description">Mô tả sản phẩm</label>
-                    <textarea class="form-control" name="description" id="description" rows="4" placeholder="Mô tả sản phẩm"><?= htmlspecialchars($data['description'] ?? '') ?></textarea>
+                    <textarea class="form-control" name="description" id="description" rows="4" placeholder="Mô tả sản phẩm"></textarea>
                     <small id="description-required" class="text-danger" style="display:none">Vui lòng nhập mô tả sản phẩm</small>
                 </div>
 
                 <div class="form-group">
                     <label for="brand">Thương hiệu</label>
-                    <select class="form-control" name="brand">
-                        <?php
-                        if (isset($brands) && !empty($brands)):
-                            foreach ($brands as $brand):
-                        ?>
-                                <option value="<?= $brand['id'] ?>"><?= $brand['name'] ?></option>
-                            <?php
-                            endforeach;
-                        else :
-                            ?>
-                            <option value="">Không có thương hiệu</option>
-
-                        <?php
-                        endif;
-                        ?>
+                    <select class="form-control select2-form" name="brand">
+                        <option value="">Chọn danh thương hiệu</option>
+                        <?php foreach ($brands as $key => $brand): ?>
+                            <option value="<?= $brand['id'] ?>"><?= $brand['name'] ?></option>
+                        <?php endforeach ?>
                     </select>
                     <small id="brand-required" class="text-danger" style="display:none">Vui lòng chọn thương hiệusản phẩm</small>
 
                 </div>
-                    <div class="form-group">
-                        <label for="categories">Danh mục cha:</label>
-                        <select class="form-control" id="categories" name="categories" >
-                            <option value="">Chọn danh mục cha</option>
-                            
-                        </select>
-
-                        <div id="child_category" style="display:none;">
-                            <label for="child_category">Danh mục con:</label>
-                            <select class="form-control" id="child_category" name="child_category">
-                                <option value="">Chọn danh mục con</option>
-                            </select>
-                        </div>
-                    <small id="categories-required" class="text-danger" style="display:none">Vui lòng chọn danh mục sản phẩm</small>
-                    </div>
-
-
-
                 <div class="form-group">
-                    <label for="discount">Giá giảm (%)</label>
-                    <input type="number" class="form-control" name="discount" placeholder="Giảm giá" min="0" max="100" value="<?= htmlspecialchars($data['discount'] ?? '') ?>">
-                    <small id="discount-required" class="text-danger" style="display:none">Vui lòng nhập giá giảm</small>
+                    <label for="categories">Danh mục</label>
+                    <select class="form-control select2-form" id="categories" name="categories">
+                        <option value="">Chọn danh mục sản phẩm</option>
+                        <?php foreach ($categories as $key => $category): ?>
+                            <option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
+                        <?php endforeach ?>
+
+                    </select>
+
+                    <small id="categories-required" class="text-danger" style="display:none">Vui lòng chọn danh mục sản phẩm</small>
                 </div>
+
+
 
                 <div class="form-group">
                     <label for="thumbnail">Hình ảnh sản phẩm</label>
@@ -93,13 +82,6 @@ $this->start('main_content');
                     <div id="imagesPreview" style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;"></div>
                     <small id="thumbnail-required" class="text-danger" style="display:none">Vui lòng chọn hình ảnh sản phẩm</small>
                 </div>
-
-                <div class="form-group">
-                    <label for="specifications_file">Tải lên file Excel cho thông số kỹ thuật (.xls hoặc .xlsx)</label>
-                    <input type="file" class="form-control" name="specifications_file" accept=".xls, .xlsx">
-                    <small id="categories-required" class="text-danger" style="display:none">Vui lòng tải lên file excel sản phẩm</small>
-                </div>
-
                 <div class="form-group">
                     <label for="status">Trạng thái</label>
                     <select class="form-control" name="status">
@@ -107,18 +89,17 @@ $this->start('main_content');
                         <option value="2" <?= isset($data['status']) && $data['status'] == 2 ? 'selected' : '' ?>>Không hoạt động</option>
                     </select>
                 </div>
+                <div class="form-group" id="variantsContainer">
 
-                <div class="form-group">
-                    <label>Thêm biến thể</label>
-                    <div id="sku_section">
-                        
-                    </div>
-                    <a href="javascript:void(0)" onclick="addSku()" class="btn btn-success mt-3">Thêm SKU</a>
                 </div>
 
+
                 <button type="submit" name="submit" class="btn btn-primary">Thêm sản phẩm</button>
+                <button type="button" id="addVariant" class="btn btn-warning text-light" style="float: right;">Thêm biến thể</button>
+
             </form>
         </div>
+
     </div>
 </div>
 
@@ -129,15 +110,61 @@ $this->start('main_content');
 
 $this->push('scripts');
 ?>
-<script src="<?=$_ENV['APP_URL']?>/node_modules\ckeditor4\ckeditor.js"></script>
+<script src="<?= $_ENV['APP_URL'] ?>/node_modules\ckeditor4\ckeditor.js"></script>
 <script>
-
     CKEDITOR.replace('description', {
-    height: 300,
-});
-
+        height: 300,
+    });
 </script>
 <script src="<?= $_ENV['APP_URL'] ?>/public\Assets\Admin\js\Pages\ProductValidate.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.select2-form').select2();
+
+        let variantIndex = 0;
+
+        function updateIndexes() {
+            $(".variant-group").each(function(index) {
+                $(this).attr("data-index", index);
+                $(this).find("input[name='sku[]']").attr("placeholder", "SKU " + (index + 1));
+                $(this).find("input[name='price[]']").attr("placeholder", "Giá " + (index + 1));
+                $(this).find("h5").text(`SKU ${index + 1}`);
+
+            });
+            variantIndex = $(".variant-group").length;
+        }
+
+        $("#addVariant").on("click", function() {
+            let variantHtml = `
+            <div class="form-group variant-group" data-index="${variantIndex}">
+    <h5>SKU ${variantIndex + 1}</h5> <!-- Tiêu đề SKU -->
+    <div class="row">
+        <div class="col-md-4">
+            <input type="text" class="form-control" name="sku[]" placeholder="Mã SKU" required>
+        </div>
+        <div class="col-md-4">
+            <input type="number" class="form-control" name="price[]" placeholder="Giá" required>
+        </div>
+        <div class="col-md-3">
+            <input type="file" class="form-control" name="image[]" accept="image/*">
+        </div>
+        <div class="col-md-1 d-flex align-items-end">
+            <button type="button" class="btn btn-danger remove-variant">X</button>
+        </div>
+    </div>
+</div>
+        `;
+
+            $("#variantsContainer").append(variantHtml);
+            variantIndex++;
+        });
+
+        $(document).on("click", ".remove-variant", function() {
+            $(this).closest(".variant-group").remove();
+            updateIndexes();
+        });
+    });
+</script>
 <?php
 
 $this->end();
