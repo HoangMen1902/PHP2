@@ -27,7 +27,7 @@ final class SkuValuesTable extends AbstractMigration
         ->addColumn('updated_at', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
         ->addForeignKey('sku_id', 'product_skus', 'id',  ['delete'  => 'CASCADE', 'update' => 'NO_ACTION'])
         ->addForeignKey('option_id', 'options', 'id',  ['delete'  => 'CASCADE', 'update' => 'NO_ACTION'])
-        ->addForeignKey('value_id', 'sku_values', 'id',  ['delete'  => 'CASCADE', 'update' => 'NO_ACTION'])
+        ->addForeignKey('value_id', 'option_values', 'id',  ['delete'  => 'CASCADE', 'update' => 'NO_ACTION'])
         
         ->create();
     }

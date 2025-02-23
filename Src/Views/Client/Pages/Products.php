@@ -151,149 +151,24 @@
                         </div>
                     </div>
                     <div class="row row-grid row-product">
-                        <div class="col-md-6 col-lg-4 col-xl-4 product-item">
-                            <div class="img-container">
-                                <a href=""><img src="<?= client_img ?>/TempProduct/SuwakoFumo.jpg" class="product-img" /></a>
-
-                            </div>
-                            <div class="additional-info">
-                                <a href="/chi-tiet" class="text-decoration-none link-nav"><h4 class="product-name">Fumo Suwako Version 1</h4></a>
-                                <div class="info-group">
-                                    <span class="price">2.000.000đ</span>
-                                    <span class="warehouse-status">Còn hàng</span>
+                        <?php foreach ($data as $product): ?>
+                            <div class="col-md-6 col-lg-4 col-xl-4 product-item">
+                                <div class="img-container">
+                                    <a href="/chi-tiet/<?= $product['product_id'] ?>"><img src="<?= uploads ?>/<?= $product['thumbnail'] ?>" class="product-img" /></a>
                                 </div>
-
-                            </div>
-
-                        </div>
-                        <!--col-end-->
-                        <div class="col-md-6 col-lg-4 col-xl-4 product-item">
-                            <div class="img-container">
-                                <a href=""><img src="<?= client_img ?>/TempProduct/Cirno.png" class="product-img" /></a>
-                            </div>
-                            <div class="additional-info">
-                                <a href="/chi-tiet" class="text-decoration-none link-nav"><h4 class="product-name">Fumo Cirno Version 1</h4></a>
-                                <div class="info-group">
-                                    <span class="price">2.000.000đ</span>
-                                    <span class="warehouse-status">Còn hàng</span>
+                                <div class="additional-info">
+                                    <a href="/chi-tiet/<?=$product['product_id']?>" class="text-decoration-none link-nav">
+                                        <h4 class="product-name"><?= $product['name'] ?></h4>
+                                    </a>
+                                    <div class="info-group">
+                                        <span class="price"><?= $product['price'] ?></span>
+                                        <span class="warehouse-status" style="<?= $product['total_quantity'] <= 0 ? 'background: red' : '' ?>"><?= $product['total_quantity'] > 0 ? 'Còn hàng' : 'Hết hàng' ?></span>
+                                    </div>
                                 </div>
-
                             </div>
-                        </div>
-                        <!--col-end-->
-                        <div class="col-md-6 col-lg-4 col-xl-4 product-item">
-                            <div class="img-container">
-                                <a href=""><img src="<?= client_img ?>/TempProduct/Reimu.jpg" class="product-img" /></a>
-                            </div>
-                            <div class="additional-info">
-                                <a href="/chi-tiet" class="text-decoration-none link-nav"><h4 class="product-name">Fumo Reimu Version 1</h4></a>
-                                <div class="info-group">
-                                    <span class="price">2.000.000đ</span>
-                                    <span class="warehouse-status">Còn hàng</span>
-                                </div>
-
-                            </div>
-                        </div>
-                        <!--col-end-->
-                        <div class="col-md-6 col-lg-4 col-xl-4 product-item">
-                            <div class="img-container">
-                                <a href=""><img src="<?= client_img ?>/TempProduct/Hotaru.jpg" class="product-img" /></a>
-                            </div>
-                            <div class="additional-info">
-                                <a href="/chi-tiet" class="text-decoration-none link-nav"><h4 class="product-name">Plushie Hotaru Honkai Star Rail</h4></a>
-                                <div class="info-group">
-                                    <span class="price">2.000.000đ</span>
-                                    <span class="warehouse-status">Còn hàng</span>
-                                </div>
-
-                            </div>
-                        </div>
-                        <!--col-end-->
-                        <div class="col-md-6 col-lg-4 col-xl-4 product-item">
-                            <div class="img-container">
-                                <a href=""><img src="<?= client_img ?>/TempProduct/Kafka.jpg" class="product-img" /></a>
-                            </div>
-                            <div class="additional-info">
-                                <a href="/chi-tiet" class="text-decoration-none link-nav"><h4 class="product-name">Plushie Kafka Honkai Star Rail</h4></a>
-                                <div class="info-group">
-                                    <span class="price">2.000.000đ</span>
-                                    <span class="warehouse-status">Còn hàng</span>
-                                </div>
-
-                            </div>
-                        </div>
-                        <!--col-end-->
-                        <div class="col-md-6 col-lg-4 col-xl-4 product-item">
-                            <div class="img-container">
-                                <a href=""><img src="<?= client_img ?>/TempProduct/Marisa.jpg" class="product-img" /></a>
-                            </div>
-                            <div class="additional-info">
-                                <a href="/chi-tiet" class="text-decoration-none link-nav"><h4 class="product-name">Combo 2 Fumo Hakurei Reimu Và Kirisame Marisa Verison 1</h4></a>
-                                <div class="info-group">
-                                    <span class="price">2.000.000đ</span>
-                                    <span class="warehouse-status">Còn hàng</span>
-                                </div>
-
-                            </div>
-                        </div>
-                        <!--col-end-->
-                        <div class="col-md-6 col-lg-4 col-xl-4 product-item">
-                            <div class="img-container">
-                                <a href=""><img src="<?= client_img ?>/TempProduct/Hanabi.png" class="product-img" /></a>
-                            </div>
-                            <div class="additional-info">
-                                <a href="/chi-tiet" class="text-decoration-none link-nav"><h4 class="product-name">Hanabi Plushie Honkai Star Rail</h4></a>
-                                <div class="info-group">
-                                    <span class="price">2.000.000đ</span>
-                                    <span class="warehouse-status">Còn hàng</span>
-                                </div>
-
-                            </div>
-                        </div>
-                        <!--col-end-->
-                        <div class="col-md-6 col-lg-4 col-xl-4 product-item">
-                            <div class="img-container">
-                                <a href=""><img src="<?= client_img ?>/TempProduct/Pompom.jpg" class="product-img" /></a>
-                            </div>
-                            <div class="additional-info">
-                                <a href="/chi-tiet" class="text-decoration-none link-nav"><h4 class="product-name">Plushie Pompom - Honkai Star Rail</h4></a>
-                                <div class="info-group">
-                                    <span class="price">2.000.000đ</span>
-                                    <span class="warehouse-status">Còn hàng</span>
-                                </div>
-
-                            </div>
-                        </div>
-                        <!--col-end-->
-                        <div class="col-md-6 col-lg-4 col-xl-4 product-item">
-                            <div class="img-container">
-                                <a href=""><img src="<?= client_img ?>/TempProduct/Pompom.jpg" class="product-img" /></a>
-                            </div>
-                            <div class="additional-info">
-                                <a href="/chi-tiet" class="text-decoration-none link-nav"><h4 class="product-name">Plushie Pompom - Honkai Star Rail</h4></a>
-                                <div class="info-group">
-                                    <span class="price">2.000.000đ</span>
-                                    <span class="warehouse-status">Còn hàng</span>
-                                </div>
-
-                            </div>
-                        </div>
-                        <!--col-end-->
-
-                        <div class="col-md-6 col-lg-4 col-xl-4 product-item">
-                            <div class="img-container">
-                                <a href=""><img src="<?= client_img ?>/TempProduct/Pompom.jpg" class="product-img" /></a>
-                            </div>
-                            <div class="additional-info">
-                                <a href="/chi-tiet" class="text-decoration-none link-nav"><h4 class="product-name">Plushie Pompom - Honkai Star Rail</h4></a>
-                                <div class="info-group">
-                                    <span class="price">2.000.000đ</span>
-                                    <span class="warehouse-status">Còn hàng</span>
-                                </div>
-
-                            </div>
-                        </div>
-                        <!--col-end-->
+                        <?php
+                        endforeach;
+                        ?>
                     </div>
                 </div>
             </div>

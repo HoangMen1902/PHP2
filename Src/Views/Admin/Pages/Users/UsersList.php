@@ -60,7 +60,7 @@ $this->start('main_content');
                             <td><?=$user['role'] === 1 ? 'Khách hàng' : 'Quản trị'?></td>
                             <td>
                                 <div class="d-flex align-items-center">
-                                    <a href="/admin/edit-user/1" class="btn btn-success btn-sm btn-icon-text mr-3">
+                                    <a href="/admin/edit-user/<?=$user['id']?>" class="btn btn-success btn-sm btn-icon-text mr-3">
                                         Sửa
                                         <i class="typcn typcn-edit btn-icon-append"></i>
                                     </a>

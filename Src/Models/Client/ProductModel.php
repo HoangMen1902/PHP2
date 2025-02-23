@@ -1,0 +1,56 @@
+<?php
+
+namespace Src\Models\Client;
+
+use PDO;
+use PDOException;
+use Src\Models\Model;
+
+class ProductModel extends Model
+{
+    protected $table = 'products';
+
+    public function findAllProduct(): array
+    {
+        return $this->findAll();
+    }
+
+    public function findAllProductWithSku(): array
+    {
+        try {
+            $sql = "SELECT p.*, p.id AS product_id, ps.* 
+            FROM {$this->table} p 
+            JOIN product_skus ps ON p.id = ps.product_id 
+            WHERE ps.price = (SELECT MIN(price) FROM product_skus WHERE product_id = p.id)";
+
+            $result = $this->database->getConnection()->query($sql);
+            return $result->fetchAll();
+        } catch (PDOException $e) {
+            echo "Lỗi truy vấn database: " . $e->getMessage();
+            return [];
+        }
+    }
+
+    public function findOneProductWithSku(int $id): array
+    {
+        try {
+            $sql = "SELECT p.*, p.id AS product_id, ps.* 
+            FROM {$this->table} p 
+            JOIN product_skus ps ON p.id = ps.product_id 
+            WHERE ps.price = (SELECT MIN(price) FROM product_skus WHERE product_id = p.id) 
+            AND p.id = ?";
+
+            $stmt = $this->database->getConnection()->prepare($sql);
+            $stmt->execute([$id]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Lỗi truy vấn database: " . $e->getMessage();
+            return [];
+        }
+    }
+
+    public function findProduct(int $id): array
+    {
+        return $this->find($id);
+    }
+}

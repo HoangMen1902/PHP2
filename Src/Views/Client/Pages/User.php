@@ -11,34 +11,25 @@
                         <p>THÔNG TIN CÁ NHÂN</p>
                     </div>
                     <div class="account-info-form">
-                        <form method="POST" action="/update-information">
-                            <input type="hidden" name="method" value="POST">
-                            <div class="form-group">
-                                <label for="fullname" class="form-label">Tên đầy đủ</label>
-                                <input type="text" id="fullname" name="fullname" class="form-control form-control-lg"
-                                    value="<?= isset($_SESSION['user']['fullname']) ? htmlspecialchars($_SESSION['user']['fullname']) : '' ?>"
-                                    placeholder="Ex: NguyenVanA, ....">
-                                <div id="fullname-error" style="display: none;" class="text-danger">Tên đầy đủ không được để trống.</div>
-                            </div>
-
+                        <form method="POST" action="/cap-nhat-profile" id="profileForm">
                             <div class="form-group">
                                 <label for="firstname" class="form-label">Tên</label>
                                 <input type="text" id="firstname" name="firstname" class="form-control form-control-lg"
-                                    value="<?= isset($_SESSION['user']['firstname']) ? htmlspecialchars($_SESSION['user']['firstname']) : '' ?>">
+                                    value="<?=$data['firstname']?>">
                                 <div id="firstname-error" style="color: red; display: none;">Tên không được để trống *</div>
                             </div>
 
                             <div class="form-group">
                                 <label for="lastname" class="form-label">Họ</label>
                                 <input type="text" id="lastname" name="lastname" class="form-control form-control-lg"
-                                    value="<?= isset($_SESSION['user']['lastname']) ? htmlspecialchars($_SESSION['user']['lastname']) : '' ?>">
+                                    value="<?=$data['lastname']?>">
                                 <div id="lastname-error" style="display: none;" class="text-danger">Họ không được để trống *</div>
                             </div>
 
                             <div class="form-group">
                                 <label for="phone" class="form-label">Số điện thoại</label>
                                 <input type="text" id="phone" name="phone" class="form-control form-control-lg"
-                                    value="<?= isset($_SESSION['user']['phone']) ? htmlspecialchars($_SESSION['user']['phone']) : '' ?>">
+                                    value="<?=$data['phone']?>">
                                 <div id="phone-error" style="display: none;" class="text-danger">Số điện thoại không được để trống *</div>
                             </div>
                             <div class="form-group" id="email-group"
@@ -50,7 +41,7 @@
                                     <small class="text-muted">Email được liên kết với Google, không thể chỉnh sửa.</small>
                                 <?php else: ?>
                                     <input type="text" id="email" name="email" class="form-control form-control-lg"
-                                        value="<?= isset($_SESSION['user']['email']) ? htmlspecialchars($_SESSION['user']['email']) : '' ?>">
+                                        value="<?=$data['email']?>">
                                     <div id="email-error" style="display: none;" class="text-danger">Email không được để trống *</div>
                                 <?php endif; ?>
                             </div>
@@ -58,7 +49,7 @@
 
 
                             <div class="form-group">
-                                <button type="submit" name="submit" class="btn btn-success btn-lg">
+                                <button type="submit" class="btn btn-success btn-lg">
                                     Lưu thay đổi
                                 </button>
                             </div>
@@ -70,3 +61,54 @@
     </div>
 </section>
 <?= $this->stop() ?>
+<?= $this->push('scripts') ?>
+<script>
+    $(document).ready(function() {
+        $("#profileForm").submit(function(event) {
+            let isValid = true;
+
+            $(".text-danger").hide();
+
+            let firstname = $("#firstname").val().trim();
+            let lastname = $("#lastname").val().trim();
+            let phone = $("#phone").val().trim();
+            let email = $("#email").val().trim();
+
+            if (firstname === "") {
+                $("#firstname-error").show();
+                isValid = false;
+            }
+
+            if (lastname === "") {
+                $("#lastname-error").show();
+                isValid = false;
+            }
+
+            let phoneRegex = /^[0-9]{10,11}$/;
+            if (phone === "") {
+                $("#phone-error").text("Số điện thoại không được để trống *").show();
+                isValid = false;
+            } else if (!phoneRegex.test(phone)) {
+                $("#phone-error").text("Số điện thoại không hợp lệ *").show();
+                isValid = false;
+            }
+
+            let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if ($("#email-group").is(":visible")) {
+                if (email === "") {
+                    $("#email-error").text("Email không được để trống *").show();
+                    isValid = false;
+                } else if (!emailRegex.test(email)) {
+                    $("#email-error").text("Email không hợp lệ *").show();
+                    isValid = false;
+                }
+            }
+
+            // Nếu có lỗi, ngăn chặn form submit
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+    });
+</script>
+<?= $this->end() ?>

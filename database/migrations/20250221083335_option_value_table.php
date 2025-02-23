@@ -24,12 +24,10 @@ final class OptionValueTable extends AbstractMigration
         $table->addColumn('product_id', 'integer', ['signed' => false])
         ->addColumn('option_id', 'integer', ['signed' => false])
         ->addColumn('value_name', 'string', ['limit' => 255])
-        ->addColumn('status', 'integer', ['limit'=> MysqlAdapter::INT_TINY])
         ->addColumn('created_at', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
         ->addColumn('updated_at', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
         ->addForeignKey('option_id', 'options', 'id',  ['delete'  => 'CASCADE', 'update' => 'NO_ACTION'])
         ->addForeignKey('product_id', 'products', 'id',  ['delete'  => 'CASCADE', 'update' => 'NO_ACTION'])
-
         ->create();
     }
 }

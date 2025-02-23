@@ -29,7 +29,7 @@ $this->start('main_content');
                                 <tr>
                                     <td><?= $product['id'] ?></td>
                                     <td><?= $product['name'] ?></td>
-                                    <td><img src="/public/Uploads/Products/<?= $product['thumbnail'][0] ?>" alt="Hình ảnh sản phẩm" width="100%"></td>
+                                    <td><img src="<?=$_ENV['APP_URL']?>/Public/Uploads/<?= $product['thumbnail'][0] ?>" alt="Hình ảnh sản phẩm" width="100%"></td>
                                     <td><?= $product['status'] == 1 ? 'Hoạt động' : 'Ẩn' ?></td>
                                     <td>
                                         <div class="btn-group">
@@ -54,10 +54,8 @@ $this->start('main_content');
                             endforeach;
                         else:
                         ?>
-                            <tr>
-                                <td colspan="5" class="text-center text-danger">Không có dữ liệu</td>
-                            </tr>
-                        <?php endif; ?>
+                        <?php 
+                    endif; ?>
                     </tbody>
                 </table>
             </div>

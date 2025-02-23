@@ -1,7 +1,7 @@
 <div class="col-lg-3">
     <div class="account-sidebar">
         <div class="account-sidebar-title">
-            <p>Xin Chào, Men!</p>
+            <p>Xin Chào, <?=$_SESSION['user']['lastname']?>!</p>
         </div>
         <div class="account-sidebar-main">
             <ul>

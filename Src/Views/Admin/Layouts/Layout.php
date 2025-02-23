@@ -226,7 +226,7 @@
         </div>
 
     </div>
-
+<?=$this->insert('Notification')?>
     <?= $this->section('scripts') ?>
     <!-- <script src="<?= $_ENV['APP_URL'] ?>/public/assets/admin/vendors/js/vendor.bundle.base.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

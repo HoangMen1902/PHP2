@@ -22,13 +22,13 @@ final class ProductTable extends AbstractMigration
     {
         $table = $this->table('products');
         $table->addColumn('name', 'string', ['limit' => 255])
+        ->addColumn('short_description', 'text')
         ->addColumn('description', 'text')
         ->addColumn('total_quantity', 'integer')
         ->addColumn('thumbnail', 'text')
         ->addColumn('status', 'integer', ['limit'=> MysqlAdapter::INT_TINY])
         ->addColumn('brand_id', 'integer', ['signed' => false])
         ->addColumn('category_id', 'integer', ['signed' => false])
-        ->addColumn('images', 'text')
         ->addColumn('created_at', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
         ->addColumn('updated_at', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
         ->addForeignKey('brand_id', 'brands', 'id',  ['delete'  => 'CASCADE', 'update' => 'NO_ACTION'])

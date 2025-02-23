@@ -7,7 +7,7 @@
     <div class="login-form">
         <h1 class="login-title">Đăng nhập</h1>
 
-        <form action="" class="login-form-inside" id="loginForm" name="loginForm" method="post">
+        <form action="/xu-ly-dn" class="login-form-inside" id="loginForm" name="loginForm" method="post">
             <input type="text" class="form-control login-input" id="email" name="email" placeholder="E-mail">
             <input type="password" class="form-control login-input" id="password" name="password" placeholder="Mật khẩu">
         </form>

@@ -21,6 +21,10 @@ class UserController extends BaseController {
     public function editPage($id) {
         $UserModel = new UserModel();
         $data = $UserModel->findUser($id);
+        if(empty($data)) {
+            header('location: /admin/users');
+            exit();
+        }
         echo $this->view->render('/Admin/Pages/Users/UserEdit', ['data' => $data]);
     }
 

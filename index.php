@@ -54,11 +54,15 @@ $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) {
     $r->get('/dang-nhap', [AuthController::class, 'loadLogin']);
     $r->get('/dang-ky', [AuthController::class, 'loadRegister']);
     $r->get('/san-pham', [ProductController::class, 'loadProducts']);
-    $r->get('/chi-tiet', [ProductController::class, 'loadDetail']);
+    $r->get('/chi-tiet/{id}', [ProductController::class, 'loadDetail']);
     $r->get('/gio-hang', [CartController::class, 'loadCart']);
     $r->get('/thanh-toan', [CheckoutController::class, 'checkoutPage']);
     $r->get('/tai-khoan', [AuthController::class, 'loadProfile']);
+    $r->get('/dang-xuat', [AuthController::class, 'logout']);
 
+    $r->post('/xu-ly-dk', [AuthController::class, 'register']);
+    $r->post('/xu-ly-dn', [AuthController::class, 'login']);
+    $r->post('/cap-nhat-profile', [AuthController::class, 'updateProfile']);
 
 
 
@@ -107,6 +111,9 @@ $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) {
 
         $r->post('/add-brand', [BrandController::class, 'insertBrand']);
         $r->post('/update-brand/{id}', [BrandController::class, 'updateBrand']);
+
+        $r->post('/product/store', [AdminProductController::class, 'add']);
+
 
 
     });
