@@ -15,6 +15,10 @@ class CartModel extends Model
         return $this->insert($data);
     }
 
+    public function deleteAllUserCart(int $user_id) {
+        return $this->delete($user_id);
+    }
+
     public function findCartByUser(int $user_id)
     {
         try {

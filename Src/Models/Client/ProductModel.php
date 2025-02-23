@@ -18,10 +18,15 @@ class ProductModel extends Model
     public function findAllProductWithSku(): array
     {
         try {
-            $sql = "SELECT p.*, p.id AS product_id, ps.* 
-            FROM {$this->table} p 
-            JOIN product_skus ps ON p.id = ps.product_id 
-            WHERE ps.price = (SELECT MIN(price) FROM product_skus WHERE product_id = p.id)";
+            $sql = "SELECT p.*, ps.*
+            FROM {$this->table} p
+            JOIN product_skus ps 
+                ON ps.id = (
+                    SELECT id FROM product_skus 
+                    WHERE product_id = p.id 
+                    ORDER BY price ASC, id ASC 
+                    LIMIT 1
+                )";
 
             $result = $this->database->getConnection()->query($sql);
             return $result->fetchAll();
@@ -38,10 +43,10 @@ class ProductModel extends Model
                     FROM {$this->table} p 
                     JOIN product_skus ps ON p.id = ps.product_id 
                     WHERE p.id = ?";
-    
+
             $stmt = $this->database->getConnection()->prepare($sql);
             $stmt->execute([$id]);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC); 
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             echo "Lỗi truy vấn database: " . $e->getMessage();
             return [];

@@ -255,8 +255,30 @@ $this->push('scripts');
         });
         $('.select2-form').select2();
 
+
     });
+
+
+
 </script>
 <?php
 
 $this->end();
+?>
+
+<?= $this->push('styles') ?>
+<style>
+    .error {
+        color: red;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+
+    .input-error {
+        border: 2px solid red;
+    }
+</style>
+<?php
+
+$this->end();
+?>

@@ -33,13 +33,13 @@ class ProductController extends BaseController
 
     public function add()
     {
-        echo "<pre>";
         $productInfo = [];
         $productInfo['total_quantity'] = 0;
         $total_quantity = 0;
         $firstSku = [];
         $firstOption = [];
         $optionValuesInsert = [];
+
         foreach ($_POST as $key => $value) {
             if ($key === 'sku') {
                 break;
@@ -56,6 +56,7 @@ class ProductController extends BaseController
             }
             $productInfo[$key] = $value;
         }
+
         $total_quantity += $firstSku['quantity'];
 
 
@@ -125,9 +126,14 @@ class ProductController extends BaseController
                 exit();
             }
         }
+
         if (isset($_POST['sku'])):
 
             $sku = [];
+            $sku_values = [];
+            $option_values = [];
+            $option_value_insert = [];
+
 
             foreach ($_POST['sku'] as $index => $skuCode) {
                 $sku = [];
@@ -148,8 +154,9 @@ class ProductController extends BaseController
                     header('location: /admin/product/add');
                     exit();
                 }
+
                 if (!move_uploaded_file($_FILES["image"]["tmp_name"][$index], $target_file2)) {
-                    die("Lỗi: Không thể di chuyển file vào $target_file");
+                    die("Lỗi: Không thể di chuyển file vào $target_file2");
                 }
 
                 $sku['images'] = $new_filename2;
@@ -158,28 +165,49 @@ class ProductController extends BaseController
                     Notification::error('Thất bại', 'Thêm SKU thất bại');
                     header('location: /admin/product/add');
                     exit();
-                } else {
+                }
 
-                    $quantity_update = ['total_quantity' => $total_quantity];
-                    if ($ProductModel->updateProduct($insertProductId, $quantity_update)) {
-                        Notification::success('Thành công', 'Đã thêm sản phẩm');
+                foreach ($_POST['values'][$index] as $key => $value) {
+                    $option_values['product_id'] = $insertProductId;
+                    $option_values['option_id'] = $_POST['options'][$index][$key];
+                    $option_values['value_name'] = $value;
+                    $option_value_insert[] = $OptionValueModel->insertValue($option_values);
+                    if (!$option_value_insert[$key]) {
+                        Notification::error('Thất bại', 'Thêm giá trị thuộc tính thất bại');
                         header('location: /admin/product/add');
                         exit();
-                    } else {
-                        Notification::error('Thất bại', 'Thêm sản phẩm không thành công');
+                    }
+                    $sku_values['sku_id'] = $sku_insert;
+                    $sku_values['option_id'] = $option_values['option_id'];
+                    $sku_values['value_id'] = $option_value_insert[$key];
+                    $result = $SkuValueModel->insertSkuValues($sku_values);
+                    if (!$result) {
+                        Notification::error('Thất bại', 'Liên kết thất bại');
                         header('location: /admin/product/add');
                         exit();
                     }
                 }
             }
+
+
+
+            $quantity_update = ['total_quantity' => $total_quantity];
+            if ($ProductModel->updateProduct($insertProductId, $quantity_update)) {
+                Notification::success('Thành công', 'Đã thêm sản phẩm');
+            } else {
+                Notification::error('Thất bại', 'Không thể cập nhật số lượng sản phẩm');
+            }
+
+            header('location: /admin/product/add');
+            exit();
+
         else:
             $quantity_update = ['total_quantity' => $total_quantity];
             if ($ProductModel->updateProduct($insertProductId, $quantity_update)) {
                 Notification::success('Thành công', 'Đã thêm sản phẩm');
-                header('location: /admin/product/add');
-                exit();
+            } else {
+                Notification::error('Thất bại', 'Không thể cập nhật số lượng sản phẩm');
             }
-            Notification::error('Thất bại', 'Không thể cập nhật số lượng');
             header('location: /admin/product/add');
             exit();
         endif;

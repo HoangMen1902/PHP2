@@ -9,6 +9,7 @@ use Src\Controllers\Admin\HomeController as AdminHomeController;
 use Src\Controllers\Admin\OrderController;
 use Src\Controllers\Admin\ProductController as AdminProductController;
 use Src\Controllers\Admin\UserController;
+use Src\Controllers\Client\ApiController;
 use Src\Controllers\Client\AuthController;
 use Src\Controllers\Client\CartController;
 use Src\Controllers\Client\CheckoutController;
@@ -59,13 +60,32 @@ $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) {
     $r->get('/thanh-toan', [CheckoutController::class, 'checkoutPage']);
     $r->get('/tai-khoan', [AuthController::class, 'loadProfile']);
     $r->get('/dang-xuat', [AuthController::class, 'logout']);
+    $r->get('/dia-chi', [AuthController::class, 'addressPage']);
+    $r->get('/api/tinh-thanh', [ApiController::class, 'fetchProvince']);
+    $r->get('/api/quan-huyen', [ApiController::class, 'fetchDistrict']);
+    $r->get('/api/phuong-xa', [ApiController::class, 'fetchWard']);
+    $r->get('/cam-on/{id}/{method}', [CheckoutController::class, 'thanksPage']);
 
+
+    $r->get('/international-success/{id}/{address}', [CheckoutController::class, 'checkoutComplete']);
+
+    // $r->get('/api/phi-giao-hang', [ApiController::class, 'calculateFee']);
+
+    $r->get('/doi-mat-khau', [AuthController::class, 'changePasswordPage']);
+
+
+
+    $r->post('/xu-ly-mk', [AuthController::class, 'changePassword']);
     $r->post('/xu-ly-dk', [AuthController::class, 'register']);
     $r->post('/xu-ly-dn', [AuthController::class, 'login']);
     $r->post('/cap-nhat-profile', [AuthController::class, 'updateProfile']);
+    $r->post('/xu-ly-thanh-toan', [CheckoutController::class, 'checkout']);
     
     $r->post('/them-san-pham', [CartController::class, 'addToCart']);
     $r->post('/xoa-gio-hang', [CartController::class, 'deleteCart']);
+
+    $r->post('/them-dia-chi', [AuthController::class, 'insertAddress']);
+    $r->post('/xoa-dia-chi/{id}', [AuthController::class, 'deleteAddress']);
 
 
     $r->addGroup('/admin', function (RouteCollector $r) {
@@ -102,6 +122,7 @@ $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) {
 
         $r->get('/orders', [OrderController::class, 'index']);
 
+
         $r->post('/add-user', [UserController::class, 'insertUser']);
         $r->post('/edit-user/{id}', [UserController::class, 'updateUser']);
 
@@ -135,6 +156,7 @@ $uri = rawurldecode($uri);
 $routeInfo = $dispatcher->dispatch($httpMethod, $uri);
 switch ($routeInfo[0]) {
     case FastRoute\Dispatcher::NOT_FOUND:
+        echo '404: Đường dẫn không hợp lệ';
         break;
     case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
         $allowedMethods = $routeInfo[1];
