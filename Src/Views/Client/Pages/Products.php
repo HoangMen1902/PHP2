@@ -161,7 +161,7 @@
                                         <h4 class="product-name"><?= $product['name'] ?></h4>
                                     </a>
                                     <div class="info-group">
-                                        <span class="price"><?= $product['price'] ?></span>
+                                        <span class="price"><?= number_format($product['price']) ?> vnđ</span>
                                         <span class="warehouse-status" style="<?= $product['total_quantity'] <= 0 ? 'background: red' : '' ?>"><?= $product['total_quantity'] > 0 ? 'Còn hàng' : 'Hết hàng' ?></span>
                                     </div>
                                 </div>

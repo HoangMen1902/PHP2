@@ -75,7 +75,7 @@ class AuthController extends BaseController {
                 unset($user['password']);
                 $_SESSION['user'] = $user;
                 Notification::success('Thành công', 'Đã đăng nhập thành công');
-                header('location: /dang-nhap');
+                header('location: /home');
                 exit();
             } else {
                 Notification::error('Thất bại', 'Thông tin tài khoản không chính xác');

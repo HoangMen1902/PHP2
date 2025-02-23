@@ -94,28 +94,40 @@
                 align-items: center;
                 width: fit-content;
 
-                .increment-quantity {
-                    text-align: center;
-                    padding: 0;
-                    border-radius: 0;
-                    -webkit-user-select: none;
-                    -ms-user-select: none;
-                    user-select: none;
-                    border: 1px solid $text-color-dark;
-                    border-right: 0;
-                    border-left: 0;
-                    width: 2.5rem;
-                    outline: none;
+                .quantity-group {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
                 }
-
-                label {
+                
+                .quantity-btn {
+                    width: 36px;
+                    height: 36px;
+                    border: 1px solid #ccc;
+                    background-color: #f8f8f8;
+                    color: #333;
+                    font-size: 18px;
+                    font-weight: bold;
+                    border-radius: 8px;
                     cursor: pointer;
-                    padding: 0 0.3rem;
-                    background: $bg-color;
-                    border: 1px solid $text-color-dark;
-                    background: $secondary-color;
-                    color: $text-color-light;
+                    transition: all 0.3s ease;
                 }
+                
+                .quantity-btn:hover {
+                    background-color: #e6a65e;
+                    color: white;
+                    border-color: #e6a65e;
+                }
+                
+                .increment-quantity {
+                    width: 50px;
+                    height: 36px;
+                    text-align: center;
+                    font-size: 16px;
+                    border: 1px solid #ccc;
+                    border-radius: 8px;
+                }
+                
             }
         }
 
@@ -159,8 +171,13 @@
         margin-bottom: 1rem;
     }
     .product-block {
+        .product-card {
+            width: 100% !important; 
+        }
         display: flex;
         align-items: center;
+        justify-content: space-between;
+        gap: 0;
         
     }
 }

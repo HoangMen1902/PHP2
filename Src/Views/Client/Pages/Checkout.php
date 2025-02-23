@@ -11,7 +11,7 @@
             <form action="/order" method="post" id="paymentForm">
                 <input type="hidden" name="method" value="POST">
                 <div class="form-group">
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name='email' value='' placeholder="Email">
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name='email' value='<?=$_SESSION['user']['email']?>' placeholder="Email">
                 </div>
 
 
@@ -40,7 +40,7 @@
 
                 <div class="shipping-details">
                     <div class="name">
-                        <input class="cnvc" type="text" placeholder="Tên" name="name" value="" />
+                        <input class="cnvc" type="text" placeholder="Tên" name="name" value="<?=$_SESSION['user']['firstname'] . ' ' . $_SESSION['user']['lastname']?>" />
                     </div>
 
                         <input class="cnvc" type="text" placeholder="Địa chỉ" name="address" value="" />
@@ -55,18 +55,18 @@
                 </div>
 
                 <div class="shipping-methods">
-                    <h3>Phương thức vận chuyển</h3>
+                    <h3>Phương thức thanh toán</h3>
                     <div class="method">
-                        <input type="radio" id="grab" name="delivery-method" />
-                        <label for="grab">Khách tự book Grab (TP.HCM)</label>
+                        <label for="grab">Thanh toán quốc tế</label>
+                        <input type="radio" id="visa" style="width: fit-content ;" name="delivery-method" />
                     </div>
                     <div class="method">
-                        <input type="radio" id="free-hcm" name="delivery-method" checked />
-                        <label for="free-hcm">Miễn phí HCM (trong ngày)</label>
+                        <label for="grab">Chuyển khoản ngân hàng</label>
+                        <input type="radio" id="visa" style="width: fit-content ;" name="delivery-method" />
                     </div>
                     <div class="method">
-                        <input type="radio" id="free-national" name="delivery-method" />
-                        <label for="free-national">Miễn phí toàn quốc (2 ~ 7 ngày)</label>
+                        <label for="grab">Thanh toán tiền mặt</label>
+                        <input type="radio" id="visa" style="width: fit-content ;" name="delivery-method" />
                     </div>
                 </div>
                 <button type="submit" class="button_thanhtoan">THANH TOÁN NGAY</button>
@@ -105,8 +105,7 @@
                 <div class="totals">
                     <p>Vận chuyển: MIỄN PHÍ</p>
                     <h3>Tổng: <?= number_format(2000000) ?> ₫</h3>
-                    <p>Phương thức thanh toán: Tiền mặt</p>
-                </div>
+               </div>
             </div>
         </div>
     </div>

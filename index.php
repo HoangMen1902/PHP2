@@ -63,7 +63,9 @@ $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) {
     $r->post('/xu-ly-dk', [AuthController::class, 'register']);
     $r->post('/xu-ly-dn', [AuthController::class, 'login']);
     $r->post('/cap-nhat-profile', [AuthController::class, 'updateProfile']);
-
+    
+    $r->post('/them-san-pham', [CartController::class, 'addToCart']);
+    $r->post('/xoa-gio-hang', [CartController::class, 'deleteCart']);
 
 
     $r->addGroup('/admin', function (RouteCollector $r) {

@@ -4,51 +4,55 @@
 <div class="product-container container-default">
     <div class="left-side">
         <div class="gallery">
-            <img src="<?= client_img ?>/grey.png" style="opacity: 0.2;" class="gallery-img">
-            <img src="<?= client_img ?>/grey.png" style="opacity: 0.2;" class="gallery-img">
-            <img src="<?= client_img ?>/grey.png" style="opacity: 0.2;" class="gallery-img">
-            <img src="<?= client_img ?>/grey.png" style="opacity: 0.2;" class="gallery-img">
+            <?php foreach ($data as $product): ?>
+                <img src="<?= uploads ?>/<?= $product['images'] ?>" 
+                     data-sku="<?= $product['sku'] ?>" 
+                     data-price="<?= $product['price'] ?>" 
+                     data-sku-id="<?= $product['sku_id'] ?>"
+                     class="gallery-img variant-option">
+            <?php endforeach; ?>
         </div>
         <div class="main-image">
-            <img src="<?= uploads ?>/<?= $data['thumbnail'] ?>" alt="Cirno" class="main-img" style="min-height: 100%;">
+            <img src="<?= uploads ?>/<?= $data[0]['thumbnail'] ?>" alt="Product" class="main-img" style="min-height: 100%;">
         </div>
     </div>
     <div class="right-side">
-        <h1 class="product-name"><?= $data['name'] ?></h1>
-        <p class="product-price"><?= $data['price'] ?></p>
+        <h1 class="product-name"><?= $data[0]['name'] ?></h1>
+        <p class="product-price"><?= number_format($data[0]['price']) ?> vnđ</p>
         <ul class="short-description">
             <span class="description-title">Mô tả ngắn:</span>
-            <?= $data['short_description'] ?>
+            <?= $data[0]['short_description'] ?>
         </ul>
 
         <div class="variant-group">
             <h5 class="variant-title">Lựa chọn:</h5>
             <div class="variant-img-group">
-                <img src="<?= client_img ?>/TempProduct/cirno.png" alt="variant" class="variant-img">
-                <img src="<?= client_img ?>/TempProduct/cirno.png" alt="variant" class="variant-img">
-                <img src="<?= client_img ?>/TempProduct/cirno.png" alt="variant" class="variant-img">
-
+                <?php foreach ($data as $product): ?>
+                    <img src="<?= uploads ?>/<?= $product['images'] ?>" 
+                         data-sku="<?= $product['sku'] ?>" 
+                         data-price="<?= $product['price'] ?>" 
+                         data-sku-id="<?= $product['sku_id'] ?>"
+                         class="variant-img variant-option">
+                <?php endforeach; ?>
             </div>
-
+            <p class="sku-label mt-4">Mã SKU: <span id="skuDisplay"><?= $data[0]['sku'] ?></span></p>
         </div>
 
         <div class="btn-group">
             <div class="quantity-group">
                 <span>Số lượng</span>
-                <form action="/them-san-pham" class="add-form" id="addForm">
-                    <label for="quantity">-</label>
-                    <input type="number" class=" increment-quantity" value="1" min="1" readonly>
-                    <label for="quantity">+</label>
-
+                <form action="/them-san-pham" class="add-form" id="addForm" method="POST">
+                    <input type="hidden" name="sku_id" id="skuInput" value="<?= $data[0]['sku_id'] ?>">                    
+                    <button type="button" class="quantity-btn" id="decrease">-</button>
+                    <input type="number" name="quantity" id="quantity" class="increment-quantity" value="1" min="1">
+                    <button type="button" class="quantity-btn" id="increase">+</button>
                 </form>
             </div>
-
-            <button class="add-btn" form="addForm">Thêm vào giỏ hàng</button>
-
+            <button class="add-btn" type="submit" form="addForm">Thêm vào giỏ hàng</button>
         </div>
-
     </div>
 </div>
+
 <!-- <div class="description-part container-default">
     <div class="desc-title">
         <h4 class="title">Mô tả sản phẩm</h4>
@@ -59,7 +63,7 @@
 <div class="related-product container-default">
     <h2>Sản phẩm liên quan</h2>
     <div class="product-block">
-        <div class="cont">
+        <div class="">
             <div class="product-card">
                 <div class="product-card__image">
                     <img src="<?= client_img ?>/TempProduct/Cirno.png" alt="">
@@ -74,7 +78,7 @@
                 </div>
             </div>
         </div>
-        <div class="cont">
+        <div class="">
             <div class="product-card">
                 <div class="product-card__image">
                     <img src="<?= client_img ?>/TempProduct/Reimu.jpg" alt="">
@@ -89,7 +93,7 @@
                 </div>
             </div>
         </div>
-        <div class="cont">
+        <div class="">
             <div class="product-card">
                 <div class="product-card__image">
                     <img src="<?= client_img ?>/TempProduct/Marisa.jpg" alt="">
@@ -104,7 +108,7 @@
                 </div>
             </div>
         </div>
-        <div class="cont">
+        <div class="">
             <div class="product-card">
                 <div class="product-card__image">
                     <img src="<?= client_img ?>/TempProduct/SuwakoFumo.jpg" alt="">
@@ -123,3 +127,39 @@
 </div>
 
 <?= $this->stop() ?>
+
+<?=$this->push('scripts')?>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const variants = document.querySelectorAll(".variant-option");
+    const mainImage = document.querySelector(".main-img");
+    const priceDisplay = document.querySelector(".product-price");
+    const skuDisplay = document.getElementById("skuDisplay");
+    const skuInput = document.getElementById("skuInput");
+    const priceInput = document.getElementById("priceInput");
+
+    variants.forEach(variant => {
+        variant.addEventListener("click", function () {
+            mainImage.src = this.src;
+            priceDisplay.innerText = parseInt(this.dataset.price).toLocaleString("vi-VN") + " vnđ";
+            skuDisplay.innerText = this.dataset.sku;
+            skuInput.value = this.dataset.skuId;
+            priceInput.value = this.dataset.price;
+        });
+    });
+
+    // Số lượng sản phẩm
+    const quantityInput = document.getElementById("quantity");
+    document.getElementById("increase").addEventListener("click", function () {
+        quantityInput.value = parseInt(quantityInput.value) + 1;
+    });
+
+    document.getElementById("decrease").addEventListener("click", function () {
+        if (parseInt(quantityInput.value) > 1) {
+            quantityInput.value = parseInt(quantityInput.value) - 1;
+        }
+    });
+});
+</script>
+
+<?=$this->end()?>

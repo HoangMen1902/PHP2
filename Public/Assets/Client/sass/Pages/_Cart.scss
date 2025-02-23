@@ -109,6 +109,15 @@
             }
 
             .prd-quantity {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+
+                .delete-btn {
+                    font-size: $fs-h6;
+                    border: none;
+                }
                 form {
                     label {
                         cursor: pointer;

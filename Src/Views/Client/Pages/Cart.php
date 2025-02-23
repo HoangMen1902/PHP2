@@ -1,5 +1,6 @@
 <?= $this->layout('Client/Components/Layout') ?>
 <?= $this->start('main_content') ?>
+<?php $total_amount = 0 ?>
 <div class="container-default cart-container">
     <h2 class="cart-title">Giỏ hàng</h2>
     <div class="cart-block-item cart-block">
@@ -13,52 +14,35 @@
 
         <div class="product-info-tab">
             <div class="product-info-group">
-                <div class="cart-product-row">
-                    <div class="product-info-show">
-                        <div class="product-img-show">
-                            <a href="" class="text-decoration-none"><img src="<?= client_img ?>/TempProduct/SuwakoFumo.jpg" alt="" class="prd-img"></a>
-                            <div class="essential-info">
-                                <a href="" class="text-decoration-none"><span class="prd-name">Suwako Fumo Version 1</span></a>
-                                <p class="prd-description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus voluptas laudantium sed nisi eveniet quam, debitis consequatur asperiores perferendis ea architecto, nemo vel provident, excepturi velit facilis voluptate dolorem? Dolor!</p>
-                                <div class="detail-btn">
-                                    <a href="" class="order-detail">Xem chi tiết</a>
+                <?php foreach ($data as $cart): ?>
+                    <div class="cart-product-row cart-item">
+                        <div class="product-info-show">
+                            <div class="product-img-show">
+                                <a href="" class="text-decoration-none"><img src="<?= uploads ?>/<?=$cart['images']?>" alt="" class="prd-img"></a>
+                                <div class="essential-info">
+                                    <a href="" class="text-decoration-none"><span class="prd-name"><?=$cart['product_name']?></span></a>
+                                    <p class="prd-description"><?=$cart['short_description']?></p>
+                                    <div class="detail-btn">
+                                        <a href="/chi-tiet/<?=$cart['product_id']?>" class="order-detail">Xem chi tiết</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <span class="prd-type">Version 1</span>
-                        <div class="prd-quantity">
-                            <form action="">
-                                <label for="quantity">-</label>
-                                <input type="number" class=" increment-quantity" value="1" min="1" readonly>
-                                <label for="quantity">+</label>
-                            </form>
-                        </div>
-                        <span class="prd-price">2.000.000đ</span>
-                    </div>
-                </div>
-                <div class="cart-product-row">
-                    <div class="product-info-show">
-                        <div class="product-img-show">
-                            <a href="" class="text-decoration-none"><img src="<?= client_img ?>/TempProduct/SuwakoFumo.jpg" alt="" class="prd-img"></a>
-                            <div class="essential-info">
-                                <a href="" class="text-decoration-none"><span class="prd-name">Suwako Fumo Version 1</span></a>
-                                <p class="prd-description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus voluptas laudantium sed nisi eveniet quam, debitis consequatur asperiores perferendis ea architecto, nemo vel provident, excepturi velit facilis voluptate dolorem? Dolor!</p>
-                                <div class="detail-btn">
-                                    <a href="" class="order-detail">Xem chi tiết</a>
-                                </div>
+                            <span class="prd-type"><?=isset($cart['sku_options']) ? $cart['sku_options'] : 'Không'?></span>
+                            <div class="prd-quantity">
+                                <form action="">
+                                    <label for="quantity">-</label>
+                                    <input type="number" class=" increment-quantity" value="<?=$cart['cart_quantity']?>" min="1" readonly>
+                                    <label for="quantity">+</label>
+                                </form>
+                                <button class="delete-btn" data-cart-id="<?=$cart['cart_id']?>">Xóa khỏi giỏ hàng</button>
                             </div>
+                            <span class="prd-price"><?=number_format($cart['price'])?>đ</span>
                         </div>
-                        <span class="prd-type">Version 1</span>
-                        <div class="prd-quantity">
-                            <form action="">
-                                <label for="quantity">-</label>
-                                <input type="number" class=" increment-quantity" value="1" min="1" readonly>
-                                <label for="quantity">+</label>
-                            </form>
-                        </div>
-                        <span class="prd-price">2.000.000đ</span>
                     </div>
-                </div>
+                <?php 
+                $total_amount += $cart['price'] * $cart['cart_quantity'];
+                endforeach 
+                ?>
             </div>
         </div>
     </div>
@@ -67,12 +51,12 @@
             <h4 class="summary-title">Tóm tắt đơn hàng</h4>
             <div class="total-price">
                 <span class="total-price-title">Tổng</span>
-                <span class="total-price-amount">2.000.000đ</span>
+                <span class="total-price-amount"><?=number_format($total_amount)?>đ</span>
             </div>
             <div class="external-fee">
                 <div class="product-total">
                     <span class="product-total-title">Sản phẩm</span>
-                    <span class="product-total-price">2.000.000đ</span>
+                    <span class="product-total-price"><?=number_format($total_amount)?>đ</span>
                 </div>
                 <div class="sub-fee">
                     <div class="sub-fee-title">Phí phụ</div>
@@ -80,11 +64,48 @@
                 </div>
             </div>
             <hr>
-            <a href="" class="btn payment-btn">Thanh toán</a>
+            <a href="/thanh-toan" class="btn payment-btn">Thanh toán</a>
         </div>
     </div>
 </div>
-<?= $this->stop() ?>
 
+<?= $this->stop() ?>
 <?= $this->push('scripts') ?>
-<? $this->end() ?>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+$(document).ready(function () {
+    
+    $(".delete-btn").on('click', function () {
+        
+        let cartId = $(this).data("cart-id");
+        let button = $(this);
+
+        if (!cartId) {
+            alert("Không tìm thấy sản phẩm trong giỏ hàng!");
+            return;
+        }
+
+        $.ajax({
+            url: "/xoa-gio-hang",
+            type: "POST", // Dùng POST thay vì DELETE
+            data: JSON.stringify({ cart_id: cartId }),
+            contentType: "application/json",
+            dataType: "json",
+            success: function (response) {
+                if (response.success) {
+                    button.closest(".cart-item").fadeOut(300, function () {
+                        $(this).remove();
+                    });
+                } else {
+                    alert(response.message || "Xóa sản phẩm thất bại!");
+                }
+            },
+            error: function () {
+                alert("Lỗi khi gửi yêu cầu xóa. Vui lòng thử lại!");
+            }
+        });
+    });
+});
+</script>
+<?= $this->end() ?>

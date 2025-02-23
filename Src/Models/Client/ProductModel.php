@@ -34,15 +34,14 @@ class ProductModel extends Model
     public function findOneProductWithSku(int $id): array
     {
         try {
-            $sql = "SELECT p.*, p.id AS product_id, ps.* 
-            FROM {$this->table} p 
-            JOIN product_skus ps ON p.id = ps.product_id 
-            WHERE ps.price = (SELECT MIN(price) FROM product_skus WHERE product_id = p.id) 
-            AND p.id = ?";
-
+            $sql = "SELECT p.*, p.id AS product_id, ps.*, ps.id AS sku_id 
+                    FROM {$this->table} p 
+                    JOIN product_skus ps ON p.id = ps.product_id 
+                    WHERE p.id = ?";
+    
             $stmt = $this->database->getConnection()->prepare($sql);
             $stmt->execute([$id]);
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC); 
         } catch (PDOException $e) {
             echo "Lỗi truy vấn database: " . $e->getMessage();
             return [];
