@@ -20,6 +20,9 @@ class ProductModel extends Model
 
     }
 
+    public function findProduct($id): array {
+        return $this->find($id);
+    }
     public function updateProduct(int $id,array $data): bool {
         return $this->update($id, $data);
     }

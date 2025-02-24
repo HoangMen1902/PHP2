@@ -19,14 +19,17 @@ class ProductModel extends Model
     {
         try {
             $sql = "SELECT p.*, ps.*
-            FROM {$this->table} p
-            JOIN product_skus ps 
-                ON ps.id = (
-                    SELECT id FROM product_skus 
-                    WHERE product_id = p.id 
-                    ORDER BY price ASC, id ASC 
-                    LIMIT 1
-                )";
+FROM products p
+JOIN product_skus ps 
+    ON ps.id = (
+        SELECT ps_inner.id 
+        FROM product_skus ps_inner
+        WHERE ps_inner.product_id = p.id
+        ORDER BY ps_inner.price ASC, ps_inner.id ASC
+        LIMIT 1
+    )
+WHERE p.status = 1;
+";
 
             $result = $this->database->getConnection()->query($sql);
             return $result->fetchAll();

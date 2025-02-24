@@ -60,6 +60,10 @@ $this->start('main_content');
                             <td><?=$user['role'] === 1 ? 'Khách hàng' : 'Quản trị'?></td>
                             <td>
                                 <div class="d-flex align-items-center">
+                                <a href="" class="btn btn-primary btn-sm btn-icon-text mr-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        Đơn hàng
+                                        <i class="typcn typcn-edit btn-icon-append"></i>
+                                    </a>
                                     <a href="/admin/edit-user/<?=$user['id']?>" class="btn btn-success btn-sm btn-icon-text mr-3">
                                         Sửa
                                         <i class="typcn typcn-edit btn-icon-append"></i>
@@ -89,7 +93,16 @@ $this->start('main_content');
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <table id="myTable">
+                        <thead>
 
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>

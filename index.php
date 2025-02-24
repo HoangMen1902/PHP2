@@ -125,6 +125,7 @@ $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) {
 
         $r->get('/orders', [OrderController::class, 'index']);
         $r->get('/delete-order/{id}', [OrderController::class, 'deleteOrder']);
+        $r->get('/change-status-product/{id}', [\Src\Controllers\Admin\ProductController::class, 'changeStatus']);
 
 
         $r->post('/add-user', [UserController::class, 'insertUser']);

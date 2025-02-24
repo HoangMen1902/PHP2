@@ -37,8 +37,8 @@ $this->start('main_content');
                                                 <i class="bi bi-three-dots"></i>
                                             </button>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item d-flex align-items-center" href="/admin/delete-product/<?=$product['id']?>" onclick="return confirm('Bạn chắc chứ?')">
-                                                    <span>Xóa</span>
+                                                <a class="dropdown-item d-flex align-items-center" href="/admin/change-status-product/<?=$product['id']?>" onclick="return confirm('Bạn chắc chứ?')">
+                                                    <span><?=$product['status'] === 1 ? "Tạm ngưng" : "Hoạt động"?></span>
                                                     <i class="typcn typcn-delete-outline ms-auto"></i>
                                                 </a>
                                                 <a class="dropdown-item d-flex align-items-center" href="/admin/product/detail/<?=$product['id']?>">

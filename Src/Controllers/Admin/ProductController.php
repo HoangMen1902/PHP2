@@ -15,6 +15,25 @@ use Symfony\Component\VarDumper\VarDumper;
 
 class ProductController extends BaseController
 {
+    public function changeStatus($id) {
+        $ProductModel = new ProductModel();
+        $product = $ProductModel->findProduct($id);
+        $status = 1;
+        $product['status'] === 1 ? $status = 2 : $status = 1;
+        
+        $data = ['status' => $status];
+
+        $result = $ProductModel->updateProduct($id,$data);
+        if($result) {
+            Notification::success('Thành công', 'Đã cập nhật trạng thái');
+            header('location: /admin/products');
+            exit();
+        } else {
+            Notification::error('Thất bại', 'Cập nhật trạng thái thất bại');
+            header('location: /admin/products');
+            exit();
+        }
+    }
     public function index()
     {
         $ProductModel = new ProductModel();
