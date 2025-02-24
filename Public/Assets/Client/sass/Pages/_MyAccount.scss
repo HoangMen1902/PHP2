@@ -362,8 +362,8 @@
         }
         .content-order{
          .items-prod-in-orders{
+
             display: flex;
-            align-items: center;
             .vendor-prod{
                font-size: $fs-h5;
             //    font-weight: $fw-semibold;
@@ -387,3 +387,9 @@
        }
     }
  }
+
+ .items-orders-list {
+   background: rgba(87, 86, 86, 0.078);
+   border-radius: 0.5rem;
+   margin-top: 0.5rem;
+}

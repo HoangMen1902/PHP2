@@ -90,12 +90,15 @@ $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) {
     $r->post('/them-dia-chi', [AuthController::class, 'insertAddress']);
     $r->post('/xoa-dia-chi/{id}', [AuthController::class, 'deleteAddress']);
 
+    $r->post('/huy-don/{id}', [AuthController::class, 'cancelOrder']);
 
+    
     $r->addGroup('/admin', function (RouteCollector $r) {
 
         $r->get('/', [AdminHomeController::class, 'index']);
         $r->get('', [AdminHomeController::class, 'index']);
         $r->get('/dashboard', [AdminHomeController::class, 'index']);
+        $r->get('/lay-don-hang/{id}', [OrderController::class, 'getOrders']);
 
         $r->get('/users', [UserController::class, 'index']);
         $r->get('/create-user', [UserController::class, 'addPage']);
@@ -130,7 +133,6 @@ $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) {
 
         $r->post('/add-user', [UserController::class, 'insertUser']);
         $r->post('/edit-user/{id}', [UserController::class, 'updateUser']);
-
         $r->post('/attribute-add', [AttributeController::class, 'insertAttribute']);
         $r->post('/attribute-update/{id}', [AttributeController::class, 'updateAttribute']);
 

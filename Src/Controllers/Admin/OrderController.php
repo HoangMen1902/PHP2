@@ -7,6 +7,12 @@ use Src\Models\Admin\OrderModel;
 use Src\Notifications\Notification;
 
 class OrderController extends BaseController {
+    public function getOrders($id) {
+        header('Content-Type: application/json');
+        $OrderModel = new OrderModel();
+        $orders = $OrderModel->getOrdersByUserId($id);
+        echo json_encode($orders);
+    }
     public function deleteOrder($id) {
         $OrderModel = new OrderModel();
         $result = $OrderModel->deleteOrder($id);

@@ -186,6 +186,22 @@ class AuthController extends BaseController {
         }
     }
 
+    public function cancelOrder($id) {
+        $OrderModel = new OrderModel();
+        $OrderData = $OrderModel->findOrder($id);
+        if($OrderData && $OrderData['user_id'] === $_SESSION['user']['id']) {
+            $result = $OrderModel->updateOrder($id, ['status' => 6]);
+            if(!$result) {
+                Notification::error('Thất bại', 'Đã xảy ra lỗi khi hủy đơn');
+                header('location: /don-hang');
+                exit();
+            }
+            Notification::success('Thành công', 'Đã hủy đơn');
+            header('location: /don-hang');
+            exit();
+        }
+    }
+
     public function login() {
         $DataValidate = new DataValidate;
         $validation = $DataValidate($_POST);

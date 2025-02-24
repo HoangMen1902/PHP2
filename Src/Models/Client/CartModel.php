@@ -2,6 +2,7 @@
 
 namespace Src\Models\Client;
 
+use Exception;
 use PDO;
 use PDOException;
 use Src\Models\Model;
@@ -16,7 +17,21 @@ class CartModel extends Model
     }
 
     public function deleteAllUserCart(int $user_id) {
-        return $this->delete($user_id);
+        try {
+            $sql = "DELETE FROM {$this->table} WHERE user_id = ?";
+            $conn = $this->database->getConnection();
+            $stmt = $conn->prepare($sql);
+
+            if (!$stmt) {
+                throw new Exception("Không thể chuẩn bị truy vấn DELETE.");
+            }
+
+            $stmt->bindValue(1, $user_id, PDO::PARAM_INT);
+
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            throw new Exception("Lỗi khi xóa dữ liệu: " . $e->getMessage());
+        }
     }
 
     public function findCartByUser(int $user_id)

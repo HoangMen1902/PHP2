@@ -19,60 +19,25 @@
                             <div>
                                 <h2 class="border-bottom filter-title">Phân loại</h2>
                                 <div class="mb-30 filter-options">
+                                    <?php foreach($categories AS $category): ?>
                                     <div class="custom-control custom-checkbox mb-3">
-                                        <input type="checkbox" class="custom-control-input" id="Indoor" checked>
+                                        <input type="checkbox" class="custom-control-input" id="Indoor">
                                         <span></span>
-                                        <label class="custom-control-label" for="Indoor">Touhou Fumo</label>
+                                        <label class="custom-control-label" for="Indoor"><?=$category['name']?></label>
                                     </div>
-                                    <div class="custom-control custom-checkbox mb-3">
-                                        <input type="checkbox" class="custom-control-input" id="Outdoor">
-                                        <span></span>
-                                        <label class="custom-control-label" for="Outdoor">Plush</label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox mb-3">
-                                        <input type="checkbox" class="custom-control-input" id="bear">
-                                        <span></span>
-                                        <label class="custom-control-label" for="bear">Gấu bông thường</label>
-                                    </div>
+                                    <?php endforeach; ?>
+                     
                                 </div>
                                 <!--seating option end-->
                                 <h2 class="font-xbold body-font border-bottom filter-title">Chủ đề</h2>
                                 <div class="mb-3 filter-options" id="cusine-options">
+                                    <?php foreach($brands as $brand): ?>
                                     <div class="custom-control custom-checkbox mb-3">
-                                        <input type="checkbox" class="custom-control-   input" id="Touhou" checked>
+                                        <input type="checkbox" class="custom-control-input" id="Touhou" >
                                         <span></span>
-                                        <label class="custom-control-label" for="Touhou">Touhou Project</label>
+                                        <label class="custom-control-label" for="Touhou"><?=$brand['name']?></label>
                                     </div>
-                                    <div class="custom-control custom-checkbox mb-3">
-                                        <input type="checkbox" class="custom-control-input" id="HSR">
-                                        <span></span>
-                                        <label class="custom-control-label" for="HSR">Honkai Star Rail</label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox mb-3">
-                                        <input type="checkbox" class="custom-control-input" id="Genshin">
-                                        <span></span>
-                                        <label class="custom-control-label" for="Genshin">Genshin Impact</label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox mb-3">
-                                        <input type="checkbox" class="custom-control-input" id="Frieren">
-                                        <span></span>
-                                        <label class="custom-control-label" for="Frieren">Frieren</label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox mb-3">
-                                        <input type="checkbox" class="custom-control-input" id="BlueArchive">
-                                        <span></span>
-                                        <label class="custom-control-label" for="BlueArchive">Blue Archive</label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox mb-3">
-                                        <input type="checkbox" class="custom-control-input" id="Arknights">
-                                        <span></span>
-                                        <label class="custom-control-label" for="Arknights">Arknights</label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox mb-3">
-                                        <input type="checkbox" class="custom-control-input" id="Hololive">
-                                        <span></span>
-                                        <label class="custom-control-label" for="Hololive">Hololive</label>
-                                    </div>
+                                    <?php endforeach; ?>
                                 </div>
 
                                 <!-- cusine filters end -->

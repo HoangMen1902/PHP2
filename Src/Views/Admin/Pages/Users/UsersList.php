@@ -7,6 +7,7 @@ $this->push('styles');
 
 ?>
 <link rel="stylesheet" href="<?= $_ENV['APP_URL'] ?>/node_modules\datatables.net-dt\css\dataTables.dataTables.min.css">
+
 <?php
 $this->end();
 ?>
@@ -60,7 +61,7 @@ $this->start('main_content');
                             <td><?=$user['role'] === 1 ? 'Khách hàng' : 'Quản trị'?></td>
                             <td>
                                 <div class="d-flex align-items-center">
-                                <a href="" class="btn btn-primary btn-sm btn-icon-text mr-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <a href="" data-id="<?=$user['id']?>" onclick="showUserOrders(<?=$user['id']?>)" class="btn btn-primary btn-sm btn-icon-text mr-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                         Đơn hàng
                                         <i class="typcn typcn-edit btn-icon-append"></i>
                                     </a>
@@ -86,19 +87,29 @@ $this->start('main_content');
         </div>
     </div>
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content ">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title" style="font-size: 24px;" id="exampleModalLabel">Lịch sử mua hàng</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button"  class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <table id="myTable">
+                    <table id="orderTable">
                         <thead>
-
+                            <th>ID</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Số điện thoại</th>
+                            <th>Địa chỉ</th>
+                            <th>Tổng giá sản phẩm</th>
+                            <th>Trạng thái</th>
                         </thead>
-                        <tbody>
+                        <tbody class="order-body">
                             <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                                 <td></td>
                             </tr>
                         </tbody>
@@ -122,6 +133,54 @@ $this->push('scripts');
 <script src="<?= $_ENV['APP_URL'] ?>/node_modules/datatables.net/js/datatables.js"></script>
 
 <script>
+        function showUserOrders(id) {
+            $.ajax({
+                type: "GET",
+                url: `/admin/lay-don-hang/${id}`,
+                success: function (response) {
+                    $('.order-body').empty();
+                    let data = response;
+                    console.log(response);
+                    response.forEach(e => {
+                        let status = '';
+                        switch (e.status) {
+                            case 1:
+                                status = 'Đang xử lý';
+                                break;
+                            case 2:
+                                status = 'Chờ thanh toán';
+                                break;
+                            case 3:
+                                status = 'Đã thanh toán';
+                                break;
+                            case 4:
+                                status = 'Đang vận chuyển';
+                                break;
+                            case 5:
+                                status = 'Đã giao';
+                                break;
+                            default:
+                                status = 'Đã hủy';
+                                break;
+                        }
+                        let html = `
+                            <tr>
+                                <td>${e.id}</td>
+                                <td>${e.product_name}</td>
+                                <td>${e.phone}</td>
+                                <td>${e.address}</td>
+                                <td>${e.total_price}</td>
+                                <td>${status}</td>
+                            </tr>
+                        `;
+                        $('.order-body').append(html);
+                    });
+                    
+                }, error: function (xhr) {
+                    console.log(xhr);
+                }
+            });            
+        }
     function deleteUser(id) {
         if(confirm('Bạn chắc chứ?')) {
             window.location.href = `/admin/delete-user/${id}`;
@@ -261,8 +320,35 @@ $this->push('scripts');
                 sortDescending: ": kích hoạt để sắp xếp cột giảm dần"
             }
         }
-
     });
+
+
+    let table2 = new DataTable('#orderTable', {
+        responsive: true,
+        language: {
+            decimal: ",",
+            thousands: ".",
+            search: "Tìm kiếm:",
+            lengthMenu: "Hiển thị _MENU_ dòng mỗi trang",
+            info: "Hiển thị _START_ đến _END_ trong tổng số _TOTAL_ dòng",
+            infoEmpty: "Không có dữ liệu",
+            infoFiltered: "(lọc từ _MAX_ dòng)",
+            loadingRecords: "Đang tải...",
+            zeroRecords: "Không tìm thấy kết quả phù hợp",
+            emptyTable: "Không có dữ liệu trong bảng",
+            paginate: {
+                first: "Đầu",
+                last: "Cuối",
+                next: "Tiếp",
+                previous: "Trước"
+            },
+            aria: {
+                sortAscending: ": kích hoạt để sắp xếp cột tăng dần",
+                sortDescending: ": kích hoạt để sắp xếp cột giảm dần"
+            }
+        }
+    });
+
 </script>
 <script src="<?= $_ENV['APP_URL'] ?>/public\Assets\Admin\js\Pages\UserScript.js"></script>
 <?php

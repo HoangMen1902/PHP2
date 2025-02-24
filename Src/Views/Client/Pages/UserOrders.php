@@ -50,7 +50,7 @@ $this->start('main_content');
         <?php foreach ($orderData as $r): ?>
             <div class="tab-content">
                 <div class="list-order-page">
-                    <div class="items-orders-list">
+                    <div class="items-orders-list p-3"">
                         <div class="wrap-head-order">
                             <div class="code-order-list">
                                 <h4 class="col-6">
@@ -72,6 +72,13 @@ $this->start('main_content');
                                         echo $statusMap[$r['status']] ?? 'Không xác định';
                                         ?>
                                     </span>
+                                    <?php if (in_array($r['status'], [1, 2, 3])): ?>
+                                <div class="btnInCard d-flex justify-content-end">
+                                    <form method="POST" action="/huy-don/<?= $r['order_id'] ?>">
+                                        <button type="submit" class="btn btn-danger btn-sm">Hủy đơn</button>
+                                    </form>
+                                </div>
+                            <?php endif; ?>
 
                                 </div>
                             </div>
@@ -82,6 +89,7 @@ $this->start('main_content');
                             if (!empty($products)):
                                 ?>
                                     <div class="items-prod-in-orders">
+                                        
                                         <div class="media-prod">
                                             <img width="100px" src="<?=uploads?>/<?= htmlspecialchars($products[0]['sku_images']) ?>" alt="<?= htmlspecialchars($products[0]['product_name']) ?>">
                                         </div>
@@ -101,14 +109,7 @@ $this->start('main_content');
                                     </div>
                             <?php endif; ?>
                             
-                            <?php if (in_array($r['status'], [1, 2, 3])): ?>
-                                <div class="btnInCard d-flex justify-content-end">
-                                    <form method="POST" action="/cancelOrder/<?= $r['order_id'] ?>">
-                                        <input type="hidden" name="order_id" value="<?= htmlspecialchars($r['order_id']) ?>">
-                                        <button type="submit" class="btn btn-danger btn-sm">Hủy đơn</button>
-                                    </form>
-                                </div>
-                            <?php endif; ?>
+
                         </div>
                     </div>
                 </div>

@@ -59,4 +59,7 @@ GROUP BY o.id;";
             return [];
         }
     }
+    public function updateOrder(int $id, array $data): bool  {
+        return $this->update($id, $data);
+    }
 }
