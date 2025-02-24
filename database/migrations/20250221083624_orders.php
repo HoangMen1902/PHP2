@@ -24,6 +24,7 @@ final class Orders extends AbstractMigration
         $table->addColumn('total_price', 'double')
         ->addColumn('user_id', 'integer', ['signed' => false])
         ->addColumn('address', 'text')
+        ->addColumn('phone', 'string', ['limit' => 10])
         ->addColumn('status', 'integer', ['limit'=> MysqlAdapter::INT_TINY])
         ->addColumn('created_at', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
         ->addColumn('updated_at', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])

@@ -15,6 +15,7 @@ use Src\Controllers\Client\CartController;
 use Src\Controllers\Client\CheckoutController;
 use Src\Controllers\Client\HomeController;
 use Src\Controllers\Client\ProductController;
+use Src\Helpers\AuthHelper;
 
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
@@ -37,7 +38,7 @@ Ignition::make()->register()->theme('dark');
 
 
 
-
+AuthHelper::middleware();
 
 
 
@@ -65,9 +66,11 @@ $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) {
     $r->get('/api/quan-huyen', [ApiController::class, 'fetchDistrict']);
     $r->get('/api/phuong-xa', [ApiController::class, 'fetchWard']);
     $r->get('/cam-on/{id}/{method}', [CheckoutController::class, 'thanksPage']);
+    $r->get('/don-hang', [AuthController::class, 'loadOrder']);
 
 
-    $r->get('/international-success/{id}/{address}', [CheckoutController::class, 'checkoutComplete']);
+
+    $r->get('/international-success/{id}/{address}/{phone}', [CheckoutController::class, 'checkoutComplete']);
 
     // $r->get('/api/phi-giao-hang', [ApiController::class, 'calculateFee']);
 
@@ -121,6 +124,7 @@ $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) {
         $r->get('/edit-brand/{id}', [BrandController::class, 'editPage']);
 
         $r->get('/orders', [OrderController::class, 'index']);
+        $r->get('/delete-order/{id}', [OrderController::class, 'deleteOrder']);
 
 
         $r->post('/add-user', [UserController::class, 'insertUser']);
@@ -136,9 +140,9 @@ $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) {
         $r->post('/update-brand/{id}', [BrandController::class, 'updateBrand']);
 
         $r->post('/product/store', [AdminProductController::class, 'add']);
+        $r->post('/cap-nhat-don-hang', [OrderController::class, 'changeStatus']);
 
-
-
+        
     });
 });
 

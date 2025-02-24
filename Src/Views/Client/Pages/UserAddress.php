@@ -250,6 +250,8 @@ $this->start('main_content');
             type: "GET",
             url: "/api/tinh-thanh",
             success: function(response) {
+            console.log(response);
+            
                 let data = response.data
                 data.forEach(element => {
                     $('select[name="city"]').append(`<option value="${element.ProvinceName}|${element.ProvinceID}" data-province-id="${element.ProvinceID}">${element.ProvinceName}</option>`);

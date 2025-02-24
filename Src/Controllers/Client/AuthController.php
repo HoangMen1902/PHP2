@@ -4,11 +4,22 @@ namespace Src\Controllers\Client;
 use Src\Controllers\BaseController;
 use Src\Helpers\ProvinceApi;
 use Src\Models\Client\AddressModel;
+use Src\Models\Client\OrderModel;
 use Src\Models\Client\UserModel;
 use Src\Notifications\Notification;
 use Src\Validations\DataValidate;
 
 class AuthController extends BaseController {
+    public function loadOrder() {
+        if(!isset($_SESSION['user']['id'])) {
+            header('location: /dang-nhap');
+            exit();
+        }
+        $OrderModel = new OrderModel();
+        $data = $OrderModel->getAllUserOrder($_SESSION['user']['id']);
+        echo $this->view->render('Client/Pages/UserOrders', ['orderData' => $data]);
+
+    }
 
 
     public function changePassword() {

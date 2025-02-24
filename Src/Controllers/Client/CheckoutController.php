@@ -24,7 +24,7 @@ class CheckoutController extends BaseController {
         }
         echo $this->view->render('Client/Pages/CheckoutComplete', ['data' => $OrderData, 'method' => $method]);
     }
-    public function checkoutComplete($id, $address) {
+    public function checkoutComplete($id, $address, $phone) {
         $address = urldecode($address);
         Stripe::setApiKey($_ENV['STRIPE_API']);
         $data = session::retrieve($id);
@@ -35,7 +35,8 @@ class CheckoutController extends BaseController {
             'user_id' => $user_id,
             'address' => $address,
             'total_price' => $total,
-            'status' => 3
+            'status' => 3,
+            'phone' => $phone
         ];
 
         $OrderModel = new OrderModel;
@@ -71,7 +72,7 @@ class CheckoutController extends BaseController {
         }
         Notification::success('Đã đặt hàng', 'Bạn đã đặt hàng thành công');
         $CartModel->deleteAllUserCart($user_id);
-        header('location: /cam-on?order_id=' . $result . '&method=international');
+        header("location: /cam-on/$result/international");
         exit();
     }
     public function checkoutPage() {
@@ -126,8 +127,9 @@ class CheckoutController extends BaseController {
                 }, $UserCart);
 
                 $additionalData['address'] = $_POST['address'] . ' ' . $_POST['ward'] . ' ' . $_POST['district'] . ' ' . $_POST['province'] . ' ' . $_POST['phone'];
+                $phone = $_POST['phone'];
     
-                $this->createCheckoutSession($lineItems, $additionalData);
+                $this->createCheckoutSession($lineItems, $additionalData, $phone);
     
 
             } catch (Exception $e) {
@@ -139,7 +141,7 @@ class CheckoutController extends BaseController {
         }
     }
     
-    public function createCheckoutSession($lineItems, $additionalData)
+    public function createCheckoutSession($lineItems, $additionalData, $phone)
     {
         try {
             header('Content-Type: application/json');
@@ -150,7 +152,7 @@ class CheckoutController extends BaseController {
             $checkout_session = \Stripe\Checkout\Session::create([
                 'line_items' => $lineItems,
                 'mode' => 'payment',
-                'success_url' => $_ENV['APP_URL'] . "/international-success/{CHECKOUT_SESSION_ID}/$address",
+                'success_url' => $_ENV['APP_URL'] . "/international-success/{CHECKOUT_SESSION_ID}/$address/$phone",
                 'cancel_url' => $_ENV['APP_URL'] . '/international-cancel',
             ]);
             header("HTTP/1.1 303 See Other");

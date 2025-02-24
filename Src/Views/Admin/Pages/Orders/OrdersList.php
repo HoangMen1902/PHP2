@@ -15,7 +15,7 @@ $this->start('main_content');
     <div class="col-md-12">
         <div class="card">
             <div class="table-responsive pt-3">
-                <table class="table table-striped project-orders-table">
+                <table class="table table-striped project-orders-table" id="myTable">
                     <thead>
                         <tr>
                             <th class="ml-5">ID</th>
@@ -28,64 +28,56 @@ $this->start('main_content');
                         </tr>
                     </thead>
                     <tbody id="orderTable">
-                        <?php if (!empty($orderData)): ?>
-                            <?php foreach ($orderData as $order): ?>
-                                <tr>
-                                    <td><?= htmlspecialchars($order['order_id']) ?></td>
-                                    <td>
-                                        <?php if (!empty($order['products'])): ?>
-                                            <ul>
-                                                <?php
-
-                                                $products = explode(';', $order['products']);
-                                                foreach ($products as $productData):
-
-                                                    list($productName, $image, $quantity) = explode('|', $productData);
-                                                ?>
-                                                    <li>
-                                                        <img src="<?= $_ENV['APP_URL'] ?>/public/Uploads/Products/<?= htmlspecialchars($image) ?>" alt="<?= htmlspecialchars($productName) ?>" style="width: 50px; height: 50px;">
-                                                        <?= htmlspecialchars($productName) ?> (Số lượng: <?= htmlspecialchars($quantity) ?>)
-                                                    </li>
-                                                <?php endforeach; ?>
-                                            </ul>
-                                        <?php else: ?>
-                                            Không có sản phẩm.
-                                        <?php endif; ?>
-                                    </td>
-                                    <td><?= htmlspecialchars($order['phone']) ?></td>
-                                    <td><?= htmlspecialchars($order['address']) ?></td>
-                                    <td><?= number_format($order['order_price'], 0, ',', '.') ?> VND</td>
-                                    <td>
-                                        <form action="/admin/update-order-status" method="post" id="statusForm-<?= htmlspecialchars($order['order_id']) ?>">
-                                            <input type="hidden" name="order_id" value="<?= htmlspecialchars($order['order_id']) ?>">
-                                            <select name="order_status" class="form-control order-status" data-order-id="<?= htmlspecialchars($order['order_id']) ?>" style="width: 200px;">
-                                                <option value="1" <?= $order['order_status'] == 1 ? 'selected' : '' ?>>Đang xử lý</option>
-                                                <option value="2" <?= $order['order_status'] == 2 ? 'selected' : '' ?>>Chờ thanh toán</option>
-                                                <option value="3" <?= $order['order_status'] == 3 ? 'selected' : '' ?>>Đã thanh toán</option>
-                                                <option value="4" <?= $order['order_status'] == 4 ? 'selected' : '' ?>>Đang vận chuyển</option>
-                                                <option value="5" <?= $order['order_status'] == 5 ? 'selected' : '' ?>>Đã giao</option>
-                                                <option value="6" <?= $order['order_status'] == 6 ? 'selected' : '' ?>>Đã hủy</option>
+                        <?php foreach ($data as $order): ?>
+                            <tr>
+                                <td><?= $order['id'] ?></td>
+                                <td><?= $order['product_name'] ?></td>
+                                <td><?= $order['phone'] ?></td>
+                                <td><?= $order['address'] ?></td>
+                                <td><?= $order['total_price'] ?></td>
+                                <td>
+                                    <?php
+                                    switch ($order['status']) {
+                                        case 1:
+                                            echo 'Đang xử lý';
+                                            break;
+                                        case 2:
+                                            echo 'Chờ thanh toán';
+                                            break;
+                                        case 3:
+                                            echo 'Đã thanh toán';
+                                            break;
+                                        case 4:
+                                            echo 'Đang vận chuyển';
+                                            break;
+                                        case 5:
+                                            echo 'Đã giao';
+                                            break;
+                                        default:
+                                            echo 'Đã hủy';
+                                            break;
+                                    }
+                                    ?>
+                                </td>
+                                <td>
+                                    <div class="row">
+                                        <form action="/admin/cap-nhat-don-hang" method="post" id="statusForm-<?= htmlspecialchars($order['id']) ?>">
+                                            <input type="hidden" name="order_id" value="<?= htmlspecialchars($order['id']) ?>">
+                                            <select name="order_status" class="form-control order-status" data-order-id="<?= htmlspecialchars($order['id']) ?>" style="width: 200px;">
+                                                <option value="1" <?= $order['status'] == 1 ? 'selected' : '' ?>>Đang xử lý</option>
+                                                <option value="2" <?= $order['status'] == 2 ? 'selected' : '' ?>>Chờ thanh toán</option>
+                                                <option value="3" <?= $order['status'] == 3 ? 'selected' : '' ?>>Đã thanh toán</option>
+                                                <option value="4" <?= $order['status'] == 4 ? 'selected' : '' ?>>Đang vận chuyển</option>
+                                                <option value="5" <?= $order['status'] == 5 ? 'selected' : '' ?>>Đã giao</option>
+                                                <option value="6" <?= $order['status'] == 6 ? 'selected' : '' ?>>Đã hủy</option>
                                             </select>
                                         </form>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <a href="/admin/order-detail/<?= htmlspecialchars($order['order_id']) ?>">
-                                                <button type="button" class="btn btn-info btn-sm btn-icon-text mr-3">
-                                                    Chi tiết
-                                                    <i class="typcn typcn-edit btn-icon-append"></i>
-                                                </button>
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                            <tr>
-                                <td colspan="7" class="text-center">Không có đơn hàng.</td>
-                            </tr>
-                        <?php endif; ?>
+                                        <button id="deleteBtn" class="btn btn-danger mt-2" data-id="<?= $order['id'] ?>">Xóa</button>
+                                    </div>
 
+                                </td>
+                            </tr>
+                        <?php endforeach ?>
 
                     </tbody>
                 </table>
@@ -98,12 +90,80 @@ $this->start('main_content');
 
 $this->stop();
 ?>
-
-<?php
+<?= $this->push('styles') ?>
+<link rel="stylesheet" href="<?= $_ENV['APP_URL'] ?>/node_modules\datatables.net-dt\css\dataTables.dataTables.min.css">
+<?=
+$this->end();
+?>
+<?=
 $this->push('scripts');
 ?>
 <script src="<?= $_ENV['APP_URL'] ?>/public/Assets/Admin/js/Pages/OrderScript.js"></script>
-<?php
+<script src="<?= $_ENV['APP_URL'] ?>/node_modules/datatables.net/js/datatables.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#deleteBtn').on('click', function(e) { 
+            if (confirm('Bạn có chắc muốn xóa?')) {
+                let id = $(this).data('id'); 
+                window.location.href = `/admin/delete-order/${id}`;
+            }
+        });
+        $('.order-status').on('change', function() {
+            var status = $(this).val();
+            var orderId = $(this).data('order-id');
+            console.log('Order ID: ' + orderId + ', Status: ' + status);
+            $.ajax({
+                url: '/admin/cap-nhat-don-hang',
+                method: 'POST',
+                data: {
+                    order_id: orderId,
+                    order_status: status
+                },
+                success: function(response) {
+                    if (response.success) {
+                        console.log('Cập nhật trạng thái thành công');
+                    } else {
+                        console.log('Cập nhật thất bại');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
+                    console.log('Có lỗi xảy ra, vui lòng thử lại');
+                }
+
+            });
+        });
+    });
+
+    let table = new DataTable('#myTable', {
+        responsive: true,
+        language: {
+            decimal: ",",
+            thousands: ".",
+            search: "Tìm kiếm:",
+            lengthMenu: "Hiển thị _MENU_ dòng mỗi trang",
+            info: "Hiển thị _START_ đến _END_ trong tổng số _TOTAL_ dòng",
+            infoEmpty: "Không có dữ liệu",
+            infoFiltered: "(lọc từ _MAX_ dòng)",
+            loadingRecords: "Đang tải...",
+            zeroRecords: "Không tìm thấy kết quả phù hợp",
+            emptyTable: "Không có dữ liệu trong bảng",
+            paginate: {
+                first: "Đầu",
+                last: "Cuối",
+                next: "Tiếp",
+                previous: "Trước"
+            },
+            aria: {
+                sortAscending: ": kích hoạt để sắp xếp cột tăng dần",
+                sortDescending: ": kích hoạt để sắp xếp cột giảm dần"
+            }
+        }
+
+    });
+</script>
+<?=
 
 $this->end();
 ?>
