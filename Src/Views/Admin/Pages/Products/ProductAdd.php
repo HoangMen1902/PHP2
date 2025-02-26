@@ -23,7 +23,7 @@ $this->start('main_content');
         <div class="card-body">
 
             <h4 class="card-title">Thêm sản phẩm</h4>
-            <form action="/admin/product/store" id="productAddForm" method="post" enctype="multipart/form-data">
+            <form action="/admin/product/store" id="1" method="post" enctype="multipart/form-data">
 
                 <p class="card-description">Thông tin sản phẩm</p>
                 <div class="form-group">
@@ -149,7 +149,6 @@ $this->push('scripts');
         height: 300,
     });
 </script>
-<script src="<?= $_ENV['APP_URL'] ?>/public\Assets\Admin\js\Pages\ProductValidate.js"></script>
 <script>
     $(document).ready(function() {
 
@@ -196,7 +195,6 @@ $this->push('scripts');
             variantIndex++;
         });
 
-        // Xóa SKU
         $(document).on("click", ".remove-variant", function() {
             $(this).closest(".variant-group").remove();
             updateIndexes();
@@ -259,6 +257,14 @@ $this->push('scripts');
     });
 
 
+
+    $(document).ready(function() {
+        $('#productAddForm').on('submit', function(e) {
+            e.preventDefault();
+            console.log(e);
+            
+        })
+    })
 
 </script>
 <?php

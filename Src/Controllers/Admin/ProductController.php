@@ -11,6 +11,7 @@ use Src\Models\Admin\ProductModel;
 use Src\Models\Admin\SkuModel;
 use Src\Models\Admin\SkuValueModel;
 use Src\Notifications\Notification;
+use Src\Validations\ProductValidation;
 use Symfony\Component\VarDumper\VarDumper;
 
 class ProductController extends BaseController
@@ -59,6 +60,15 @@ class ProductController extends BaseController
         $firstOption = [];
         $optionValuesInsert = [];
 
+        $ProductValidation = new ProductValidation();
+
+        $Validation = $ProductValidation->productValidate($_POST);
+        if(!empty($Validation)) {
+            Notification::error("Lỗi", "Vui lòng nhập đầy đủ thông tin");
+            header('location: /admin/product/add');
+            exit();
+        }
+
         foreach ($_POST as $key => $value) {
             if ($key === 'sku') {
                 break;
@@ -75,6 +85,7 @@ class ProductController extends BaseController
             }
             $productInfo[$key] = $value;
         }
+
 
         $total_quantity += $firstSku['quantity'];
 
