@@ -67,9 +67,18 @@ $this->start('main_content');
                                             3 => 'Đã thanh toán',
                                             4 => 'Đang vận chuyển',
                                             5 => 'Đã giao',
-                                            6 => 'Đã hủy'
+                                            6 => 'Đã hủy',
+                                            7 => 'Yêu cầu hoàn tiền',
+                                            8 => 'Đã hoàn tiền'
                                         ];
                                         echo $statusMap[$r['status']] ?? 'Không xác định';
+                                        if($r['status'] === 6):
+                                        ?>
+                                        <form method="POST" action="/yeu-cau-hoan-tien/<?= $r['order_id'] ?>">
+                                            <button type="submit" class="btn btn-danger btn-sm">Gửi yêu cầu hoàn tiền</button>
+                                        </form>
+                                        <?php
+                                        endif;
                                         ?>
                                     </span>
                                     <?php if (in_array($r['status'], [1, 2, 3])): ?>

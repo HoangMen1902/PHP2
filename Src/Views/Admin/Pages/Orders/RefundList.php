@@ -24,7 +24,7 @@ $this->start('main_content');
                             <th>Địa chỉ</th>
                             <th>Tổng giá sản phẩm</th>
                             <th>Trạng thái</th>
-                            <th>Action</th>
+                            <th>Hành động</th>
                         </tr>
                     </thead>
                     <tbody id="orderTable">
@@ -53,15 +53,6 @@ $this->start('main_content');
                                         case 5:
                                             echo 'Đã giao';
                                             break;
-                                        case 6:
-                                            echo 'Đã hủy';
-                                            break;
-                                        case 7:
-                                            echo 'Yêu cầu hoàn tiền';
-                                            break;
-                                        case 8:
-                                            echo 'Đã hoàn tiền';
-                                            break;
                                         default:
                                             echo 'Đã hủy';
                                             break;
@@ -70,30 +61,7 @@ $this->start('main_content');
                                 </td>
                                 <td>
                                     <div class="row">
-                                        <form action="/admin/cap-nhat-don-hang" method="post" id="statusForm-<?= htmlspecialchars($order['id']) ?>">
-                                            <input type="hidden" name="order_id" value="<?= htmlspecialchars($order['id']) ?>">
-                                            <select name="order_status" class="form-control order-status" data-order-id="<?= htmlspecialchars($order['id']) ?>" style="width: 200px;">
-                                                <?php
-                                                $statuses = [
-                                                    1 => 'Đang xử lý',
-                                                    2 => 'Chờ thanh toán',
-                                                    3 => 'Đã thanh toán',
-                                                    4 => 'Đang vận chuyển',
-                                                    5 => 'Đã giao',
-                                                    6 => 'Đã hủy',
-                                                    7 => 'Yêu cầu hoàn tiền',
-                                                    8 => 'Đã hoàn tiền'
-                                                ];
-
-                                                foreach ($statuses as $key => $value) {
-                                                    $selected = ($order['status'] == $key) ? 'selected' : '';
-                                                    $disabled = ($key < $order['status']) ? 'disabled' : '';
-                                                    echo "<option value='$key' $selected $disabled>$value</option>";
-                                                }
-                                                ?>
-                                            </select>
-                                        </form>
-                                        <button id="deleteBtn" class="btn btn-danger mt-2" data-id="<?= $order['id'] ?>">Xóa</button>
+                                        <button class="btn btn-danger mt-2 check-btn"  data-id="<?= $order['id'] ?>" data-bs-toggle="modal" data-bs-target="#exampleModal">Kiểm tra</button>
                                     </div>
 
                                 </td>
@@ -106,7 +74,44 @@ $this->start('main_content');
         </div>
     </div>
 </div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title" style="font-size: 24px;" id="exampleModalLabel">Kiểm tra giao dịch</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped project-orders-table" id="myTable2">
+                    <thead>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody id="orderTable">
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
 
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary">Tiến hành hoàn tiền</button>
+            </div>
+        </div>
+    </div>
+</div>
 <?php
 
 $this->stop();
@@ -124,40 +129,48 @@ $this->push('scripts');
 
 <script>
     $(document).ready(function() {
-        $('#deleteBtn').on('click', function(e) {
-            if (confirm('Bạn có chắc muốn xóa?')) {
-                let id = $(this).data('id');
-                window.location.href = `/admin/delete-order/${id}`;
-            }
-        });
-        $('.order-status').on('change', function() {
-            var status = $(this).val();
-            var orderId = $(this).data('order-id');
-            console.log('Order ID: ' + orderId + ', Status: ' + status);
+        $('.check-btn').on('click', function(e) {
+            let id = $(this).data('id');
             $.ajax({
-                url: '/admin/cap-nhat-don-hang',
                 method: 'POST',
-                data: {
-                    order_id: orderId,
-                    order_status: status
-                },
-                success: function(response) {
-                    if (response.success) {
-                        console.log('Cập nhật trạng thái thành công');
-                    } else {
-                        console.log(response);
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.log(xhr.responseText);
-                    console.log('Có lỗi xảy ra, vui lòng thử lại');
+                url: `/admin/get-payment/${id}`,
+                success: function (response) {
+                    console.log(response);
+                }, error:function() {
+                    console.log('loi');
                 }
-
             });
-        });
+        })
     });
 
     let table = new DataTable('#myTable', {
+        responsive: true,
+        language: {
+            decimal: ",",
+            thousands: ".",
+            search: "Tìm kiếm:",
+            lengthMenu: "Hiển thị _MENU_ dòng mỗi trang",
+            info: "Hiển thị _START_ đến _END_ trong tổng số _TOTAL_ dòng",
+            infoEmpty: "Không có dữ liệu",
+            infoFiltered: "(lọc từ _MAX_ dòng)",
+            loadingRecords: "Đang tải...",
+            zeroRecords: "Không tìm thấy kết quả phù hợp",
+            emptyTable: "Không có dữ liệu trong bảng",
+            paginate: {
+                first: "Đầu",
+                last: "Cuối",
+                next: "Tiếp",
+                previous: "Trước"
+            },
+            aria: {
+                sortAscending: ": kích hoạt để sắp xếp cột tăng dần",
+                sortDescending: ": kích hoạt để sắp xếp cột giảm dần"
+            }
+        }
+
+    });
+
+    let table2 = new DataTable('#myTable2', {
         responsive: true,
         language: {
             decimal: ",",

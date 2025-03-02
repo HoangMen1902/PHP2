@@ -91,6 +91,8 @@ $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) {
     $r->post('/xoa-dia-chi/{id}', [AuthController::class, 'deleteAddress']);
 
     $r->post('/huy-don/{id}', [AuthController::class, 'cancelOrder']);
+    $r->post('/yeu-cau-hoan-tien/{id}', [AuthController::class, 'refundRequest']);
+
 
     
     $r->addGroup('/admin', function (RouteCollector $r) {
@@ -127,6 +129,8 @@ $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) {
         $r->get('/delete-brand/{id}', [BrandController::class, 'delete']);
 
         $r->get('/edit-brand/{id}', [BrandController::class, 'editPage']);
+        $r->get('/refund', [OrderController::class, 'refund']);
+
 
 
         $r->get('/orders', [OrderController::class, 'index']);
@@ -150,7 +154,9 @@ $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) {
         $r->post('/delete-property', [\Src\Controllers\Admin\ProductController::class, 'deleteProperty']);
         $r->post('/delete-sku', [\Src\Controllers\Admin\ProductController::class, 'deleteSku']);
         $r->post('/product/edit/{id}', [\Src\Controllers\Admin\ProductController::class , 'update']);
-        
+        $r->post('/get-payment/{id}', [OrderController::class , 'paymentHistory']);
+
+
     });
 });
 

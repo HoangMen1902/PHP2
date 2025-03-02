@@ -190,6 +190,9 @@
                         <div id="ordersSubmenu" class="collapse submenu">
                             <a class="nav-link" href="/admin/orders">Danh sách đơn hàng</a>
                         </div>
+                        <div id="ordersSubmenu" class="collapse submenu">
+                            <a class="nav-link" href="/admin/refund">Danh sách hoàn tiền</a>
+                        </div>
                     </li>
 
 

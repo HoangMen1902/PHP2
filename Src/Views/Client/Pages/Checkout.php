@@ -75,10 +75,7 @@ $total = 0;
                         <label for="grab">Thanh toán quốc tế</label>
                         <input type="radio" id="visa" style="width: fit-content ;" name="payment-method" value="international" />
                     </div>
-                    <div class="method">
-                        <label for="grab">Chuyển khoản ngân hàng</label>
-                        <input type="radio" id="banking" style="width: fit-content ;" name="payment-method" value="vnpay" />
-                    </div>
+
                     <div class="method">
                         <label for="grab">Thanh toán tiền mặt</label>
                         <input type="radio" id="cáh" style="width: fit-content ;" name="delivery-method" value="cáh" />

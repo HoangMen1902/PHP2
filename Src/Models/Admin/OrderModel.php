@@ -10,6 +10,22 @@ class OrderModel extends Model
 {
     protected $table = 'orders';
 
+    public function findOrder(int $id): array {
+        try {
+            $sql = "SELECT o.*, u.* FROM {$this->table} o 
+                    JOIN users u ON u.id = o.user_id
+                    WHERE o.id = ?";
+                    
+            $stmt = $this->database->getConnection()->prepare($sql);
+            $stmt->execute([$id]);
+            $record = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $record ?: [];
+        } catch (PDOException $e) {
+            echo "Lỗi truy vấn database: " . $e->getMessage();
+            return [];
+        }
+    }
+
     public function getOrdersByUserId(int $user_id): array
     {
         try {
@@ -28,7 +44,7 @@ class OrderModel extends Model
                 JOIN products p ON psk.product_id = p.id 
                 WHERE o.user_id = ?;
             ";
-    
+
             $stmt = $this->database->getConnection()->prepare($sql);
             $stmt->execute([$user_id]);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -73,5 +89,32 @@ JOIN products p ON psk.product_id = p.id;
     public function deleteOrder(int $id): bool
     {
         return $this->delete($id);
+    }
+
+    public function findAllRefundRequest(): array
+    {
+        try {
+            $sql = "
+            SELECT 
+    o.id, 
+    p.name AS product_name, 
+    o.phone, 
+    o.address, 
+    o.total_price, 
+    o.status 
+FROM orders o 
+JOIN order_details dt ON dt.order_id = o.id 
+    AND dt.id = (SELECT MIN(dt2.id) FROM order_details dt2 WHERE dt2.order_id = o.id)
+JOIN product_skus psk ON dt.sku_id = psk.id 
+JOIN products p ON psk.product_id = p.id WHERE o.status = 7;
+
+";
+
+            $result = $this->database->getConnection()->query($sql);
+            return $result->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Lỗi truy vấn database: " . $e->getMessage();
+            return [];
+        };
     }
 }

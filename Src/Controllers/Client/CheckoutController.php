@@ -9,6 +9,7 @@ use Src\Models\Client\OrderDetailModel;
 use Src\Models\Client\OrderModel;
 use Src\Models\Client\UserModel;
 use Src\Notifications\Notification;
+use Src\Validations\DataValidate;
 use Stripe\Stripe;
 use Stripe\Checkout\Session;
 
@@ -105,7 +106,15 @@ class CheckoutController extends BaseController {
 
     public function checkOut() {
         if (!isset($_POST['payment-method'])) {
-            Notification::error('Thanh toán thất bại', 'Không thể checkout');
+            Notification::error('Thanh toán thất bại', 'Vui lòng chọn phương thức thanh toán');
+            header('location: /thanh-toan');
+            exit();
+        }
+
+        $DataValidate = new DataValidate();
+        $DataValidation = $DataValidate($_POST);
+        if(!empty($DataValidation)) {
+            Notification::error('Thất bại', 'Vui lòng nhập đầy đủ thông tin');
             header('location: /thanh-toan');
             exit();
         }
