@@ -16,6 +16,14 @@ use Symfony\Component\VarDumper\VarDumper;
 
 class ProductController extends BaseController
 {
+
+    public function validator() {
+        header('Content-Type: application/json');
+        $ProductValidate = new ProductValidation;
+        $response = $ProductValidate->ajaxValidate($_POST);
+
+        echo json_encode($response);
+    }
     public function changeStatus($id) {
         $ProductModel = new ProductModel();
         $product = $ProductModel->findProduct($id);
@@ -197,7 +205,10 @@ class ProductController extends BaseController
                     exit();
                 }
 
+                $option_value_insert = [];
                 foreach ($_POST['values'][$index] as $key => $value) {
+                    $option_values = [];
+                    $sku_values = [];
                     $option_values['product_id'] = $insertProductId;
                     $option_values['option_id'] = $_POST['options'][$index][$key];
                     $option_values['value_name'] = $value;
@@ -241,5 +252,19 @@ class ProductController extends BaseController
             header('location: /admin/product/add');
             exit();
         endif;
+    }
+
+
+    public function edit($id) {
+        $ProductModel = new ProductModel();
+        $CategoryModel = new CategoryModel();
+        $BrandModel = new BrandModel();
+        $OptionModel = new OptionModel();
+        $options = $OptionModel->findAllOptions();
+        $data = $ProductModel->findAllProductWithSku();
+        $brands = $BrandModel->findAllBrands();
+        $categories = $CategoryModel->findAllCategory();
+        
+        echo $this->view->render('/Admin/Pages/Products/ProductEdit', ['data' => $data, 'brands' => $brands, 'categories' => $categories, 'options' => $options]);
     }
 }

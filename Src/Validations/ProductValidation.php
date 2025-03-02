@@ -28,4 +28,21 @@ class ProductValidation extends DataValidate {
 
         return $this->error;
     }
+    public function ajaxValidate(array $data): array {
+        foreach($data as $key => $input) {
+            if(!is_array($data[$key]) && empty($input)) {
+                $this->error[] = $key;
+            }
+
+            if(is_array($data[$key])) {
+                foreach($data[$key] as $value) {
+                    if(empty($value)) {
+                        $this->error[] = $key;
+                    }
+                }
+            }
+        }
+
+        return $this->error;
+    }
 }

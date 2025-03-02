@@ -114,6 +114,8 @@ $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) {
         $r->get('/delete-attribute/{id}', [AttributeController::class, 'delete']);
 
 
+        $r->get('/product/detail/{id}', [\Src\Controllers\Admin\ProductController::class, 'edit']);
+
         $r->get('/categories', [CategoryController::class, 'index']);
         $r->get('/category/add', [CategoryController::class, 'categoryAdd']);
         $r->get('/category-edit/{id}', [CategoryController::class, 'categoryEdit']);
@@ -126,10 +128,10 @@ $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) {
 
         $r->get('/edit-brand/{id}', [BrandController::class, 'editPage']);
 
+
         $r->get('/orders', [OrderController::class, 'index']);
         $r->get('/delete-order/{id}', [OrderController::class, 'deleteOrder']);
         $r->get('/change-status-product/{id}', [\Src\Controllers\Admin\ProductController::class, 'changeStatus']);
-
 
         $r->post('/add-user', [UserController::class, 'insertUser']);
         $r->post('/edit-user/{id}', [UserController::class, 'updateUser']);
@@ -141,7 +143,7 @@ $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) {
 
         $r->post('/add-brand', [BrandController::class, 'insertBrand']);
         $r->post('/update-brand/{id}', [BrandController::class, 'updateBrand']);
-
+        $r->post('/product-validate', [\Src\Controllers\Admin\ProductController::class, 'validator']);
         $r->post('/product/store', [AdminProductController::class, 'add']);
         $r->post('/cap-nhat-don-hang', [OrderController::class, 'changeStatus']);
 
@@ -176,7 +178,10 @@ switch ($routeInfo[0]) {
         } else {
             die("Error: Invalid route handler!");
         }
-
-        call_user_func_array([new $class, $method], $vars);
+        try {
+            call_user_func_array([new $class, $method], $vars);
+        } catch (TypeError $e) {
+            echo 'No method';
+        }
         break;
 }

@@ -23,36 +23,31 @@ $this->start('main_content');
         <div class="card-body">
 
             <h4 class="card-title">Thêm sản phẩm</h4>
-            <form action="/admin/product/store" id="1" method="post" enctype="multipart/form-data">
+            <form action="/admin/product/store" id="addForm" method="post" enctype="multipart/form-data">
 
                 <p class="card-description">Thông tin sản phẩm</p>
                 <div class="form-group">
                     <label for="name">Mã SKU</label>
                     <input type="text" class="form-control" name="sku_base" placeholder="SKU">
-                    <small id="name-required" class="text-danger" style="display:none">Vui lòng nhập tên sản phẩm</small>
                 </div>
 
                 <div class="form-group">
                     <label for="name">Tên sản phẩm</label>
                     <input type="text" class="form-control" name="name" placeholder="Tên sản phẩm">
-                    <small id="name-required" class="text-danger" style="display:none">Vui lòng nhập tên sản phẩm</small>
                 </div>
 
                 <div class="form-group">
                     <label for="description">Mô tả ngắn</label>
                     <textarea class="form-control" name="short_description" id="short_description" rows="2" placeholder="Mô tả sản phẩm"></textarea>
-                    <small id="description-required" class="text-danger" style="display:none">Vui lòng nhập mô tả sản phẩm</small>
                 </div>
 
                 <div class="form-group">
                     <label for="description">Mô tả sản phẩm</label>
                     <textarea class="form-control" name="description" id="description" rows="4" placeholder="Mô tả sản phẩm"></textarea>
-                    <small id="description-required" class="text-danger" style="display:none">Vui lòng nhập mô tả sản phẩm</small>
                 </div>
                 <div class="form-group">
                     <label for="quantity">Số lượng</label>
                     <input type="number" min="0" class="form-control" name="quantity_base" id="quantity">
-                    <small id="quantity" class="text-danger" style="display:none">Vui lòng nhập số lượng</small>
 
                 </div>
                 <div class="form-group">
@@ -63,7 +58,6 @@ $this->start('main_content');
                             <option value="<?= $brand['id'] ?>"><?= $brand['name'] ?></option>
                         <?php endforeach ?>
                     </select>
-                    <small id="brand-required" class="text-danger" style="display:none">Vui lòng chọn thương hiệu sản phẩm</small>
 
                 </div>
                 <div class="form-group">
@@ -76,12 +70,10 @@ $this->start('main_content');
 
                     </select>
 
-                    <small id="categories-required" class="text-danger" style="display:none">Vui lòng chọn danh mục sản phẩm</small>
                 </div>
                 <div class="form-group">
                     <label for="price">Giá</label>
-                    <input type="number" class="form-control" name="price_base" placeholder="Giá" required>
-                    <small id="categories-required" class="text-danger" style="display:none">Vui lòng nhập giá cho sản phẩm</small>
+                    <input type="number" class="form-control" name="price_base" placeholder="Giá">
                 </div>
 
 
@@ -89,7 +81,6 @@ $this->start('main_content');
                     <label for="thumbnail">Hình ảnh sản phẩm</label>
                     <input type="file" class="form-control" name="thumbnail" accept="image/*">
                     <div id="imagesPreview" style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;"></div>
-                    <small id="thumbnail-required" class="text-danger" style="display:none">Vui lòng chọn hình ảnh sản phẩm</small>
                 </div>
 
 
@@ -131,12 +122,12 @@ $this->start('main_content');
                 <button type="button" id="addVariant" class="btn btn-warning text-light" style="float: right;">Thêm biến thể</button>
 
             </form>
+            <div id="response"></div>
+
         </div>
 
     </div>
 </div>
-
-
 
 <?php $this->stop(); ?>
 <?php
@@ -151,6 +142,48 @@ $this->push('scripts');
 </script>
 <script>
     $(document).ready(function() {
+
+        $('#addForm').on('submit', function(e) {
+            e.preventDefault();
+            for (instance in CKEDITOR.instances) {
+                CKEDITOR.instances[instance].updateElement();
+            }
+
+            $.ajax({
+
+                type: "POST",
+                url: "/admin/product-validate",
+                data: $(this).serialize(),
+                success: function(response) {
+                    if (response.length !== 0) {
+                        console.log(response);
+                        html = `<small class="text-danger">* Vui lòng điền thông tin</small>`
+                        $('.text-danger').remove();
+                        response.forEach(element => {
+                            if (element === 'options_base') {
+                                let field = $(`[name="options_base[]"]`);
+                                field.next('.select2').after(html);
+                            }
+                            if (element === 'values_base') {
+                                let field = $(`[name="values_base[]"]`);
+                                field.after(html);
+                            }
+                            let field = $(`[name="${element}"]`);
+                            if (field.hasClass('select2-hidden-accessible')) {
+                                field.next('.select2').after(html);
+                            } else {
+                                field.after(html);
+                            }
+                        });
+                    } else {
+                        $('#addForm').off('submit').submit();
+                    }
+                },
+                error: function() {
+                    $('#response').html('<p class="text-danger">Có lỗi xảy ra!</p>');
+                }
+            });
+        });
 
         let variantIndex = 0;
 
@@ -168,13 +201,13 @@ $this->push('scripts');
                 <h5>SKU ${variantIndex + 1}</h5>
                 <div class="row">
                     <div class="col-md-3">
-                        <input type="text" class="form-control" name="sku[]" placeholder="Mã SKU" required>
+                        <input type="text" class="form-control" name="sku[]" placeholder="Mã SKU" >
                     </div>
                     <div class="col-md-3">
-                        <input type="number" class="form-control" name="price[]" placeholder="Giá" required>
+                        <input type="number" class="form-control" name="price[]" placeholder="Giá" >
                     </div>
                     <div class="col-md-2">
-                        <input type="number" class="form-control" name="quantity[]" placeholder="Số lượng" required>
+                        <input type="number" class="form-control" name="quantity[]" placeholder="Số lượng" >
                     </div>
                     <div class="col-md-3">
                         <input type="file" class="form-control" name="image[]" accept="image/*">
@@ -184,7 +217,6 @@ $this->push('scripts');
                     </div>
                 </div>
 
-                <!-- Nút thêm thuộc tính -->
                 <button type="button" class="btn btn-info btn-sm add-attribute mt-2">Thêm thuộc tính</button>
                 <div class="attributes-container mt-2"></div> 
 
@@ -262,10 +294,9 @@ $this->push('scripts');
         $('#productAddForm').on('submit', function(e) {
             e.preventDefault();
             console.log(e);
-            
+
         })
     })
-
 </script>
 <?php
 

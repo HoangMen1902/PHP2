@@ -34,7 +34,7 @@ $this->start('main_content');
                                 <td><?= $order['product_name'] ?></td>
                                 <td><?= $order['phone'] ?></td>
                                 <td><?= $order['address'] ?></td>
-                                <td><?= $order['total_price'] ?></td>
+                                <td><?= number_format($order['total_price']) ?></td>
                                 <td>
                                     <?php
                                     switch ($order['status']) {
