@@ -13,7 +13,7 @@ class AuthHelper {
         if ($admin == 'admin') {
             if (!isset($_SESSION['user'])) {
                 Notification::error('Admin', 'Vui lòng đăng nhập');
-                header('location: /login');
+                header('location: /dang-nhap');
                 exit;
             }
             if ($_SESSION['user']['role'] != 2) {

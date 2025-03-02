@@ -64,12 +64,22 @@ $this->start('main_content');
                                         <form action="/admin/cap-nhat-don-hang" method="post" id="statusForm-<?= htmlspecialchars($order['id']) ?>">
                                             <input type="hidden" name="order_id" value="<?= htmlspecialchars($order['id']) ?>">
                                             <select name="order_status" class="form-control order-status" data-order-id="<?= htmlspecialchars($order['id']) ?>" style="width: 200px;">
-                                                <option value="1" <?= $order['status'] == 1 ? 'selected' : '' ?>>Đang xử lý</option>
-                                                <option value="2" <?= $order['status'] == 2 ? 'selected' : '' ?>>Chờ thanh toán</option>
-                                                <option value="3" <?= $order['status'] == 3 ? 'selected' : '' ?>>Đã thanh toán</option>
-                                                <option value="4" <?= $order['status'] == 4 ? 'selected' : '' ?>>Đang vận chuyển</option>
-                                                <option value="5" <?= $order['status'] == 5 ? 'selected' : '' ?>>Đã giao</option>
-                                                <option value="6" <?= $order['status'] == 6 ? 'selected' : '' ?>>Đã hủy</option>
+                                                <?php
+                                                $statuses = [
+                                                    1 => 'Đang xử lý',
+                                                    2 => 'Chờ thanh toán',
+                                                    3 => 'Đã thanh toán',
+                                                    4 => 'Đang vận chuyển',
+                                                    5 => 'Đã giao',
+                                                    6 => 'Đã hủy'
+                                                ];
+
+                                                foreach ($statuses as $key => $value) {
+                                                    $selected = ($order['status'] == $key) ? 'selected' : '';
+                                                    $disabled = ($key < $order['status']) ? 'disabled' : ''; 
+                                                    echo "<option value='$key' $selected $disabled>$value</option>";
+                                                }
+                                                ?>
                                             </select>
                                         </form>
                                         <button id="deleteBtn" class="btn btn-danger mt-2" data-id="<?= $order['id'] ?>">Xóa</button>
@@ -103,9 +113,9 @@ $this->push('scripts');
 
 <script>
     $(document).ready(function() {
-        $('#deleteBtn').on('click', function(e) { 
+        $('#deleteBtn').on('click', function(e) {
             if (confirm('Bạn có chắc muốn xóa?')) {
-                let id = $(this).data('id'); 
+                let id = $(this).data('id');
                 window.location.href = `/admin/delete-order/${id}`;
             }
         });

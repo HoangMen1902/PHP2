@@ -167,6 +167,8 @@ class AuthController extends BaseController {
                 exit();
             }
             $data = $_POST;
+            $data['status'] = 1;
+            $data['role'] = 1;
             $data['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
             $result = $UserModel->insertUser($data);

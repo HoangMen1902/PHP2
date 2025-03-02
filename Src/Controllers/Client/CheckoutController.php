@@ -18,6 +18,11 @@ class CheckoutController extends BaseController {
         $OrderModel = new OrderModel();
         $OrderData = $OrderModel->findOrder($id);
 
+        if(empty($OrderData)) {
+            header('location: /home');
+            exit();
+        }
+
         if(!$OrderData && empty($OrderData) && $OrderData['user_id'] != $_SESSION['user']['id']) {
             header('location: /home');
             exit();
