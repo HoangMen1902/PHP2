@@ -156,7 +156,6 @@ class Model
             }
 
             $stmt->bindValue($i, $id, PDO::PARAM_INT);
-
             return $stmt->execute();
         } catch (PDOException $e) {
             throw new Exception("Lỗi khi cập nhật dữ liệu trong bảng {$this->getTable()}: " . $e->getMessage());

@@ -11,4 +11,14 @@ class OptionValueModel extends Model {
     public function insertValue(array $data):int {
         return $this->insert($data);
     }
+
+
+    public function deleteValue(int $id): bool {
+        return $this->delete($id);
+    }
+
+
+    public function updateValue(int $id, array $data): bool {
+        return $this->update($id, $data);
+    }
 }

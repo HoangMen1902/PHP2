@@ -147,6 +147,9 @@ $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) {
         $r->post('/product/store', [AdminProductController::class, 'add']);
         $r->post('/cap-nhat-don-hang', [OrderController::class, 'changeStatus']);
 
+        $r->post('/delete-property', [\Src\Controllers\Admin\ProductController::class, 'deleteProperty']);
+        $r->post('/delete-sku', [\Src\Controllers\Admin\ProductController::class, 'deleteSku']);
+        $r->post('/product/edit/{id}', [\Src\Controllers\Admin\ProductController::class , 'update']);
         
     });
 });

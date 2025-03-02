@@ -10,4 +10,7 @@ class SkuValueModel extends Model {
     public function insertSkuValues(array $data): int {
         return $this->insert($data);
     }
+    public function updateSkuValue(int $id, array $data): bool {
+        return $this->update($id, $data);
+    }
 }
