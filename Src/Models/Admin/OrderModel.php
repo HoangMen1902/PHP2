@@ -25,7 +25,18 @@ class OrderModel extends Model
             return [];
         }
     }
-
+    public function countOrders(): int
+    {
+        try {
+            $sql = "SELECT COUNT(*) as total FROM {$this->table}";
+            $stmt = $this->database->getConnection()->query($sql);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return (int) $result['total'];
+        } catch (PDOException $e) {
+            error_log("Lỗi truy vấn database: " . $e->getMessage());
+            return 0;
+        }
+    }
     public function getOrdersByUserId(int $user_id): array
     {
         try {

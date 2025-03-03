@@ -1,3 +1,4 @@
+
 <div class="row">
     <div class="col-xl-6 grid-margin stretch-card flex-column">
         <h5 class="mb-2 text-titlecase mb-4">Thống kê trạng thái</h5>
@@ -7,7 +8,7 @@
                     <div class="card-body d-flex flex-column justify-content-between">
                         <div class="d-flex justify-content-between align-items-center mb-2">
                             <p class="mb-0 text-muted">Người dùng</p>
-                            <p class="mb-2 text-muted"><?= isset($countUser[0]['user']) ? $countUser[0]['user'] : 0 ?></p>
+                            <p class="mb-2 text-muted"><?= isset($user) ? $user : 0 ?></p>
 
                             <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px"
                                 fill="#666666">
@@ -36,7 +37,7 @@
                                 <h6 class="mb-0"></h6>
                             </div>
                             <div>
-                                <p class="mb-2 text-muted"><?= isset($countCategory[0]['category']) ? $countCategory[0]['category'] : 0 ?></p>
+                                <p class="mb-2 text-muted"><?= isset($category) ? $category : 0 ?></p>
                                 <h6 class="mb-0"></h6>
                             </div>
                             <div>
@@ -65,7 +66,7 @@
                                 <h6 class="mb-0"></h6>
                             </div>
                             <div>
-                                <p class="mb-2 text-muted"><?= isset($countOrder[0]['order']) ? $countOrder[0]['order'] : 0 ?></p>
+                                <p class="mb-2 text-muted"><?= isset($order) ? $order : 0 ?></p>
 
                                 <h6 class="mb-0"></h6>
                             </div>
@@ -96,7 +97,7 @@
                                 <h6 class="mb-0"></h6>
                             </div>
                             <div>
-                                <p class="mb-2 text-muted"><?= isset($countComment[0]['comment']) ? $countComment[0]['comment'] : 0 ?></p>
+                                <p class="mb-2 text-muted"><?= isset($countComment[0]['comment']) ? $countComment[0]['comment'] : 100 ?></p>
                                 <h6 class="mb-0"></h6>
                             </div>
                             <div>
@@ -125,7 +126,7 @@
                                 <h6 class="mb-0"></h6>
                             </div>
                             <div>
-                                <p class="mb-2 text-muted"></p>
+                                <p class="mb-2 text-muted"><?=isset($brand) ? $brand : 0 ?></p>
                                 <h6 class="mb-0"></h6>
                             </div>
                             <div class="text-center" style="width: fit-content;">
@@ -152,7 +153,7 @@
                                 <h6 class="mb-0"></h6>
                             </div>
                             <div>
-                                <p class="mb-2 text-muted"></p>
+                                <p class="mb-2 text-muted">100</p>
                                 <h6 class="mb-0"></h6>
                             </div>
                             <div class="text-center" style="width: fit-content;">
@@ -169,34 +170,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-6 grid-margin stretch-card">
-                <div class="card">
-                    <div class="card-body d-flex flex-column justify-content-between">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <div>
-                                <p class="mb-2 text-muted">Phân loại cha</p>
-                                <h6 class="mb-0"></h6>
-                            </div>
-                            <div>
-                                <p class="mb-2 text-muted"></p>
-                                <h6 class="mb-0"></h6>
-                            </div>
-                            <div class="text-center" style="width: fit-content;">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="size-6 w-50" width="60px">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M3 3h18v18H3z" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="text-center">
-                            <h2 class="mb"></h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <div class="col-md-6 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body d-flex flex-column justify-content-between">
@@ -206,7 +179,7 @@
                                 <h6 class="mb-0"></h6>
                             </div>
                             <div>
-                                <p class="mb-2 text-muted"></p>
+                                <p class="mb-2 text-muted"><?=$product?></p>
                                 <h6 class="mb-0"></h6>
                             </div>
                             <div class="text-center" style="width: fit-content;">

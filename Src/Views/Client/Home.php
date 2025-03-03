@@ -92,133 +92,47 @@
     <div class="best-seller">
         <h2>Sản phẩm tiêu biểu</h2>
         <div class="product-block">
-            <div class="cont">
-                <div class="product-card">
-                    <div class="product-card__image">
-                        <img src="<?= client_img ?>/TempProduct/Cirno.png" alt="">
-                    </div>
-                    <div class="product-card__info">
-                        <h2 class="product-card__title">Touhou Plush Series 42 [Cirno (ver.1.5)] FumoFumo Cirno (Sono Ittengo) - Touhou Project - (Gift) Plush</h2>
-                        <p class="product-card__description">Experience ultimate comfort and style with these iconic Nike Air Max sneakers. lorem</p>
-                        <div class="product-card__price-row">
-                            <span class="product-card__price">2.000.000đ</span>
-                            <button class="product-card__btn">Xem Thêm</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="cont">
-                <div class="product-card">
-                    <div class="product-card__image">
-                        <img src="<?= client_img ?>/TempProduct/Reimu.jpg" alt="">
-                    </div>
-                    <div class="product-card__info">
-                        <h2 class="product-card__title">Touhou Plush Hakurei Reimu - Version 1</h2>
-                        <p class="product-card__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos aut quaerat voluptatum nisi repellat nemo assumenda eveniet hic velit in earum veniam minima, dicta nihil cupiditate illo commodi mollitia facilis?</p>
-                        <div class="product-card__price-row">
-                            <span class="product-card__price">2.000.000đ</span>
-                            <button class="product-card__btn">Xem Thêm</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="cont">
-                <div class="product-card">
-                    <div class="product-card__image">
-                        <img src="<?= client_img ?>/TempProduct/Marisa.jpg" alt="">
-                    </div>
-                    <div class="product-card__info">
-                        <h2 class="product-card__title">Bộ 2 Touhou Plush Hakurei Reimu & Kirisame Marisa - Version 1</h2>
-                        <p class="product-card__description">Experience ultimate comfort and style with these iconic Nike Air Max sneakers. lorem</p>
-                        <div class="product-card__price-row">
-                            <span class="product-card__price">2.000.000đ</span>
-                            <button class="product-card__btn">Xem Thêm</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="cont">
-                <div class="product-card">
-                    <div class="product-card__image">
-                        <img src="<?= client_img ?>/TempProduct/SuwakoFumo.jpg" alt="">
-                    </div>
-                    <div class="product-card__info">
-                        <h2 class="product-card__title">Touhou Plush Suwako Moriya - Version 1</h2>
-                        <p class="product-card__description">Experience ultimate comfort and style with these iconic Nike Air Max sneakers. lorem</p>
-                        <div class="product-card__price-row">
-                            <span class="product-card__price">2.000.000đ</span>
-                            <button class="product-card__btn">Xem Thêm</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
+
+            <?php foreach ($data as $product): ?>
+                <div class="cont">
+                    <div class="product-card">
+                        <div class="product-card__image">
+                            <img src="<?= uploads ?>/<?= $product['thumbnail'] ?>" alt="">
+                        </div>
+                        <div class="product-card__info">
+                            <h2 class="product-card__title"><?= $product['name'] ?></h2>
+                            <p class="product-card__description"><?= $product['short_description'] ?></p>
+                            <div class="product-card__price-row">
+                                <span class="product-card__price"><?= number_format($product['min_price']) ?></span>
+                                <a class="text-decoration-none product-card__btn" href="/chi-tiet/<?= $product['id'] ?>">Xem Thêm</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach ?>
         </div>
     </div>
     <div class="special-product best-seller">
         <h2>Đặc biệt từ Honkai: Star Rail</h2>
         <div class="product-block">
-            <div class="cont">
-                <div class="product-card">
-                    <div class="product-card__image">
-                        <img src="<?= client_img ?>/TempProduct/Hanabi.png" alt="">
-                    </div>
-                    <div class="product-card__info">
-                        <h2 class="product-card__title">Hanabi Plush</h2>
-                        <p class="product-card__description">Experience ultimate comfort and style with these iconic Nike Air Max sneakers. lorem</p>
-                        <div class="product-card__price-row">
-                            <span class="product-card__price">2.000.000đ</span>
-                            <button class="product-card__btn">Xem Thêm</button>
+            <?php foreach ($data2 as $product): ?>
+                <div class="cont">
+                    <div class="product-card">
+                        <div class="product-card__image">
+                            <img src="<?= uploads ?>/<?= $product['thumbnail'] ?>" alt="">
+                        </div>
+                        <div class="product-card__info">
+                            <h2 class="product-card__title"><?= $product['name'] ?></h2>
+                            <p class="product-card__description"><?= $product['short_description'] ?></p>
+                            <div class="product-card__price-row">
+                                <span class="product-card__price"><?= number_format($product['min_price']) ?></span>
+                                <a class="text-decoration-none product-card__btn" href="/chi-tiet/<?= $product['id'] ?>">Xem Thêm</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="cont">
-                <div class="product-card">
-                    <div class="product-card__image">
-                        <img src="<?= client_img ?>/TempProduct/Kafka.jpg" alt="">
-                    </div>
-                    <div class="product-card__info">
-                        <h2 class="product-card__title">Kafka Plush</h2>
-                        <p class="product-card__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos aut quaerat voluptatum nisi repellat nemo assumenda eveniet hic velit in earum veniam minima, dicta nihil cupiditate illo commodi mollitia facilis?</p>
-                        <div class="product-card__price-row">
-                            <span class="product-card__price">2.000.000đ</span>
-                            <button class="product-card__btn">Xem Thêm</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="cont">
-                <div class="product-card">
-                    <div class="product-card__image">
-                        <img src="<?= client_img ?>/TempProduct/Pompom.jpg" alt="">
-                    </div>
-                    <div class="product-card__info">
-                        <h2 class="product-card__title">Pom-pom Plush</h2>
-                        <p class="product-card__description">Experience ultimate comfort and style with these iconic Nike Air Max sneakers. lorem</p>
-                        <div class="product-card__price-row">
-                            <span class="product-card__price">2.000.000đ</span>
-                            <button class="product-card__btn">Xem Thêm</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="cont">
-                <div class="product-card">
-                    <div class="product-card__image">
-                        <img src="<?= client_img ?>/TempProduct/Hotaru.jpg" alt="">
-                    </div>
-                    <div class="product-card__info">
-                        <h2 class="product-card__title">Hotaru Plush</h2>
-                        <p class="product-card__description">Experience ultimate comfort and style with these iconic Nike Air Max sneakers. lorem</p>
-                        <div class="product-card__price-row">
-                            <span class="product-card__price">2.000.000đ</span>
-                            <button class="product-card__btn">Xem Thêm</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            <?php endforeach ?>
         </div>
     </div>
 </div>
@@ -227,78 +141,36 @@
         Trình duyệt của bạn không hỗ trợ video
     </video>
     <div class="banner-text-2">
-            <h2 class="banner-heading text-light">Thỏa sức khám phá!</h2>
-            <p class="text-light">Hãy vui vẻ, tận hưởng những phút giây tuyệt vời khi khám phá lượng sản phẩm tuyệt vời của trang web nhé!</p>
-            <p class="text-light">Thông tin thêm về <em>SUWAFUMO</em></p>
-            <div class="button-holder">
-                <a href="/gioi-thieu" class="banner-btn">Giới Thiệu</a>
-            </div>
+        <h2 class="banner-heading text-light">Thỏa sức khám phá!</h2>
+        <p class="text-light">Hãy vui vẻ, tận hưởng những phút giây tuyệt vời khi khám phá lượng sản phẩm tuyệt vời của trang web nhé!</p>
+        <p class="text-light">Thông tin thêm về <em>SUWAFUMO</em></p>
+        <div class="button-holder">
+            <a href="/gioi-thieu" class="banner-btn">Giới Thiệu</a>
         </div>
+    </div>
 </div>
 <div class="container-default">
-<div class="special-product best-seller">
+    <div class="special-product best-seller">
         <h2>Sản phẩm ngẫu nhiên</h2>
         <div class="product-block">
-            <div class="cont">
-                <div class="product-card">
-                    <div class="product-card__image">
-                        <img src="<?= client_img ?>/TempProduct/Hanabi.png" alt="">
-                    </div>
-                    <div class="product-card__info">
-                        <h2 class="product-card__title">Hanabi Plush</h2>
-                        <p class="product-card__description">Experience ultimate comfort and style with these iconic Nike Air Max sneakers. lorem</p>
-                        <div class="product-card__price-row">
-                            <span class="product-card__price">2.000.000đ</span>
-                            <button class="product-card__btn">Xem Thêm</button>
+
+            <?php foreach ($data2 as $product): ?>
+                <div class="cont">
+                    <div class="product-card">
+                        <div class="product-card__image">
+                            <img src="<?= uploads ?>/<?= $product['thumbnail'] ?>" alt="">
+                        </div>
+                        <div class="product-card__info">
+                            <h2 class="product-card__title"><?= $product['name'] ?></h2>
+                            <p class="product-card__description"><?= $product['short_description'] ?></p>
+                            <div class="product-card__price-row">
+                                <span class="product-card__price"><?= number_format($product['min_price']) ?></span>
+                                <a class="text-decoration-none product-card__btn" href="/chi-tiet/<?= $product['id'] ?>">Xem Thêm</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="cont">
-                <div class="product-card">
-                    <div class="product-card__image">
-                        <img src="<?= client_img ?>/TempProduct/Kafka.jpg" alt="">
-                    </div>
-                    <div class="product-card__info">
-                        <h2 class="product-card__title">Kafka Plush</h2>
-                        <p class="product-card__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos aut quaerat voluptatum nisi repellat nemo assumenda eveniet hic velit in earum veniam minima, dicta nihil cupiditate illo commodi mollitia facilis?</p>
-                        <div class="product-card__price-row">
-                            <span class="product-card__price">2.000.000đ</span>
-                            <button class="product-card__btn">Xem Thêm</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="cont">
-                <div class="product-card">
-                    <div class="product-card__image">
-                        <img src="<?= client_img ?>/TempProduct/Pompom.jpg" alt="">
-                    </div>
-                    <div class="product-card__info">
-                        <h2 class="product-card__title">Pom-pom Plush</h2>
-                        <p class="product-card__description">Experience ultimate comfort and style with these iconic Nike Air Max sneakers. lorem</p>
-                        <div class="product-card__price-row">
-                            <span class="product-card__price">2.000.000đ</span>
-                            <button class="product-card__btn">Xem Thêm</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="cont">
-                <div class="product-card">
-                    <div class="product-card__image">
-                        <img src="<?= client_img ?>/TempProduct/Hotaru.jpg" alt="">
-                    </div>
-                    <div class="product-card__info">
-                        <h2 class="product-card__title">Hotaru Plush</h2>
-                        <p class="product-card__description">Experience ultimate comfort and style with these iconic Nike Air Max sneakers. lorem</p>
-                        <div class="product-card__price-row">
-                            <span class="product-card__price">2.000.000đ</span>
-                            <button class="product-card__btn">Xem Thêm</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php endforeach ?>
 
         </div>
     </div>

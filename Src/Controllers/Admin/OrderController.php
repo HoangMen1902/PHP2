@@ -23,7 +23,6 @@ class OrderController extends BaseController {
     
         try {
             Stripe::setApiKey($_ENV['STRIPE_API']);
-    
             $OrderModel = new OrderModel;
             $order = $OrderModel->findOrder($id);
     

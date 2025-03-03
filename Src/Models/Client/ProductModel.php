@@ -15,6 +15,29 @@ class ProductModel extends Model
         return $this->findAll();
     }
 
+    public function findRandomProducts(int $limit = 4): array
+    {
+        try {
+            $sql = "SELECT p.*, 
+               (SELECT psku.price 
+                FROM product_skus psku 
+                WHERE psku.product_id = p.id 
+                ORDER BY psku.price ASC 
+                LIMIT 1) AS min_price
+        FROM {$this->table} p
+        ORDER BY RAND()
+        LIMIT :limit";
+
+            $stmt = $this->database->getConnection()->prepare($sql);
+            $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+            $stmt->execute();
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Lỗi truy vấn database: " . $e->getMessage());
+            return [];
+        }
+    }
     public function findAllProductWithSku(): array
     {
         try {
