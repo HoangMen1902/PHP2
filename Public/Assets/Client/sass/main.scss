@@ -1,0 +1,22 @@
+@import './Bases/reset';
+
+@import './Variables/variables';
+
+@import './Bases/container';
+
+@import './Components/header';
+@import './Components/footer';
+@import './Components/Banner';
+@import './Components/Sidebar';
+
+
+@import './Pages/Home';
+@import './Pages/About';
+@import './Pages/Contact';
+@import './Pages/Login';
+@import './Pages/Register';
+@import './Pages/Product';
+@import './Pages/Cart';
+@import './Pages/Payment';
+@import './Pages/SingleProduct';
+@import './Pages/MyAccount';

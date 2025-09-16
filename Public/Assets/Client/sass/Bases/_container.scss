@@ -1,0 +1,14 @@
+.container-default {
+    max-width: $container-def;
+    margin: 0 auto;
+    padding: $container-spacing;
+}
+
+
+
+@media screen and (min-width:1800px){
+    .container-default {
+        max-width: $container-large;
+        padding: $container-spacing;
+    }
+}
